@@ -27,7 +27,7 @@ input {
 .spinner {
   width: 36px;
   height: 36px;
-  background-image: url("../../vendor/topcoat/img/spinner2x.png");
+  background-image: url("../vendor/topcoat/img/spinner2x.png");
   background-size: 36px;
   background-repeat: no-repeat;
   position: absolute;

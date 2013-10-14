@@ -1,14 +1,5 @@
-﻿angular.module('AlertApp', ['ngRoute', 'AlertModel', 'ngAnimate'], function ($routeProvider, $locationProvider, $compileProvider) {
+﻿angular.module('AlertApp', ['ngRoute', 'AlertModel', 'ngAnimate'], function ($routeProvider, $locationProvider) {
     //configure custom routing
-    $routeProvider.when('/Book/:bookId', {
-        templateUrl: '../views/Test/book.html',
-        controller: BookCntl
-    });
-    $routeProvider.when('/Book/:bookId/ch/:chapterId', {
-        templateUrl: '../views/Test/chapter.html',
-        controller: ChapterCntl
-    });
-
     $routeProvider.when('/Login', {
         templateUrl: '../views/Login/index.html',
         controller: LoginCtrl
@@ -23,35 +14,13 @@
     });
     $routeProvider.when('/LogOut', {
         templateUrl: '../views/Test/chapter.html',
-        controller: ChapterCntl
+        controller: ExitAppCtrl
     });
 
     $routeProvider.otherwise({
         redirectTo: '/Login'
     });
-
-     //configure html5 to get links working on jsfiddle
-    //$locationProvider.html5Mode(true);
-
-    //configure to whitelist file URIs
-    //$compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 });
-
-function MainCntl($route, $routeParams, $location) {
-    this.$route = $route;
-    this.$location = $location;
-    this.$routeParams = $routeParams;
-}
-
-function BookCntl($routeParams) {
-    this.name = "BookCntl";
-    this.params = $routeParams;
-}
-
-function ChapterCntl($routeParams) {
-    this.name = "ChapterCntl";
-    this.params = $routeParams;
-}
 
 // Index: http://localhost/views/Alert/index.html
 
@@ -65,7 +34,7 @@ function AlertCtrl($scope, AlertRestangular) {
         $scope.loading = true;
 
         Alerts.getList().then(function (data) {
-            $scope.loading = false;
+            //$scope.loading = false;
             $scope.Alerts = data;
         });
 
@@ -76,7 +45,7 @@ function AlertCtrl($scope, AlertRestangular) {
     $scope.loadAlerts();
 
 
-    // Get notified when an another webview modifies the data and reload
+    // Get notified when another webview modifies the data and reload
     window.addEventListener("message", function (event) {
         // reload data on message with reload status
         if (event.data.status === "reload") {
@@ -95,7 +64,6 @@ function LoginCtrl($scope, $http, $location) {
         $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
        success(function (data, status, headers, config) {
            if (data === "false") {
-               //window.location.href = "/EditKey"
                $location.path('/EditKey');
            }
        }).
@@ -108,7 +76,7 @@ function LoginCtrl($scope, $http, $location) {
 };
 
 function AddAuthKeyCtrl($scope, $http) {
-
+    $scope.loading = true;
     var authKey = localStorage.getItem("authKey");
     if (authKey != null) {
         $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
@@ -122,6 +90,10 @@ function AddAuthKeyCtrl($scope, $http) {
 
 
 };
+
+function ExitAppCtrl($scope) {
+
+}
 
 // alert dialog dismissed
 function alertDismissed() {
