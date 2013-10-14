@@ -1,19 +1,19 @@
 ﻿angular.module('AlertApp', ['ngRoute', 'AlertModel', 'ngAnimate'], function ($routeProvider, $locationProvider) {
     //configure custom routing
     $routeProvider.when('/Login', {
-        templateUrl: '../views/Login/index.html',
+        templateUrl: 'views/Login/index.html',
         controller: LoginCtrl
     });
     $routeProvider.when('/Alerts', {
-        templateUrl: '../views/Alert/index.html',
+        templateUrl: 'views/Alert/index.html',
         controller: AlertCtrl
     });
     $routeProvider.when('/EditKey', {
-        templateUrl: '../views/Login/addAuthKey.html',
+        templateUrl: 'views/Login/addAuthKey.html',
         controller: AddAuthKeyCtrl
     });
     $routeProvider.when('/LogOut', {
-        templateUrl: '../views/Test/chapter.html',
+        templateUrl: 'views/Test/chapter.html',
         controller: ExitAppCtrl
     });
 
@@ -68,7 +68,7 @@ function LoginCtrl($scope, $http, $location) {
            }
        }).
        error(function (data, status, headers, config) {
-           showAlert("Error connecting to arrowmanager")
+           showAlert("Network Error", "Status: " + status +", Data: " + data);
        });
     }
 
@@ -84,7 +84,7 @@ function AddAuthKeyCtrl($scope, $http) {
            localStorage.setItem("authKey", "key");
        }).
        error(function (data, status, headers, config) {
-           showAlert();
+           showAlert("Network Error", "Status: " + status + ", Data: " + data);
        });
     }
 
@@ -101,12 +101,12 @@ function alertDismissed() {
 }
 
 // Show a custom alert
-//
-function showAlert() {
+function showAlert(title, message) {
     navigator.notification.alert(
-        'You are the winner!',  // message
-        alertDismissed,         // callback
-        'Game Over',            // title
-        'Done'                  // buttonName
+        message,  // message
+        function(){},         // callback
+        title,            // title
+        'ok'                  // buttonName
     );
+    navigator.notification.vibrate(2000);
 }

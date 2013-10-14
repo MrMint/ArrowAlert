@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".cordova\config.json" />
-    <None Include="App.config" />
     <None Include="platforms\android\assets\www\res\screen\tizen\README.md" />
     <None Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
     <None Include="platforms\android\bin\AndroidManifest.xml.d" />
@@ -137,6 +136,7 @@
     <None Include="www\vendor\topcoat\NOTICE" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="platforms\android\AndroidManifest.xml" />
     <Content Include="platforms\android\assets\www\config.xml" />
     <Content Include="platforms\android\assets\www\cordova.js" />
@@ -279,11 +279,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="www\controllers\controllers.js" />
-    <Content Include="www\controllers\test.js" />
+    <Content Include="www\css\application.css" />
     <Content Include="www\css\index.css" />
     <Content Include="www\icon.png" />
     <Content Include="www\img\logo.png" />
-    <Content Include="www\index.html" />
+    <Content Include="www\index2.html" />
     <Content Include="www\js\application.js" />
     <Content Include="www\js\console.log.android.js" />
     <Content Include="www\js\console.log.js" />
@@ -291,7 +291,6 @@
     <Content Include="www\js\index.js" />
     <Content Include="www\js\onerror.android.js" />
     <Content Include="www\js\onerror.js" />
-    <Content Include="www\js\PageLoader.js" />
     <Content Include="www\js\PushNotification.js" />
     <Content Include="www\models\Alert.js" />
     <Content Include="www\res\icon\android\icon-36-ldpi.png" />
@@ -362,13 +361,9 @@
     <Content Include="www\views\Alert\index.html" />
     <Content Include="www\views\Alert\new.html" />
     <Content Include="www\views\Alert\show.html" />
-    <Content Include="www\views\index.html" />
+    <Content Include="www\index.html" />
     <Content Include="www\views\Login\addAuthKey.html" />
     <Content Include="www\views\Login\index.html" />
-    <Content Include="www\views\test\book.html" />
-    <Content Include="www\views\test\chapter.html" />
-    <Content Include="www\views\test\index.html" />
-    <Content Include="www\views\test\indexaa.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".cordova\hooks\after_build\" />
