@@ -1,0 +1,36 @@
+﻿<!doctype html>
+<html ng-app="AlertApp">
+<head>
+    <!--<script src="../../components/angular/angular.min.js"></script>-->
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
+    <!--<script src="http://code.angularjs.org/1.2.0-rc.2/angular-animate.min.js"></script>-->
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>
+    <!--<script src="../../js/index.js"></script>-->
+    <!--<script src="../../models/Alert.js"></script>-->
+    <script src="../../controllers/test.js"></script>
+</head>
+<body>
+    <div ng-controller="MainCntl as main">
+        Choose:
+      <a href="#/Book/Moby" rel="external">Moby</a> |
+      <a href="#/Book/Moby/ch/1" rel="external">Moby: Ch1</a> |
+      <a href="#/Book/Gatsby" rel="external">Gatsby</a> |
+      <a href="#/Book/Gatsby/ch/4?key=value" rel="external">Gatsby: Ch4</a> |
+      <a href="#/Book/Scarlet" rel="external">Scarlet Letter</a><br />
+
+        <div class="example-animate-container">
+            <div ng-view class="view-example"></div>
+        </div>
+        <hr />
+
+        <pre>$location.path() = {{main.$location.path()}}</pre>
+        <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
+        <pre>$route.current.params = {{main.$route.current.params}}</pre>
+        <pre>$route.current.scope.name = {{main.$route.current.scope.name}}</pre>
+        <pre>$routeParams = {{main.$routeParams}}</pre>
+    </div>
+<!--    <script type="text/javascript">
+        app.initialize();
+    </script>-->
+</body>
+</html>

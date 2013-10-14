@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FA5EB5A-9E99-4E5F-91BD-7B57B83C0B1F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArrowAlert</RootNamespace>
+    <AssemblyName>ArrowAlert</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".cordova\config.json" />
+    <None Include="App.config" />
+    <None Include="platforms\android\assets\www\res\screen\tizen\README.md" />
+    <None Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    <None Include="platforms\android\bin\AndroidManifest.xml.d" />
+    <None Include="platforms\android\bin\build.prop" />
+    <None Include="platforms\android\bin\classes.dex" />
+    <None Include="platforms\android\bin\classes.dex.d" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\BuildConfig.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\HelloWorld.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\R%24attr.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\R%24drawable.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\R%24string.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\R%24xml.class" />
+    <None Include="platforms\android\bin\classes\com\phonegap\helloworld\R.class" />
+    <None Include="platforms\android\bin\HelloWorld-debug-unaligned.apk" />
+    <None Include="platforms\android\bin\HelloWorld-debug-unaligned.apk.d" />
+    <None Include="platforms\android\bin\HelloWorld-debug.apk" />
+    <None Include="platforms\android\bin\HelloWorld.ap_" />
+    <None Include="platforms\android\bin\HelloWorld.ap_.d" />
+    <None Include="platforms\android\bin\jarlist.cache" />
+    <None Include="platforms\android\cordova\build" />
+    <None Include="platforms\android\cordova\build.bat" />
+    <None Include="platforms\android\cordova\check_reqs" />
+    <None Include="platforms\android\cordova\clean" />
+    <None Include="platforms\android\cordova\clean.bat" />
+    <None Include="platforms\android\cordova\lib\install-device" />
+    <None Include="platforms\android\cordova\lib\install-device.bat" />
+    <None Include="platforms\android\cordova\lib\install-emulator" />
+    <None Include="platforms\android\cordova\lib\install-emulator.bat" />
+    <None Include="platforms\android\cordova\lib\list-devices" />
+    <None Include="platforms\android\cordova\lib\list-devices.bat" />
+    <None Include="platforms\android\cordova\lib\list-emulator-images" />
+    <None Include="platforms\android\cordova\lib\list-emulator-images.bat" />
+    <None Include="platforms\android\cordova\lib\list-started-emulators" />
+    <None Include="platforms\android\cordova\lib\list-started-emulators.bat" />
+    <None Include="platforms\android\cordova\lib\start-emulator" />
+    <None Include="platforms\android\cordova\lib\start-emulator.bat" />
+    <None Include="platforms\android\cordova\log" />
+    <None Include="platforms\android\cordova\log.bat" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\.documentup.json" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\.npmignore" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\.travis.yml" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\bin\shjs" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\jshint.json" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\LICENSE" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\package.json" />
+    <None Include="platforms\android\cordova\node_modules\shelljs\README.md" />
+    <None Include="platforms\android\cordova\run" />
+    <None Include="platforms\android\cordova\run.bat" />
+    <None Include="platforms\android\cordova\version" />
+    <None Include="platforms\android\cordova\version.bat" />
+    <None Include="platforms\android\gen\R.java.d" />
+    <None Include="platforms\android\local.properties" />
+    <None Include="platforms\android\project.properties" />
+    <None Include="plugins\android.json" />
+    <None Include="www\components\angular\.bower.json" />
+    <None Include="www\components\angular\bower.json" />
+    <None Include="www\components\lodash\.bower.json" />
+    <None Include="www\components\lodash\bower.json" />
+    <None Include="www\components\myProject\.bower.json" />
+    <None Include="www\components\myProject\bower.json" />
+    <None Include="www\components\restangular\.bower.json" />
+    <None Include="www\components\restangular\.travis.yml" />
+    <None Include="www\components\restangular\bower.json" />
+    <None Include="www\components\restangular\CHANGELOG.md" />
+    <None Include="www\components\restangular\CONTRIBUTE.md" />
+    <None Include="www\components\restangular\dist\restangular.zip" />
+    <None Include="www\components\restangular\license.md" />
+    <None Include="www\components\restangular\package.json" />
+    <None Include="www\components\restangular\README.md" />
+    <None Include="www\components\steroids-js\.bower.json" />
+    <None Include="www\components\steroids-js\component.json" />
+    <None Include="www\components\underscore\.bower.json" />
+    <None Include="www\components\underscore\.npmignore" />
+    <None Include="www\components\underscore\.travis.yml" />
+    <None Include="www\components\underscore\CNAME" />
+    <None Include="www\components\underscore\CONTRIBUTING.md" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-bold.eot" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-bold.ttf" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-bold.woff" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-light.eot" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-light.ttf" />
+    <None Include="www\components\underscore\docs\public\fonts\aller-light.woff" />
+    <None Include="www\components\underscore\docs\public\fonts\novecento-bold.eot" />
+    <None Include="www\components\underscore\docs\public\fonts\novecento-bold.ttf" />
+    <None Include="www\components\underscore\docs\public\fonts\novecento-bold.woff" />
+    <None Include="www\components\underscore\LICENSE" />
+    <None Include="www\components\underscore\package.json" />
+    <None Include="www\components\underscore\Rakefile" />
+    <None Include="www\components\underscore\README.md" />
+    <None Include="www\components\underscore\underscore-min.map" />
+    <None Include="www\js\.gitkeep" />
+    <None Include="www\res\screen\tizen\README.md" />
+    <None Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-It.otf" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-Light.otf" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-LightIt.otf" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-Regular.otf" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-Semibold.otf" />
+    <None Include="www\vendor\topcoat\font\SourceSansPro-SemiboldIt.otf" />
+    <None Include="www\vendor\topcoat\LICENSE" />
+    <None Include="www\vendor\topcoat\NOTICE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="platforms\android\AndroidManifest.xml" />
+    <Content Include="platforms\android\assets\www\config.xml" />
+    <Content Include="platforms\android\assets\www\cordova.js" />
+    <Content Include="platforms\android\assets\www\cordova_plugins.js" />
+    <Content Include="platforms\android\assets\www\css\index.css" />
+    <Content Include="platforms\android\assets\www\icon.png" />
+    <Content Include="platforms\android\assets\www\img\logo.png" />
+    <Content Include="platforms\android\assets\www\index.html" />
+    <Content Include="platforms\android\assets\www\js\index.js" />
+    <Content Include="platforms\android\assets\www\phonegap.js" />
+    <Content Include="platforms\android\assets\www\res\icon\android\icon-36-ldpi.png" />
+    <Content Include="platforms\android\assets\www\res\icon\android\icon-48-mdpi.png" />
+    <Content Include="platforms\android\assets\www\res\icon\android\icon-72-hdpi.png" />
+    <Content Include="platforms\android\assets\www\res\icon\android\icon-96-xhdpi.png" />
+    <Content Include="platforms\android\assets\www\res\icon\bada-wac\icon-48-type5.png" />
+    <Content Include="platforms\android\assets\www\res\icon\bada-wac\icon-50-type3.png" />
+    <Content Include="platforms\android\assets\www\res\icon\bada-wac\icon-80-type4.png" />
+    <Content Include="platforms\android\assets\www\res\icon\bada\icon-128.png" />
+    <Content Include="platforms\android\assets\www\res\icon\blackberry\icon-80.png" />
+    <Content Include="platforms\android\assets\www\res\icon\ios\icon-57-2x.png" />
+    <Content Include="platforms\android\assets\www\res\icon\ios\icon-57.png" />
+    <Content Include="platforms\android\assets\www\res\icon\ios\icon-72-2x.png" />
+    <Content Include="platforms\android\assets\www\res\icon\ios\icon-72.png" />
+    <Content Include="platforms\android\assets\www\res\icon\tizen\icon-128.png" />
+    <Content Include="platforms\android\assets\www\res\icon\webos\icon-64.png" />
+    <Content Include="platforms\android\assets\www\res\icon\windows-phone\icon-173-tile.png" />
+    <Content Include="platforms\android\assets\www\res\icon\windows-phone\icon-48.png" />
+    <Content Include="platforms\android\assets\www\res\icon\windows-phone\icon-62-tile.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-hdpi-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-hdpi-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-ldpi-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-ldpi-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-mdpi-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-mdpi-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-xhdpi-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\android\screen-xhdpi-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\bada-wac\screen-type3.png" />
+    <Content Include="platforms\android\assets\www\res\screen\bada-wac\screen-type4.png" />
+    <Content Include="platforms\android\assets\www\res\screen\bada-wac\screen-type5.png" />
+    <Content Include="platforms\android\assets\www\res\screen\bada\screen-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\blackberry\screen-225.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-ipad-landscape-2x.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-ipad-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-ipad-portrait-2x.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-ipad-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-iphone-landscape-2x.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-iphone-landscape.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-iphone-portrait-2x.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-iphone-portrait-568h-2x.png" />
+    <Content Include="platforms\android\assets\www\res\screen\ios\screen-iphone-portrait.png" />
+    <Content Include="platforms\android\assets\www\res\screen\webos\screen-64.png" />
+    <Content Include="platforms\android\assets\www\res\screen\windows-phone\screen-portrait.jpg" />
+    <Content Include="platforms\android\assets\www\spec.html" />
+    <Content Include="platforms\android\assets\www\spec\helper.js" />
+    <Content Include="platforms\android\assets\www\spec\index.js" />
+    <Content Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\jasmine-html.js" />
+    <Content Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\jasmine.css" />
+    <Content Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\jasmine.js" />
+    <Content Include="platforms\android\bin\AndroidManifest.xml" />
+    <Content Include="platforms\android\bin\dexedLibs\cordova-3.1.0-a8ac9c390eb0a7fc080bfe48df74b194.jar" />
+    <Content Include="platforms\android\bin\proguard.txt" />
+    <Content Include="platforms\android\bin\res\drawable-hdpi\icon.png" />
+    <Content Include="platforms\android\bin\res\drawable-ldpi\icon.png" />
+    <Content Include="platforms\android\bin\res\drawable-mdpi\icon.png" />
+    <Content Include="platforms\android\bin\res\drawable-xhdpi\icon.png" />
+    <Content Include="platforms\android\bin\res\drawable\icon.png" />
+    <Content Include="platforms\android\build.xml" />
+    <Content Include="platforms\android\cordova\lib\appinfo.js" />
+    <Content Include="platforms\android\cordova\lib\build.js" />
+    <Content Include="platforms\android\cordova\lib\check_reqs.js" />
+    <Content Include="platforms\android\cordova\lib\clean.js" />
+    <Content Include="platforms\android\cordova\lib\device.js" />
+    <Content Include="platforms\android\cordova\lib\emulator.js" />
+    <Content Include="platforms\android\cordova\lib\log.js" />
+    <Content Include="platforms\android\cordova\lib\run.js" />
+    <Content Include="platforms\android\cordova\node_modules\shelljs\global.js" />
+    <Content Include="platforms\android\cordova\node_modules\shelljs\make.js" />
+    <Content Include="platforms\android\cordova\node_modules\shelljs\scripts\docs.js" />
+    <Content Include="platforms\android\cordova\node_modules\shelljs\scripts\run-tests.js" />
+    <Content Include="platforms\android\cordova\node_modules\shelljs\shell.js" />
+    <Content Include="platforms\android\gen\com\phonegap\helloworld\BuildConfig.java" />
+    <Content Include="platforms\android\gen\com\phonegap\helloworld\R.java" />
+    <Content Include="platforms\android\libs\cordova-3.1.0.jar" />
+    <Content Include="platforms\android\proguard-project.txt" />
+    <Content Include="platforms\android\res\drawable-hdpi\icon.png" />
+    <Content Include="platforms\android\res\drawable-ldpi\icon.png" />
+    <Content Include="platforms\android\res\drawable-mdpi\icon.png" />
+    <Content Include="platforms\android\res\drawable-xhdpi\icon.png" />
+    <Content Include="platforms\android\res\drawable\icon.png" />
+    <Content Include="platforms\android\res\values\strings.xml" />
+    <Content Include="platforms\android\res\xml\config.xml" />
+    <Content Include="platforms\android\src\com\phonegap\helloworld\HelloWorld.java" />
+    <Content Include="www\components\angular\angular.js" />
+    <Content Include="www\components\angular\angular.min.js" />
+    <Content Include="www\components\lodash\dist\lodash.compat.js" />
+    <Content Include="www\components\lodash\dist\lodash.compat.min.js" />
+    <Content Include="www\components\lodash\dist\lodash.js" />
+    <Content Include="www\components\lodash\dist\lodash.min.js" />
+    <Content Include="www\components\lodash\dist\lodash.underscore.js" />
+    <Content Include="www\components\lodash\dist\lodash.underscore.min.js" />
+    <Content Include="www\components\lodash\lodash.js" />
+    <Content Include="www\components\restangular\.gitignore" />
+    <Content Include="www\components\restangular\dist\dependencies\angular-resource.js" />
+    <Content Include="www\components\restangular\dist\dependencies\angular.js" />
+    <Content Include="www\components\restangular\dist\dependencies\lodash.js" />
+    <Content Include="www\components\restangular\dist\restangular.js" />
+    <Content Include="www\components\restangular\dist\restangular.min.js" />
+    <Content Include="www\components\restangular\Gruntfile.js" />
+    <Content Include="www\components\restangular\karma.conf.js" />
+    <Content Include="www\components\restangular\karma.underscore.conf.js" />
+    <Content Include="www\components\restangular\src\restangular.js" />
+    <Content Include="www\components\restangular\test\restangularSpec.js" />
+    <Content Include="www\components\steroids-js\steroids.js" />
+    <Content Include="www\components\underscore\.gitignore" />
+    <Content Include="www\components\underscore\docs\docco.css" />
+    <Content Include="www\components\underscore\docs\favicon.ico" />
+    <Content Include="www\components\underscore\docs\images\background.png" />
+    <Content Include="www\components\underscore\docs\images\underscore.png" />
+    <Content Include="www\components\underscore\docs\public\stylesheets\normalize.css" />
+    <Content Include="www\components\underscore\docs\underscore.html" />
+    <Content Include="www\components\underscore\favicon.ico" />
+    <Content Include="www\components\underscore\index.html" />
+    <Content Include="www\components\underscore\index.js" />
+    <Content Include="www\components\underscore\test\arrays.js" />
+    <Content Include="www\components\underscore\test\chaining.js" />
+    <Content Include="www\components\underscore\test\collections.js" />
+    <Content Include="www\components\underscore\test\functions.js" />
+    <Content Include="www\components\underscore\test\index.html" />
+    <Content Include="www\components\underscore\test\objects.js" />
+    <Content Include="www\components\underscore\test\speed.js" />
+    <Content Include="www\components\underscore\test\utility.js" />
+    <Content Include="www\components\underscore\test\vendor\jquery.js" />
+    <Content Include="www\components\underscore\test\vendor\jslitmus.js" />
+    <Content Include="www\components\underscore\test\vendor\qunit.css" />
+    <Content Include="www\components\underscore\test\vendor\qunit.js" />
+    <Content Include="www\components\underscore\test\vendor\runner.js" />
+    <Content Include="www\components\underscore\underscore-min.js" />
+    <Content Include="www\components\underscore\underscore.js" />
+    <Content Include="www\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="www\controllers\controllers.js" />
+    <Content Include="www\controllers\test.js" />
+    <Content Include="www\css\index.css" />
+    <Content Include="www\icon.png" />
+    <Content Include="www\img\logo.png" />
+    <Content Include="www\index.html" />
+    <Content Include="www\js\application.js" />
+    <Content Include="www\js\console.log.android.js" />
+    <Content Include="www\js\console.log.js" />
+    <Content Include="www\js\drawer.js" />
+    <Content Include="www\js\index.js" />
+    <Content Include="www\js\onerror.android.js" />
+    <Content Include="www\js\onerror.js" />
+    <Content Include="www\js\PageLoader.js" />
+    <Content Include="www\js\PushNotification.js" />
+    <Content Include="www\models\Alert.js" />
+    <Content Include="www\res\icon\android\icon-36-ldpi.png" />
+    <Content Include="www\res\icon\android\icon-48-mdpi.png" />
+    <Content Include="www\res\icon\android\icon-72-hdpi.png" />
+    <Content Include="www\res\icon\android\icon-96-xhdpi.png" />
+    <Content Include="www\res\icon\bada-wac\icon-48-type5.png" />
+    <Content Include="www\res\icon\bada-wac\icon-50-type3.png" />
+    <Content Include="www\res\icon\bada-wac\icon-80-type4.png" />
+    <Content Include="www\res\icon\bada\icon-128.png" />
+    <Content Include="www\res\icon\blackberry\icon-80.png" />
+    <Content Include="www\res\icon\ios\icon-57-2x.png" />
+    <Content Include="www\res\icon\ios\icon-57.png" />
+    <Content Include="www\res\icon\ios\icon-72-2x.png" />
+    <Content Include="www\res\icon\ios\icon-72.png" />
+    <Content Include="www\res\icon\tizen\icon-128.png" />
+    <Content Include="www\res\icon\webos\icon-64.png" />
+    <Content Include="www\res\icon\windows-phone\icon-173-tile.png" />
+    <Content Include="www\res\icon\windows-phone\icon-48.png" />
+    <Content Include="www\res\icon\windows-phone\icon-62-tile.png" />
+    <Content Include="www\res\screen\android\screen-hdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-hdpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-ldpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-ldpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-mdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-mdpi-portrait.png" />
+    <Content Include="www\res\screen\android\screen-xhdpi-landscape.png" />
+    <Content Include="www\res\screen\android\screen-xhdpi-portrait.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type3.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type4.png" />
+    <Content Include="www\res\screen\bada-wac\screen-type5.png" />
+    <Content Include="www\res\screen\bada\screen-portrait.png" />
+    <Content Include="www\res\screen\blackberry\screen-225.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-landscape-2x.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-landscape.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-portrait-2x.png" />
+    <Content Include="www\res\screen\ios\screen-ipad-portrait.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-landscape-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-landscape.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait-568h-2x.png" />
+    <Content Include="www\res\screen\ios\screen-iphone-portrait.png" />
+    <Content Include="www\res\screen\webos\screen-64.png" />
+    <Content Include="www\res\screen\windows-phone\screen-portrait.jpg" />
+    <Content Include="www\spec.html" />
+    <Content Include="www\spec\helper.js" />
+    <Content Include="www\spec\index.js" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine-html.js" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.css" />
+    <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.js" />
+    <Content Include="www\vendor\angular-hammer\angular-hammer.js" />
+    <Content Include="www\vendor\hammerjs\hammer.js" />
+    <Content Include="www\vendor\hammerjs\hammer.min.js" />
+    <Content Include="www\vendor\hammerjs\jquery.hammer.js" />
+    <Content Include="www\vendor\hammerjs\jquery.hammer.min.js" />
+    <Content Include="www\vendor\topcoat\css\main.css" />
+    <Content Include="www\vendor\topcoat\css\topcoat-mobile-dark.css" />
+    <Content Include="www\vendor\topcoat\css\topcoat-mobile-light.css" />
+    <Content Include="www\vendor\topcoat\font\LICENSE.txt" />
+    <Content Include="www\vendor\topcoat\img\bg_dark.png" />
+    <Content Include="www\vendor\topcoat\img\hamburger_dark.svg" />
+    <Content Include="www\vendor\topcoat\img\hamburger_light.svg" />
+    <Content Include="www\vendor\topcoat\img\search.svg" />
+    <Content Include="www\vendor\topcoat\img\search_light.svg" />
+    <Content Include="www\vendor\topcoat\img\spinner2x.png" />
+    <Content Include="www\vendor\topcoat\js\main.js" />
+    <Content Include="www\views\Alert\edit.html" />
+    <Content Include="www\views\Alert\index.html" />
+    <Content Include="www\views\Alert\new.html" />
+    <Content Include="www\views\Alert\show.html" />
+    <Content Include="www\views\index.html" />
+    <Content Include="www\views\Login\addAuthKey.html" />
+    <Content Include="www\views\Login\index.html" />
+    <Content Include="www\views\test\book.html" />
+    <Content Include="www\views\test\chapter.html" />
+    <Content Include="www\views\test\index.html" />
+    <Content Include="www\views\test\indexaa.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".cordova\hooks\after_build\" />
+    <Folder Include=".cordova\hooks\after_compile\" />
+    <Folder Include=".cordova\hooks\after_docs\" />
+    <Folder Include=".cordova\hooks\after_emulate\" />
+    <Folder Include=".cordova\hooks\after_platform_add\" />
+    <Folder Include=".cordova\hooks\after_platform_ls\" />
+    <Folder Include=".cordova\hooks\after_platform_rm\" />
+    <Folder Include=".cordova\hooks\after_plugin_add\" />
+    <Folder Include=".cordova\hooks\after_plugin_ls\" />
+    <Folder Include=".cordova\hooks\after_plugin_rm\" />
+    <Folder Include=".cordova\hooks\after_prepare\" />
+    <Folder Include=".cordova\hooks\after_run\" />
+    <Folder Include=".cordova\hooks\before_build\" />
+    <Folder Include=".cordova\hooks\before_compile\" />
+    <Folder Include=".cordova\hooks\before_docs\" />
+    <Folder Include=".cordova\hooks\before_emulate\" />
+    <Folder Include=".cordova\hooks\before_platform_add\" />
+    <Folder Include=".cordova\hooks\before_platform_ls\" />
+    <Folder Include=".cordova\hooks\before_platform_rm\" />
+    <Folder Include=".cordova\hooks\before_plugin_add\" />
+    <Folder Include=".cordova\hooks\before_plugin_ls\" />
+    <Folder Include=".cordova\hooks\before_plugin_rm\" />
+    <Folder Include=".cordova\hooks\before_prepare\" />
+    <Folder Include=".cordova\hooks\before_run\" />
+    <Folder Include="merges\android\" />
+    <Folder Include="platforms\android\cordova\node_modules\.bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
