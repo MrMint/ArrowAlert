@@ -7,8 +7,9 @@
 
     <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-dark.css" />
     <link rel="stylesheet" href="vendor/topcoat/css/main.css" />
+    
     <link rel="stylesheet" href="css/application.css" />
-
+    <link rel="stylesheet" href="css/navigation.css" />
 
     <!--<script src="../../components/angular/angular.min.js"></script>-->
 
@@ -24,16 +25,24 @@
     <script src="vendor/topcoat/js/main.js"></script>
     <script src="models/Alert.js"></script>
     <script src="controllers/controllers.js"></script>
-
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 
 
 </head>
-<body>
+<body ng-controller="MainCtrl as main">
+
     <div id="wrapper" style="height: 100%;">
         <div class="max-width">
             <div id="sideNav">
                 <div id="pageNav">
                     <ul>
+                        <li>
+                            <div id="userDisplay">
+                                <div class="userDisplayPicture"><img src="{{userPicture}}"/></div>
+                                <div class="userDisplayName"> {{userName}} </div>
+                            </div>
+
+                        </li>
                         <li><a href="#/Login/index.html">Home</a></li>
                         <li><a href="#/Alerts">Alert History</a></li>
                         <li><a href="#/EditKey">Edit Key</a></li>
@@ -46,8 +55,7 @@
             <header id="main-header">
                 <div class="max-width">
                     <hgroup>
-                        <h1>ArrowAlert</h1>
-                        <p>Hold onto your butts</p>
+                        <h1>{{pageTitle}}</h1>
                     </hgroup>
                     <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
                 </div>
