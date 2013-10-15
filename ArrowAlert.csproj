@@ -357,13 +357,11 @@
     <Content Include="www\vendor\topcoat\img\search_light.svg" />
     <Content Include="www\vendor\topcoat\img\spinner2x.png" />
     <Content Include="www\vendor\topcoat\js\main.js" />
-    <Content Include="www\views\Alert\edit.html" />
-    <Content Include="www\views\Alert\index.html" />
-    <Content Include="www\views\Alert\new.html" />
-    <Content Include="www\views\Alert\show.html" />
     <Content Include="www\index.html" />
-    <Content Include="www\views\Login\addAuthKey.html" />
-    <Content Include="www\views\Login\index.html" />
+    <Content Include="www\views\alerts.html" />
+    <Content Include="www\views\editKey.html" />
+    <Content Include="www\views\home.html" />
+    <Content Include="www\views\login.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".cordova\hooks\after_build\" />

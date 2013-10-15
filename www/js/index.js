@@ -36,6 +36,9 @@ var app = {
         angular.element(document).ready(function () {
             angular.bootstrap(document);
         });
+
+        document.addEventListener("menubutton", onMenuKeyDown, false);
+
     },
     //// Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -49,3 +52,16 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+// Handle the Menu button being pressed
+function onMenuKeyDown() {
+    
+    ideMenuButton.onclick = function(e) {
+        var site = document.getElementById('site');
+        var cl = site.classList;
+        if (cl.contains('open')) {
+            cl.remove('open');
+        } else {
+            cl.add('open');
+        }
+}

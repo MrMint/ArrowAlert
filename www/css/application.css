@@ -125,6 +125,7 @@ table {
 }
 .alertItemBody {
     padding:20px;
+    overflow:hidden;
 }
 /*Overriding topcoat for ui stuff here*/
 
