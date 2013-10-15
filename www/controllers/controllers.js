@@ -80,7 +80,7 @@ function LoginCtrl($scope, $http, $location) {
     var authKey = localStorage.getItem("authKey");
 
     var that = this;
-    if (authKey != null) {
+    if (authKey != 'undefined' || authKey != null) {
         //User has key, authenticate with server
         $http({
             method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/",
@@ -92,18 +92,19 @@ function LoginCtrl($scope, $http, $location) {
                 if (data.characterId != null) {
                     $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
                 }
+                //TODO: Implement home view
                 //$location.path('/Home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
                     //User failed to authorize
-
-                    //Breaks chrome, uncomment for deployement
-                    //showAlert("Authorization Error", "Invalid Key");
+                    showAlert("Authorization Error", "Invalid Key");
                     $location.path('/EditKey');
                 }
-                //Was some type of network error
-                showAlert("Network Error", "Status: " + status);
+                else {
+                    //Was some type of network error
+                    showAlert("Network Error", "Status: " + status);
+                }
             });
     }
     else {
@@ -114,12 +115,23 @@ function LoginCtrl($scope, $http, $location) {
 };
 
 function EditKeyCtrl($scope, $http, $location) {
-
     $scope.setPageTitle('Edit Key');
+
+    //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
+    var authKey = localStorage.getItem("authKey");
+    if (authKey != 'undefined' || authKey != null) {
+        $scope.placeHolder = authKey;
+    }
+    //Saves the key to localstorage, and navigates to login for authetication
     $scope.changeAuthKey = function () {
         localStorage.setItem("authKey", $scope.authKey);
         $location.path('/Login');
+    }
+
+    //Opens the native browser and directs the user to the url to obtain authkey
+    $scope.openBrowserForKey = function () {
+        navigator.app.loadUrl('https://arrowmanager.net/Account/Manage', { openExternal: true });
     }
 };
 
