@@ -18,7 +18,6 @@
 
             // -- Stackmob REST API configuration
             RestangularConfigurer.setBaseUrl('https://arrowmanager.net/api');
-            //RestangularConfigurer.setBaseUrl('http://localhost:59318/api');
             RestangularConfigurer.setRestangularFields({
                 id: "ID"
             });

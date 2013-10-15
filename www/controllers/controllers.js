@@ -145,8 +145,11 @@ function EditKeyCtrl($scope, $http, $location) {
     }
 };
 
-function HomeCtrl($scope) {
+function HomeCtrl($scope, AlertRestangular) {
     $scope.setPageTitle('ArrowAlert');
+
+    //// Fetch all objects from the backend (see models/Alert.js)
+    $scope.recentAlert = AlertRestangular.one('Alerts','?count=1').get();
     $scope.loading = false;
 }
 
@@ -163,9 +166,4 @@ function showAlert(title, message) {
         'ok'              // buttonName
     );
     navigator.notification.vibrate(500);
-}
-
-//Helper function for authenticating with arrowmanager REST api
-function authenticate(scope, http) {
-
 }
