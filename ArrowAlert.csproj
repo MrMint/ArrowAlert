@@ -132,8 +132,6 @@
     <None Include="www\vendor\topcoat\font\SourceSansPro-Regular.otf" />
     <None Include="www\vendor\topcoat\font\SourceSansPro-Semibold.otf" />
     <None Include="www\vendor\topcoat\font\SourceSansPro-SemiboldIt.otf" />
-    <None Include="www\vendor\topcoat\LICENSE" />
-    <None Include="www\vendor\topcoat\NOTICE" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -281,9 +279,9 @@
     <Content Include="www\controllers\controllers.js" />
     <Content Include="www\css\application.css" />
     <Content Include="www\css\index.css" />
+    <Content Include="www\css\navigation.css" />
     <Content Include="www\icon.png" />
     <Content Include="www\img\logo.png" />
-    <Content Include="www\index2.html" />
     <Content Include="www\js\application.js" />
     <Content Include="www\js\console.log.android.js" />
     <Content Include="www\js\console.log.js" />
@@ -357,13 +355,11 @@
     <Content Include="www\vendor\topcoat\img\search_light.svg" />
     <Content Include="www\vendor\topcoat\img\spinner2x.png" />
     <Content Include="www\vendor\topcoat\js\main.js" />
-    <Content Include="www\views\Alert\edit.html" />
-    <Content Include="www\views\Alert\index.html" />
-    <Content Include="www\views\Alert\new.html" />
-    <Content Include="www\views\Alert\show.html" />
     <Content Include="www\index.html" />
-    <Content Include="www\views\Login\addAuthKey.html" />
-    <Content Include="www\views\Login\index.html" />
+    <Content Include="www\views\alerts.html" />
+    <Content Include="www\views\editKey.html" />
+    <Content Include="www\views\home.html" />
+    <Content Include="www\views\login.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".cordova\hooks\after_build\" />

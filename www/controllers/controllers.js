@@ -2,7 +2,7 @@
     //configure custom routing
     $routeProvider.when('/Home', {
         templateUrl: 'views/home.html',
-        controller: LoginCtrl
+        controller: HomeCtrl
     });
     $routeProvider.when('/Login', {
         templateUrl: 'views/login.html',
@@ -31,6 +31,8 @@ function MainCtrl($scope) {
     $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
     $scope.userName = "Not Authenticated";
     $scope.pageTitle = "ArrowAlert";
+    $scope.newAlerts = false;
+    $scope.newAlertsCount = 0;
 
     //Set page title
     $scope.setPageTitle = function (title) {
@@ -45,6 +47,14 @@ function MainCtrl($scope) {
     //Set users picture
     $scope.setuserPicture = function (title) {
         $scope.userPicture = title;
+    }
+
+    //Set new alerts count
+    $scope.setNewAlertsCount = function (count) {
+        $scope.newAlertsCount = count;
+        if (count == 0) {
+            $scope.newAlerts = false;
+        }
     }
 }
 
@@ -92,8 +102,8 @@ function LoginCtrl($scope, $http, $location) {
                 if (data.characterId != null) {
                     $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
                 }
-                //TODO: Implement home view
-                //$location.path('/Home');
+                //Send to home page
+                $location.path('/Home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
@@ -135,6 +145,14 @@ function EditKeyCtrl($scope, $http, $location) {
     }
 };
 
+function HomeCtrl($scope, AlertRestangular) {
+    $scope.setPageTitle('ArrowAlert');
+
+    //// Fetch all objects from the backend (see models/Alert.js)
+    $scope.recentAlert = AlertRestangular.one('Alerts','?count=1').get();
+    $scope.loading = false;
+}
+
 function ExitAppCtrl($scope) {
 
 }
@@ -143,14 +161,9 @@ function ExitAppCtrl($scope) {
 function showAlert(title, message) {
     navigator.notification.alert(
         message,          // message
-        function () { },     // callback
+        function () { },  // callback
         title,            // title
         'ok'              // buttonName
     );
     navigator.notification.vibrate(500);
-}
-
-//Helper function for authenticating with arrowmanager REST api
-function authenticate(scope, http) {
-
 }
