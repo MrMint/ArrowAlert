@@ -30,12 +30,14 @@
     }
 
         #userDisplay .userDisplayPicture img {
-        width:100%;
-        outline:1px solid #288edf;
+            width: 100%;
+            outline: 1px solid #288edf;
         }
+
     #userDisplay .userDisplayName {
         padding: 12px 0 0 40px;
-        color:#288edf;
+        color: #288edf;
+        margin-left: 3px;
     }
 
 #pageNav li {
@@ -47,14 +49,13 @@
 
 body {
     font-family: 'Lato', sans-serif;
-    
 }
 
 #sideNav {
-background: #252525;
-position: absolute;
-width: 100%;
-z-index: 1;
-height: 100%;
-left: 0;
+    background: #252525;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    height: 100%;
+    left: 0;
 }

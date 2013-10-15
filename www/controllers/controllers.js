@@ -2,7 +2,7 @@
     //configure custom routing
     $routeProvider.when('/Home', {
         templateUrl: 'views/home.html',
-        controller: LoginCtrl
+        controller: HomeCtrl
     });
     $routeProvider.when('/Login', {
         templateUrl: 'views/login.html',
@@ -92,8 +92,8 @@ function LoginCtrl($scope, $http, $location) {
                 if (data.characterId != null) {
                     $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
                 }
-                //TODO: Implement home view
-                //$location.path('/Home');
+                //Send to home page
+                $location.path('/Home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
@@ -135,6 +135,11 @@ function EditKeyCtrl($scope, $http, $location) {
     }
 };
 
+function HomeCtrl($scope) {
+    $scope.setPageTitle('ArrowAlert');
+
+}
+
 function ExitAppCtrl($scope) {
 
 }
@@ -143,7 +148,7 @@ function ExitAppCtrl($scope) {
 function showAlert(title, message) {
     navigator.notification.alert(
         message,          // message
-        function () { },     // callback
+        function () { },  // callback
         title,            // title
         'ok'              // buttonName
     );
