@@ -1,0 +1,10 @@
+﻿<div ng-app="AlertApp">
+
+  <div ng-controller="EditKeyCtrl" style="text-align:center;">
+      <div class="spinner" ng-show="loading"></div>
+      <button class="topcoat-button" style="margin-bottom:100px;" ng-click="openBrowserForKey()" >Open browser to copy key</button>
+      <input type="text" class="topcoat-text-input" placeholder="{{placeHolder}}" ng-model="authKey" value="">
+      <button class="topcoat-button--cta" ng-click="changeAuthKey()" >Submit Key</button>
+  </div>
+
+</div>

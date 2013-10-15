@@ -1,15 +1,19 @@
 ﻿var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel', 'ngAnimate'], function ($routeProvider, $locationProvider) {
     //configure custom routing
+    $routeProvider.when('/Home', {
+        templateUrl: 'views/home.html',
+        controller: LoginCtrl
+    });
     $routeProvider.when('/Login', {
-        templateUrl: 'views/Login/index.html',
+        templateUrl: 'views/login.html',
         controller: LoginCtrl
     });
     $routeProvider.when('/Alerts', {
-        templateUrl: 'views/Alert/index.html',
+        templateUrl: 'views/alerts.html',
         controller: AlertCtrl
     });
     $routeProvider.when('/EditKey', {
-        templateUrl: 'views/Login/editKey.html',
+        templateUrl: 'views/editKey.html',
         controller: EditKeyCtrl
     });
     $routeProvider.when('/LogOut', {
@@ -23,11 +27,24 @@
 });
 
 function MainCtrl($scope) {
-    $scope.userPicture = "http://image.eveonline.com/Character/307223040_64.jpg";
+    //User specific UI elements and page title
+    $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
     $scope.userName = "Not Authenticated";
     $scope.pageTitle = "ArrowAlert";
+
+    //Set page title
     $scope.setPageTitle = function (title) {
         $scope.pageTitle = title;
+    }
+
+    //Set users name
+    $scope.setuserName = function (title) {
+        $scope.userName = title;
+    }
+
+    //Set users picture
+    $scope.setuserPicture = function (title) {
+        $scope.userPicture = title;
     }
 }
 
@@ -43,52 +60,78 @@ function AlertCtrl($scope, AlertRestangular) {
         $scope.loading = true;
 
         Alerts.getList().then(function (data) {
-            //$scope.loading = false;
+            $scope.loading = false;
             $scope.Alerts = data;
         });
 
     };
 
-    // Fetch all objects from the backend (see app/models/Alert.js)
+    // Fetch all objects from the backend (see models/Alert.js)
     var Alerts = AlertRestangular.all('Alerts');
     $scope.loadAlerts();
 
 };
 
-function LoginCtrl($scope, $http, $location, PageTitle) {
-    $scope.setPageTitle('ArrowAlert');
+function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
-    // Save current Alert id to localStorage (edit.html gets it from there)
-    localStorage.setItem("authKey", "key4");
+    $scope.setPageTitle('Authenticating...');
 
+    //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
-    if (authKey != null) {
-        $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
-       success(function (data, status, headers, config) {
-           if (data === "false") {
-               $location.path('/EditKey');
-           }
-       }).
-       error(function (data, status, headers, config) {
-           showAlert("Network Error", "Status: " + status + ", Data: " + data);
-       });
-    }
 
+    var that = this;
+    if (authKey != 'undefined' || authKey != null) {
+        //User has key, authenticate with server
+        $http({
+            method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/",
+            headers: { "Authorization": authKey, "Content-type": "application/json" }
+        }).
+            success(function (data, status, headers, config) {
+                //Authorization was successful! Update user info and store it.
+                $scope.setuserName(data.displayName);
+                if (data.characterId != null) {
+                    $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
+                }
+                //TODO: Implement home view
+                //$location.path('/Home');
+            }).
+            error(function (data, status, headers, config) {
+                if (status == '401') {
+                    //User failed to authorize
+                    showAlert("Authorization Error", "Invalid Key");
+                    $location.path('/EditKey');
+                }
+                else {
+                    //Was some type of network error
+                    showAlert("Network Error", "Status: " + status);
+                }
+            });
+    }
+    else {
+        //User does not have a key
+        //Redirect user to enter a authorization key
+        $location.path('/EditKey');
+    }
 };
 
-function EditKeyCtrl($scope, $http) {
-    var authKey = $scope.key;
+function EditKeyCtrl($scope, $http, $location) {
     $scope.setPageTitle('Edit Key');
-    function AddAppKey() {
-        if (authKey != null) {
-            $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
-           success(function (data, status, headers, config) {
-               localStorage.setItem("authKey", "key");
-           }).
-           error(function (data, status, headers, config) {
-               showAlert("Network Error", "Status: " + status + ", Data: " + data);
-           });
-        }
+
+    //Check if they have a key in storage, UI changes based on it
+    $scope.placeHolder = "Copy your key here";
+    var authKey = localStorage.getItem("authKey");
+    if (authKey != 'undefined' || authKey != null) {
+        $scope.placeHolder = authKey;
+    }
+    //Saves the key to localstorage, and navigates to login for authetication
+    $scope.changeAuthKey = function () {
+        localStorage.setItem("authKey", $scope.authKey);
+        $location.path('/Login');
+    }
+
+    //Opens the native browser and directs the user to the url to obtain authkey
+    $scope.openBrowserForKey = function () {
+        navigator.app.loadUrl('https://arrowmanager.net/Account/Manage', { openExternal: true });
     }
 };
 
@@ -107,15 +150,7 @@ function showAlert(title, message) {
     navigator.notification.vibrate(500);
 }
 
-AlertApp.factory('PageTitle', function () {
-    var title = 'ArrowAlert';
-    return {
-        setTitle: function (data) {
+//Helper function for authenticating with arrowmanager REST api
+function authenticate(scope, http) {
 
-            title = data;
-        },
-        getTitle: function () {
-            return title;
-        }
-    };
-});
+}

@@ -1,43 +1,44 @@
 * {
-  -webkit-user-select: none;  /* Disable selection/copy of elements when tapping for a long time */
-  -webkit-touch-callout: none; /* Disable touch callouts */
+    -webkit-user-select: none; /* Disable selection/copy of elements when tapping for a long time */
+    -webkit-touch-callout: none; /* Disable touch callouts */
 }
 
 input {
-  -webkit-user-select: text;  /* Allow selection for input elements */
+    -webkit-user-select: text; /* Allow selection for input elements */
 }
 
 .content-padded {
-  padding: 10px;
+    padding: 10px;
 }
 
 #site {
-    min-height:100%;
+    min-height: 100%;
 }
 
 @-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 .spinner {
-  width: 36px;
-  height: 36px;
-  background-image: url("../vendor/topcoat/img/spinner2x.png");
-  background-size: 36px;
-  background-repeat: no-repeat;
-  position: absolute;
-  z-index: 1000;
-  left: 45%;
-  top: 45%;
-  -webkit-animation-name:            rotate;
-  -webkit-animation-duration:        1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
+    width: 36px;
+    height: 36px;
+    background-image: url("../vendor/topcoat/img/spinner2x.png");
+    background-size: 36px;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1000;
+    left: 45%;
+    top: 45%;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 }
 
 /**
@@ -63,30 +64,59 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);   /** Disable orange highlight */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /** Disable orange highlight */
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
+
 ol, ul {
     list-style: none;
 }
+
 blockquote, q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-/*Forcing app to be in mobile css mode*/
+/*Overriding topcoat for ui stuff here*/
+
+.topcoat-button--cta {
+    width: 100%;
+    max-width: 500px;
+}
+
+.topcoat-text-input {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 2px;
+}
+
+@media (min-width:1000px) {
+    .topcoat-button--cta {
+        width: 150px;
+        max-width: 500px;
+    }
+
+    .topcoat-text-input {
+        width: 700px;
+        max-width: 500px;
+        margin-bottom: 2px;
+    }
+}
