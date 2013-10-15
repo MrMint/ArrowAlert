@@ -56,7 +56,7 @@ function AlertCtrl($scope, AlertRestangular) {
 };
 
 function LoginCtrl($scope, $http, $location, PageTitle) {
-    $scope.setPageTitle('Authenticating...');
+    $scope.setPageTitle('ArrowAlert');
     $scope.loading = true;
     // Save current Alert id to localStorage (edit.html gets it from there)
     localStorage.setItem("authKey", "key4");
@@ -73,7 +73,6 @@ function LoginCtrl($scope, $http, $location, PageTitle) {
            showAlert("Network Error", "Status: " + status + ", Data: " + data);
        });
     }
-
 
 };
 
