@@ -24,7 +24,7 @@
             });
 
             RestangularConfigurer.setDefaultHeaders({
-                'authorization': '59fe150fec09ebade500321536b6b32582d3e2c6336bcdcbbad87e7500446a50d8926c309f098d8b0f963d67ba32112bb58d6a47ae87a1ead2e78d732bc8e1c7'
+                'authorization': localStorage.getItem('authKey')
             });
 
         });

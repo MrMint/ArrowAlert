@@ -39,12 +39,12 @@ function MainCtrl($scope) {
 
     //Set users name
     $scope.setuserName = function (title) {
-        $scope.pageTitle = title;
+        $scope.userName = title;
     }
 
     //Set users picture
     $scope.setuserPicture = function (title) {
-        $scope.pageTitle = title;
+        $scope.userPicture = title;
     }
 }
 
@@ -79,21 +79,30 @@ function LoginCtrl($scope, $http, $location) {
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
-
+    var that = this;
     if (authKey != null) {
         //User has key, authenticate with server
-        $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
+        $http({
+            method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/",
+            headers: { "Authorization": authKey, "Content-type": "application/json" }
+        }).
             success(function (data, status, headers, config) {
                 //Authorization was successful! Update user info and store it.
-                $scope.setuserName = data.displayName;
+                $scope.setuserName(data.displayName);
                 if (data.characterId != null) {
-                    $scope.setuserPicture = "https://image.eveonline.com/Character/" + data.characterId + "_64.jpg";
+                    $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
                 }
+                //$location.path('/Home');
             }).
             error(function (data, status, headers, config) {
-                if (states == '401') {
-                    showAlert("Authorization Error", "Invalid Key");
+                if (status == '401') {
+                    //User failed to authorize
+
+                    //Breaks chrome, uncomment for deployement
+                    //showAlert("Authorization Error", "Invalid Key");
+                    $location.path('/EditKey');
                 }
+                //Was some type of network error
                 showAlert("Network Error", "Status: " + status);
             });
     }
@@ -104,19 +113,13 @@ function LoginCtrl($scope, $http, $location) {
     }
 };
 
-function EditKeyCtrl($scope, $http) {
-    var authKey = $scope.key;
+function EditKeyCtrl($scope, $http, $location) {
+
     $scope.setPageTitle('Edit Key');
-    function AddAppKey() {
-        if (authKey != null) {
-            $http({ method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/", headers: { "authKey": authKey } }).
-           success(function (data, status, headers, config) {
-               localStorage.setItem("authKey", "key");
-           }).
-           error(function (data, status, headers, config) {
-               showAlert("Network Error", "Status: " + status + ", Data: " + data);
-           });
-        }
+    $scope.placeHolder = "Copy your key here";
+    $scope.changeAuthKey = function () {
+        localStorage.setItem("authKey", $scope.authKey);
+        $location.path('/Login');
     }
 };
 
@@ -133,4 +136,9 @@ function showAlert(title, message) {
         'ok'              // buttonName
     );
     navigator.notification.vibrate(500);
+}
+
+//Helper function for authenticating with arrowmanager REST api
+function authenticate(scope, http) {
+
 }

@@ -1,13 +1,9 @@
 ﻿<div ng-app="AlertApp">
 
-  <div ng-controller="EditKeyCtrl">
+  <div ng-controller="EditKeyCtrl" style="text-align:center;">
       <div class="spinner" ng-show="loading"></div>
-      <input type="text" class="topcoat-text-input"  placeholder="Copy key here" ng-model="authKey" value="">
-      <button class="topcoat-button--cta" >Button</button>
+      <input type="text" class="topcoat-text-input" placeholder="{{placeHolder}}" ng-model="authKey" value="">
+      <button class="topcoat-button--cta" ng-click="changeAuthKey()" >Submit Key</button>
   </div>
 
 </div>
-
-<script>
-
-</script>
