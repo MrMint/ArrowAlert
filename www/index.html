@@ -1,51 +1,78 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
+﻿<!DOCTYPE html>
 <html ng-app="AlertApp">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-                
+<head>
+    <meta charset="utf8">
+    <title>Arrow Alert</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-dark.css" />
+    <link rel="stylesheet" href="vendor/topcoat/css/main.css" />
+    
+    <link rel="stylesheet" href="css/application.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
+
+    <!--<script src="../../components/angular/angular.min.js"></script>-->
+
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-animate.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>
+
+    <script src="js/index.js"></script>
+    <script src="components/underscore/underscore-min.js"></script>
+    <script src="components/restangular/dist/restangular.min.js"></script>
+    <script src="vendor/hammerjs/hammer.min.js"></script>
+    <script src="vendor/angular-hammer/angular-hammer.js"></script>
+    <script src="vendor/topcoat/js/main.js"></script>
+    <script src="models/Alert.js"></script>
+    <script src="controllers/controllers.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body ng-controller="MainCtrl as main">
+
+    <div id="wrapper" style="height: 100%;">
+        <div class="max-width">
+            <div id="sideNav">
+                <div id="pageNav">
+                    <ul>
+                        <li>
+                            <div id="userDisplay">
+                                <div class="userDisplayPicture"><img src="{{userPicture}}"/></div>
+                                <div class="userDisplayName"> {{userName}} </div>
+                            </div>
+
+                        </li>
+                        <li><a href="#/Login/index.html">Home</a></li>
+                        <li><a href="#/Alerts">Alert History</a></li>
+                        <li><a href="#/EditKey">Edit Key</a></li>
+                        <li><a href="#/LogOut">Log Off</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="app" ng-controller="HomeController">
-            <h1>Apache Cordova with {{message}}</h1>
-            <input type="text" ng-model="message"/>
+        <div id="site">
+            <header id="main-header">
+                <div class="max-width">
+                    <hgroup>
+                        <h1>{{pageTitle}}</h1>
+                    </hgroup>
+                    <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
+                </div>
+            </header>
+            <div id="content" class="max-width">
+                <div class="example-animate-container">
+                    <div ng-view class="view-example"></div>
+                </div>
             </div>
-        <br />
-        <a href="views/Login/index.html">test link</a>
-        <script type="text/javascript" src="components/angular/angular.js"></script>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/application.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+            <footer></footer>
+        </div>
+    </div>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+
+        <script src="phonegap.js"></script>
+</body>
 </html>
