@@ -16,10 +16,6 @@
         templateUrl: 'views/editKey.html',
         controller: EditKeyCtrl
     });
-    $routeProvider.when('/LogOut', {
-        templateUrl: 'views/Test/chapter.html',
-        controller: ExitAppCtrl
-    });
 
     $routeProvider.otherwise({
         redirectTo: '/Login'
@@ -34,6 +30,10 @@ function MainCtrl($scope) {
     $scope.newAlerts = false;
     $scope.newAlertsCount = 0;
 
+    $scope.exitApplication = function () {
+        window.plugins.pushNotification.unregister(successHandler, errorHandler);
+        navigator.app.exitApp();
+    }
     //Set page title
     $scope.setPageTitle = function (title) {
         $scope.pageTitle = title;
@@ -149,7 +149,7 @@ function HomeCtrl($scope, AlertRestangular) {
     $scope.setPageTitle('ArrowAlert');
 
     //// Fetch all objects from the backend (see models/Alert.js)
-    $scope.recentAlert = AlertRestangular.one('Alerts','?count=1').get();
+    $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
     $scope.loading = false;
 }
 
