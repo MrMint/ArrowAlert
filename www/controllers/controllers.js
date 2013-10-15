@@ -31,6 +31,8 @@ function MainCtrl($scope) {
     $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
     $scope.userName = "Not Authenticated";
     $scope.pageTitle = "ArrowAlert";
+    $scope.newAlerts = false;
+    $scope.newAlertsCount = 0;
 
     //Set page title
     $scope.setPageTitle = function (title) {
@@ -45,6 +47,14 @@ function MainCtrl($scope) {
     //Set users picture
     $scope.setuserPicture = function (title) {
         $scope.userPicture = title;
+    }
+
+    //Set new alerts count
+    $scope.setNewAlertsCount = function (count) {
+        $scope.newAlertsCount = count;
+        if (count == 0) {
+            $scope.newAlerts = false;
+        }
     }
 }
 

@@ -55,8 +55,6 @@ var app = {
 
 // Handle the Menu button being pressed
 function onMenuKeyDown() {
-    
-    ideMenuButton.onclick = function(e) {
         var site = document.getElementById('site');
         var cl = site.classList;
         if (cl.contains('open')) {

@@ -45,7 +45,7 @@
 }
 
 #sideNav li a {
-     padding: 12px 0 0 30px;
+    padding: 12px 0 0 30px;
 }
 
 body {
@@ -60,16 +60,29 @@ body {
     height: 100%;
     left: 0;
 }
+
     #sideNav li i {
-        /*color: #58595A;*/
-        color:#288EDF;
-        position:absolute;
-        top:12px;
-        left:7px;
+        color: #58595A;
+        /*color:#288EDF;*/
+        position: absolute;
+        top: 12px;
+        left: 7px;
     }
 
 .navItem {
-    position:relative;
-    width:100%;
-    height:100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.topNotification {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+}
+
+.navNotification {
+    position: absolute;
+    top: 10px;
+    left: 130px;
 }

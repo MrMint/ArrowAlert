@@ -38,22 +38,22 @@
                         <li>
                             <div id="userDisplay">
                                 <div class="userDisplayPicture">
-                                    <img src="{{userPicture}}" /></div>
+                                    <img src="{{userPicture}}" />
+                                </div>
                                 <div class="userDisplayName">{{userName}} </div>
                             </div>
-
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-beer"></i><a href="#/Home.html">Home</a></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a></div>
+                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts">{{newAlertsCount}}</span></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-off"></i> <a href="#/LogOut">Log Off</a></div>
+                            <div class="navItem"><i class="icon-off"></i><a href="#/LogOut">Log Off</a></div>
                         </li>
                     </ul>
                 </div>
@@ -66,6 +66,7 @@
                         <h1>{{pageTitle}}</h1>
                     </hgroup>
                     <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
+                    <span class="topcoat-notification topNotification" ng-show="newAlerts">{{newAlertsCount}}</span>
                 </div>
             </header>
             <div id="content" class="max-width">

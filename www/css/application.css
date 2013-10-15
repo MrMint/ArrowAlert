@@ -127,12 +127,20 @@ table {
     padding:20px;
     overflow:hidden;
 }
-/*Overriding topcoat for ui stuff here*/
+/*Settings screen*/
 
-.topcoat-button--cta {
-    width: 100%;
-    max-width: 500px;
+.retrieveButton {
+    width: 60%;
+    max-width: 300px;
 }
+
+.submitButton {
+    width: 38%;
+    max-width: 200px;
+}
+
+
+/*Overriding topcoat for ui stuff here*/
 
 .topcoat-text-input {
     width: 100%;
