@@ -45,6 +45,7 @@
 }
 
 #sideNav li a {
+     padding: 12px 0 0 30px;
 }
 
 body {
@@ -58,4 +59,16 @@ body {
     z-index: 1;
     height: 100%;
     left: 0;
+}
+    #sideNav li i {
+        color:#58595A;
+        position:absolute;
+        top:12px;
+        left:7px;
+    }
+
+.navItem {
+    position:relative;
+    width:100%;
+    height:100%;
 }

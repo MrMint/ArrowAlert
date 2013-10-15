@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-dark.css" />
     <link rel="stylesheet" href="vendor/topcoat/css/main.css" />
-    
+
     <link rel="stylesheet" href="css/application.css" />
     <link rel="stylesheet" href="css/navigation.css" />
 
@@ -26,8 +26,7 @@
     <script src="models/Alert.js"></script>
     <script src="controllers/controllers.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-
-
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body ng-controller="MainCtrl as main">
 
@@ -38,15 +37,24 @@
                     <ul>
                         <li>
                             <div id="userDisplay">
-                                <div class="userDisplayPicture"><img src="{{userPicture}}"/></div>
-                                <div class="userDisplayName"> {{userName}} </div>
+                                <div class="userDisplayPicture">
+                                    <img src="{{userPicture}}" /></div>
+                                <div class="userDisplayName">{{userName}} </div>
                             </div>
 
                         </li>
-                        <li><a href="#/home.html">Home</a></li>
-                        <li><a href="#/Alerts">Alert History</a></li>
-                        <li><a href="#/EditKey">Edit Key</a></li>
-                        <li><a href="#/LogOut">Log Off</a></li>
+                        <li>
+                            <div class="navItem"><i class="icon-exclamation-sign"></i><a href="#/home.html">Home</a></div>
+                        </li>
+                        <li>
+                            <div class="navItem"><i class="icon-archive"></i><a href="#/Alerts">Alert History</a></div>
+                        </li>
+                        <li>
+                            <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
+                        </li>
+                        <li>
+                            <div class="navItem"><i class="icon-off"></i> <a href="#/LogOut">Log Off</a></div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -73,6 +81,6 @@
     </script>
 
 
-        <script src="phonegap.js"></script>
+    <script src="phonegap.js"></script>
 </body>
 </html>
