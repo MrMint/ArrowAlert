@@ -137,7 +137,7 @@ function EditKeyCtrl($scope, $http, $location) {
 
 function HomeCtrl($scope) {
     $scope.setPageTitle('ArrowAlert');
-
+    $scope.loading = false;
 }
 
 function ExitAppCtrl($scope) {

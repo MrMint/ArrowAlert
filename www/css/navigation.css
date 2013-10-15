@@ -61,7 +61,8 @@ body {
     left: 0;
 }
     #sideNav li i {
-        color:#58595A;
+        /*color: #58595A;*/
+        color:#288EDF;
         position:absolute;
         top:12px;
         left:7px;

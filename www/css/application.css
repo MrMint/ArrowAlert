@@ -95,6 +95,37 @@ table {
     border-spacing: 0;
 }
 
+
+/*Alert screen css*/
+.topLeftTriangle {
+    position: absolute;
+    top: -1px;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 25px 25px 0 0;
+   
+
+}
+.high {
+     border-color: #e13030 transparent transparent transparent;
+}
+
+
+.topcoat-list__item {
+    padding: 0rem;
+}
+.alertItemContainer {
+    /*padding: 20px;*/
+    position:relative; 
+    width: 100%; 
+    /*height: 100%;*/
+    height:58px;
+}
+.alertItemBody {
+    padding:20px;
+}
 /*Overriding topcoat for ui stuff here*/
 
 .topcoat-button--cta {
