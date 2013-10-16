@@ -40,12 +40,12 @@ function MainCtrl($scope) {
     }
 
     //Set users name
-    $scope.setuserName = function (title) {
+    $scope.setUserName = function (title) {
         $scope.userName = title;
     }
 
     //Set users picture
-    $scope.setuserPicture = function (title) {
+    $scope.setUserPicture = function (title) {
         $scope.userPicture = title;
     }
 
@@ -61,7 +61,6 @@ function MainCtrl($scope) {
 // Index: http://localhost/views/Alert/index.html
 
 function AlertCtrl($scope, AlertRestangular) {
-    showAlert('login controller called', 'it dids');
     $scope.setPageTitle('Alerts');
     // This will be populated with Restangular
     $scope.Alerts = [];
@@ -74,7 +73,6 @@ function AlertCtrl($scope, AlertRestangular) {
             $scope.loading = false;
             $scope.Alerts = data;
         });
-
     };
 
     // Fetch all objects from the backend (see models/Alert.js)
@@ -86,32 +84,30 @@ function AlertCtrl($scope, AlertRestangular) {
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
     $scope.setPageTitle('Authenticating...');
-    showAlert('login controller called', 'it dids');
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
-    if (authkey != 'undefined' && authkey != null) {
+    if (authKey != 'undefined' && authKey != null) {
         //user has key, authenticate with server
         $http({
-            method: "get", url: "https://arrowmanager.net/api/arrowalertapp/",
-            headers: { "authorization": authkey, "content-type": "application/json" }
+            method: "GET", url: "https://arrowmanager.net/api/arrowalertapp/",
+            headers: { "authorization": authKey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
                 //authorization was successful! update user info and store it.
-                $scope.setusername(data.displayname);
-                if (data.characterid != null) {
-                    $scope.setuserpicture("https://image.eveonline.com/character/" + data.characterid + "_64.jpg");
+                $scope.setUserName(data.displayName);
+                if (data.characterId != null) {
+                    $scope.setUserPicture("https://image.eveonline.com/character/" + data.characterId + "_64.jpg");
                 }
                 ////send to home page
-                showalert('login called gcm', 'it dids');
-                $scope.sendgcmtoserver();
-                $location.path('/home');
+                $scope.sendGCMToServer();
+                $location.path('/Home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
                     //user failed to authorize
-                    showalert("authorization error", "invalid key");
-                    $location.path('/editkey');
+                    showAlert("authorization error", "invalid key");
+                    $location.path('/Editkey');
                 }
                 else {
                     //was some type of network error
@@ -131,8 +127,6 @@ function LoginCtrl($scope, $http, $location) {
         //showAlert('test', 'function called');
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
-        //showAlert('authkey', authKey);
-        //showAlert('regId', regId);
         if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
             $http({
                 method: "POST",
@@ -142,7 +136,6 @@ function LoginCtrl($scope, $http, $location) {
             }).
                success(function (data, status, headers, config) {
                    //RegId was successfully updated on the server
-                   showAlert('test', 'success!');
                    localStorage.removeItem("regId");
                }).
                error(function (data, status, headers, config) {
