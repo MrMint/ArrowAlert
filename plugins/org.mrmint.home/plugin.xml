@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.mrmint.home"
+    version="1.0.0">
+
+    <name>Home</name>
+    <description>Phonegap home plugin code adapted for phonegap plugin</description>
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Home">
+                <param name="android-package" value="org.mrmint.home.Home"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Home.java" target-dir="src/org/mrmint/home" />
+    </platform>
+</plugin>

@@ -21,7 +21,7 @@ var app = {
         //    angular.bootstrap(document);
         //});
         document.addEventListener("menubutton", onMenuKeyDown, false);
-
+        document.addEventListener("backbutton", onBackKeyDown, false);
         registerForPushNotifications();
     },
     //// Update DOM on a Received Event
@@ -57,19 +57,19 @@ function onMenuKeyDown() {
 function registerForPushNotifications() {
 
     debugNote('deviceready event received');
-    document.addEventListener("backbutton", function (e) {
-        debugNote('backbutton event received');
+    //document.addEventListener("backbutton", function (e) {
+    //    debugNote('backbutton event received');
 
-        if (document.getElementById("app-status-ul").length > 0) {
-            // call this to get a new token each time. don't call it to reuse existing token.
-            pushNotification.unregister(successHandler, errorHandler);
-            e.preventDefault();
-            navigator.app.exitApp();
-        }
-        else {
-            navigator.app.backHistory();
-        }
-    }, false);
+    //    if (document.getElementById("app-status-ul").length > 0) {
+    //        // call this to get a new token each time. don't call it to reuse existing token.
+    //        pushNotification.unregister(successHandler, errorHandler);
+    //        e.preventDefault();
+    //        navigator.app.exitApp();
+    //    }
+    //    else {
+    //        navigator.app.backHistory();
+    //    }
+    //}, false);
 
     try {
         pushNotification = window.plugins.pushNotification;
@@ -113,8 +113,7 @@ function onNotificationGCM(e) {
         case 'registered':
             if (e.regid.length > 0) {
                 debugNote('REGISTERED -> REGID:' + e.regid);
-                // Your GCM push server needs to know the regID before it can push to this device
-                // here is where you might want to send it the regID for later use.
+
                 localStorage.setItem("regId", e.regid);
 
                 //TODO: This is bad, fix later with an angular service or something
@@ -125,7 +124,6 @@ function onNotificationGCM(e) {
 
         case 'message':
             // if this flag is set, this notification happened while we were in the foreground.
-            // you might want to play a sound to get the user's attention, throw up a dialog, etc.
             if (e.foreground) {
                 debugNote('--INLINE NOTIFICATION--');
 
@@ -175,3 +173,22 @@ function debugNote(text) {
     li.innerHTML = text;
     document.getElementById("app-status-ul").appendChild(li);
 }
+
+function onBackKeyDown(e) {
+    debugNote('backbutton event received');
+    e.preventDefault();
+    cordova.require('cordova/plugin/home').goHome(function () {
+        debugNote("Successfully launched home intent");
+    }, function () {
+        debugNote("Error launching home intent");
+    });
+}
+cordova.define("cordova/plugin/home", function (require, exports, module) {
+    var exec = require('cordova/exec');
+    var Home = function () { };
+    Home.prototype.goHome = function (successCallback, errorCallback) {
+        return cordova.exec(successCallback, errorCallback, 'Home', 'goHome', []);
+    };
+    var home = new Home();
+    module.exports = home;
+});
