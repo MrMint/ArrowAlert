@@ -61,6 +61,7 @@ function MainCtrl($scope) {
 // Index: http://localhost/views/Alert/index.html
 
 function AlertCtrl($scope, AlertRestangular) {
+    showAlert('login controller called', 'it dids');
     $scope.setPageTitle('Alerts');
     // This will be populated with Restangular
     $scope.Alerts = [];
@@ -85,42 +86,77 @@ function AlertCtrl($scope, AlertRestangular) {
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
     $scope.setPageTitle('Authenticating...');
-
+    showAlert('login controller called', 'it dids');
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
-    var that = this;
-    if (authKey != 'undefined' || authKey != null) {
-        //User has key, authenticate with server
+    if (authkey != 'undefined' && authkey != null) {
+        //user has key, authenticate with server
         $http({
-            method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/",
-            headers: { "Authorization": authKey, "Content-type": "application/json" }
+            method: "get", url: "https://arrowmanager.net/api/arrowalertapp/",
+            headers: { "authorization": authkey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
-                //Authorization was successful! Update user info and store it.
-                $scope.setuserName(data.displayName);
-                if (data.characterId != null) {
-                    $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
+                //authorization was successful! update user info and store it.
+                $scope.setusername(data.displayname);
+                if (data.characterid != null) {
+                    $scope.setuserpicture("https://image.eveonline.com/character/" + data.characterid + "_64.jpg");
                 }
-                //Send to home page
-                $location.path('/Home');
+                ////send to home page
+                showalert('login called gcm', 'it dids');
+                $scope.sendgcmtoserver();
+                $location.path('/home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
-                    //User failed to authorize
-                    showAlert("Authorization Error", "Invalid Key");
-                    $location.path('/EditKey');
+                    //user failed to authorize
+                    showalert("authorization error", "invalid key");
+                    $location.path('/editkey');
                 }
                 else {
-                    //Was some type of network error
-                    showAlert("Network Error", "Status: " + status);
+                    //was some type of network error
+                    showalert("network error", "status: " + status);
                 }
             });
     }
     else {
-        //User does not have a key
-        //Redirect user to enter a authorization key
-        $location.path('/EditKey');
+        //user does not have a key
+        //redirect user to enter a authorization key
+        $location.path('/editkey');
+    }
+
+
+
+    $scope.sendGCMToServer = function () {
+        //showAlert('test', 'function called');
+        var authKey = localStorage.getItem("authKey");
+        var regId = localStorage.getItem("regId")
+        //showAlert('authkey', authKey);
+        //showAlert('regId', regId);
+        if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
+            $http({
+                method: "POST",
+                url: "https://arrowmanager.net/api/ArrowAlertApp/",
+                headers: { "Authorization": authKey, "Content-type": "application/json" },
+                data: { "regId": regId }
+            }).
+               success(function (data, status, headers, config) {
+                   //RegId was successfully updated on the server
+                   showAlert('test', 'success!');
+                   localStorage.removeItem("regId");
+               }).
+               error(function (data, status, headers, config) {
+                   if (status == '401') {
+                       //User failed to authorize
+                       showAlert("Authorization Error", "Invalid Key");
+                       $location.path('/EditKey');
+                   }
+                   else {
+                       //Was some type of network error
+                       showAlert("Network Error", "Status: " + status);
+                   }
+               });
+        }
     }
 };
 
@@ -130,10 +166,10 @@ function EditKeyCtrl($scope, $http, $location) {
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
     var authKey = localStorage.getItem("authKey");
-    if (authKey != 'undefined' || authKey != null) {
+    if (authKey != 'undefined' && authKey != null) {
         $scope.placeHolder = authKey;
     }
-    //Saves the key to localstorage, and navigates to login for authetication
+    //Saves the key to localstorage, and navigates to login for authentication
     $scope.changeAuthKey = function () {
         localStorage.setItem("authKey", $scope.authKey);
         $location.path('/Login');
