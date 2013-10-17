@@ -75,6 +75,10 @@ function MainCtrl($scope, $location) {
     $scope.setNewAlerts = function (count) {
         $scope.newAlerts = count;
     }
+    //Adds to new alerts count
+    $scope.addNewAlerts = function (count) {
+        $scope.newAlerts += count;
+    }
 }
 
 // Index: http://localhost/views/Alert/index.html

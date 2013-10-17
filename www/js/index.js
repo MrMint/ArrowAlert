@@ -58,7 +58,7 @@ function registerForPushNotifications() {
         //    navigator.app.exitApp();
         //}
         //else {
-            //navigator.app.backHistory();
+        //navigator.app.backHistory();
         //}
     }, false);
 
@@ -100,6 +100,9 @@ function onNotificationAPN(e) {
 function onNotificationGCM(e) {
     debugNote('EVENT -> RECEIVED:' + e.event);
 
+    //TODO: This is bad, fix later with an angular service or something
+    
+
     switch (e.event) {
         case 'registered':
             if (e.regid.length > 0) {
@@ -108,8 +111,8 @@ function onNotificationGCM(e) {
                 localStorage.setItem("regId", e.regid);
 
                 //TODO: This is bad, fix later with an angular service or something
-                var scp = angular.element('[ng-controller="LoginCtrl"]').scope();
-                scp.sendGCMToServer();
+                var loginScope = angular.element('[ng-controller="LoginCtrl"]').scope();
+                loginScope.sendGCMToServer();
             }
             break;
 
@@ -117,7 +120,15 @@ function onNotificationGCM(e) {
             // if this flag is set, this notification happened while we were in the foreground.
             if (e.foreground) {
                 debugNote('--INLINE NOTIFICATION--');
-
+                try {
+                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
+                    mainScope.addNewAlerts(1);
+                }
+                catch (err) {
+                    txt = "There was an error on this page.\n\n";
+                    txt += "Error description: " + err.message + "\n\n";
+                    alert(txt);
+                }
                 // if the notification contains a soundname, play it.
                 //var my_media = new Media("/android_asset/www/" + e.soundname);
                 //my_media.play();
@@ -125,9 +136,13 @@ function onNotificationGCM(e) {
             else {	// otherwise we were launched because the user touched a notification in the notification tray.
                 if (e.coldstart) {
                     debugNote('--COLDSTART NOTIFICATION--');
+                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
+                    mainScope.addNewAlerts(1);
                 }
                 else {
                     debugNote('--BACKGROUND NOTIFICATION--');
+                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
+                    mainScope.addNewAlerts(1);
                 }
             }
 
