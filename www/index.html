@@ -46,13 +46,13 @@
                             </div>
                         </li>
                                                 <li>
-                            <div class="navItem"><i class="icon-cogs"></i><a href="#/Login">Login</a></div>
+                            <div class="navItem" ng-show="!authenticated"><i class="icon-cogs"></i><a href="#/Login">Login</a></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-beer"></i><a href="#/Home">Home</a></div>
+                            <div class="navItem"><i class="icon-beer" ng-show="authenticated"></i><a href="#/Home">Home</a></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts">{{newAlertsCount}}</span></div>
+                            <div class="navItem"><i class="icon-warning-sign" ng-show="authenticated"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlertsCount}}</span></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
