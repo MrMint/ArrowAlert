@@ -47,9 +47,10 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
-  <feature name="Notification">
+  <!--<plugin name="Home" value="org.apache.cordova.plugin.Home"/>-->
+  <!--<feature name="Notification">
     <param name="android-package" value="org.apache.cordova.Notification" />
-  </feature>
+  </feature>-->
   <access origin="*"/>
   <!--<content src="views/index.html" />-->
   <content src="index.html" />

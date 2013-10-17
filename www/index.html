@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/navigation.css" />
 
     <!--<script src="../../components/angular/angular.min.js"></script>-->
+    <script src="phonegap.js"></script>
+    <script type="text/javascript" src="js/PushNotification.js"></script>
 
     <script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
     <script src="http://code.angularjs.org/1.2.0-rc.2/angular-animate.min.js"></script>
@@ -44,7 +46,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-beer"></i><a href="#/Home.html">Home</a></div>
+                            <div class="navItem"><i class="icon-beer"></i><a href="#/Home">Home</a></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts">{{newAlertsCount}}</span></div>
@@ -53,7 +55,7 @@
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-off"></i><a href="#/LogOut">Log Off</a></div>
+                            <div class="navItem"><i class="icon-off"></i><a href="" ng-click="exitApplication()">Exit Application</a></div>
                         </li>
                     </ul>
                 </div>
@@ -74,7 +76,11 @@
                     <div ng-view class="view-example"></div>
                 </div>
             </div>
-            <footer></footer>
+            <footer>
+                <ul id="app-status-ul" style="overflow:hidden;">
+                    <li>Push Notification Debug</li>
+                </ul>
+            </footer>
         </div>
     </div>
     <script type="text/javascript">
@@ -82,6 +88,6 @@
     </script>
 
 
-    <script src="phonegap.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,4 @@
-﻿
-var PushNotification = function () {
+﻿var PushNotification = function () {
 };
 
 
@@ -39,7 +38,7 @@ PushNotification.prototype.unregister = function (successCallback, errorCallback
 
 
 // Call this to set the application icon badge
-PushNotification.prototype.setApplicationIconBadgeNumber = function (successCallback, badge) {
+PushNotification.prototype.setApplicationIconBadgeNumber = function (successCallback, errorCallback, badge) {
     if (errorCallback == null) { errorCallback = function () { } }
 
     if (typeof errorCallback != "function") {
@@ -52,7 +51,7 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function (successCall
         return
     }
 
-    cordova.exec(successCallback, successCallback, "PushPlugin", "setApplicationIconBadgeNumber", [{ badge: badge }]);
+    cordova.exec(successCallback, errorCallback, "PushPlugin", "setApplicationIconBadgeNumber", [{ badge: badge }]);
 };
 
 //-------------------------------------------------------------------

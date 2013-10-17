@@ -16,10 +16,6 @@
         templateUrl: 'views/editKey.html',
         controller: EditKeyCtrl
     });
-    $routeProvider.when('/LogOut', {
-        templateUrl: 'views/Test/chapter.html',
-        controller: ExitAppCtrl
-    });
 
     $routeProvider.otherwise({
         redirectTo: '/Login'
@@ -34,18 +30,22 @@ function MainCtrl($scope) {
     $scope.newAlerts = false;
     $scope.newAlertsCount = 0;
 
+    //
+    $scope.exitApplication = function () {
+        cordova.require('cordova/plugin/home').goHome();
+    }
     //Set page title
     $scope.setPageTitle = function (title) {
         $scope.pageTitle = title;
     }
 
     //Set users name
-    $scope.setuserName = function (title) {
+    $scope.setUserName = function (title) {
         $scope.userName = title;
     }
 
     //Set users picture
-    $scope.setuserPicture = function (title) {
+    $scope.setUserPicture = function (title) {
         $scope.userPicture = title;
     }
 
@@ -73,7 +73,6 @@ function AlertCtrl($scope, AlertRestangular) {
             $scope.loading = false;
             $scope.Alerts = data;
         });
-
     };
 
     // Fetch all objects from the backend (see models/Alert.js)
@@ -85,42 +84,72 @@ function AlertCtrl($scope, AlertRestangular) {
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
     $scope.setPageTitle('Authenticating...');
-
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
-    var that = this;
-    if (authKey != 'undefined' || authKey != null) {
-        //User has key, authenticate with server
+    if (authKey != 'undefined' && authKey != null) {
+        //user has key, authenticate with server
         $http({
-            method: "GET", url: "https://arrowmanager.net/api/ArrowAlertApp/",
-            headers: { "Authorization": authKey, "Content-type": "application/json" }
+            method: "GET", url: "https://arrowmanager.net/api/arrowalertapp/",
+            headers: { "authorization": authKey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
-                //Authorization was successful! Update user info and store it.
-                $scope.setuserName(data.displayName);
+                //authorization was successful! update user info and store it.
+                $scope.setUserName(data.displayName);
                 if (data.characterId != null) {
-                    $scope.setuserPicture("https://image.eveonline.com/Character/" + data.characterId + "_64.jpg");
+                    $scope.setUserPicture("https://image.eveonline.com/character/" + data.characterId + "_64.jpg");
                 }
-                //Send to home page
+                ////send to home page
+                $scope.sendGCMToServer();
                 $location.path('/Home');
             }).
             error(function (data, status, headers, config) {
                 if (status == '401') {
-                    //User failed to authorize
-                    showAlert("Authorization Error", "Invalid Key");
-                    $location.path('/EditKey');
+                    //user failed to authorize
+                    showAlert("authorization error", "invalid key");
+                    $location.path('/Editkey');
                 }
                 else {
-                    //Was some type of network error
-                    showAlert("Network Error", "Status: " + status);
+                    //was some type of network error
+                    showalert("network error", "status: " + status);
                 }
             });
     }
     else {
-        //User does not have a key
-        //Redirect user to enter a authorization key
-        $location.path('/EditKey');
+        //user does not have a key
+        //redirect user to enter a authorization key
+        $location.path('/editkey');
+    }
+
+
+
+    $scope.sendGCMToServer = function () {
+        //showAlert('test', 'function called');
+        var authKey = localStorage.getItem("authKey");
+        var regId = localStorage.getItem("regId")
+        if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
+            $http({
+                method: "POST",
+                url: "https://arrowmanager.net/api/ArrowAlertApp/",
+                headers: { "Authorization": authKey, "Content-type": "application/json" },
+                data: { "regId": regId }
+            }).
+               success(function (data, status, headers, config) {
+                   //RegId was successfully updated on the server
+                   localStorage.removeItem("regId");
+               }).
+               error(function (data, status, headers, config) {
+                   if (status == '401') {
+                       //User failed to authorize
+                       showAlert("Authorization Error", "Invalid Key");
+                       $location.path('/EditKey');
+                   }
+                   else {
+                       //Was some type of network error
+                       showAlert("Network Error", "Status: " + status);
+                   }
+               });
+        }
     }
 };
 
@@ -130,10 +159,10 @@ function EditKeyCtrl($scope, $http, $location) {
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
     var authKey = localStorage.getItem("authKey");
-    if (authKey != 'undefined' || authKey != null) {
+    if (authKey != 'undefined' && authKey != null) {
         $scope.placeHolder = authKey;
     }
-    //Saves the key to localstorage, and navigates to login for authetication
+    //Saves the key to localstorage, and navigates to login for authentication
     $scope.changeAuthKey = function () {
         localStorage.setItem("authKey", $scope.authKey);
         $location.path('/Login');
@@ -149,7 +178,7 @@ function HomeCtrl($scope, AlertRestangular) {
     $scope.setPageTitle('ArrowAlert');
 
     //// Fetch all objects from the backend (see models/Alert.js)
-    $scope.recentAlert = AlertRestangular.one('Alerts','?count=1').get();
+    $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
     $scope.loading = false;
 }
 
