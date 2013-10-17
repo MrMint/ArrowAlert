@@ -30,9 +30,9 @@ function MainCtrl($scope) {
     $scope.newAlerts = false;
     $scope.newAlertsCount = 0;
 
+    //
     $scope.exitApplication = function () {
-        window.plugins.pushNotification.unregister(successHandler, errorHandler);
-        navigator.app.exitApp();
+        cordova.require('cordova/plugin/home').goHome();
     }
     //Set page title
     $scope.setPageTitle = function (title) {

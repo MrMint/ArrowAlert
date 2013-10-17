@@ -21,24 +21,12 @@ var app = {
         //    angular.bootstrap(document);
         //});
         document.addEventListener("menubutton", onMenuKeyDown, false);
-        document.addEventListener("backbutton", onBackKeyDown, false);
+
         registerForPushNotifications();
     },
+    //TODO: Remove?
     //// Update DOM on a Received Event
     receivedEvent: function (id) {
-        alert('recieved event');
-
-
-
-
-        //var parentElement = document.getElementById(id);
-        //var listeningElement = parentElement.querySelector('.listening');
-        //var receivedElement = parentElement.querySelector('.received');
-
-        //listeningElement.setAttribute('style', 'display:none;');
-        //receivedElement.setAttribute('style', 'display:block;');
-
-        //console.log('Received Event: ' + id);
     },
 };
 
@@ -57,19 +45,22 @@ function onMenuKeyDown() {
 function registerForPushNotifications() {
 
     debugNote('deviceready event received');
-    //document.addEventListener("backbutton", function (e) {
-    //    debugNote('backbutton event received');
 
-    //    if (document.getElementById("app-status-ul").length > 0) {
-    //        // call this to get a new token each time. don't call it to reuse existing token.
-    //        pushNotification.unregister(successHandler, errorHandler);
-    //        e.preventDefault();
-    //        navigator.app.exitApp();
-    //    }
-    //    else {
-    //        navigator.app.backHistory();
-    //    }
-    //}, false);
+    //Catch back button and do nothing until use case is determined
+    //TODO: Figure out use case
+    document.addEventListener("backbutton", function (e) {
+        debugNote('backbutton event received');
+        e.preventDefault();
+        //if (document.getElementById("app-status-ul").length > 0) {
+        //    // call this to get a new token each time. don't call it to reuse existing token.
+        //    //pushNotification.unregister(successHandler, errorHandler);
+        //    e.preventDefault();
+        //    navigator.app.exitApp();
+        //}
+        //else {
+            //navigator.app.backHistory();
+        //}
+    }, false);
 
     try {
         pushNotification = window.plugins.pushNotification;
@@ -174,15 +165,6 @@ function debugNote(text) {
     document.getElementById("app-status-ul").appendChild(li);
 }
 
-function onBackKeyDown(e) {
-    debugNote('backbutton event received');
-    e.preventDefault();
-    cordova.require('cordova/plugin/home').goHome(function () {
-        debugNote("Successfully launched home intent");
-    }, function () {
-        debugNote("Error launching home intent");
-    });
-}
 cordova.define("cordova/plugin/home", function (require, exports, module) {
     var exec = require('cordova/exec');
     var Home = function () { };
