@@ -17,11 +17,17 @@ input {
 .content-padded {
     padding: 10px;
 }
-
-#site {
-    min-height: 100%;
+#wrapper {
+    height: 100%;
+    overflow:hidden;
 }
-
+#site {
+    height: 100%;
+}
+#content {
+    overflow-y:auto;
+    height:100%;
+}
 @-webkit-keyframes rotate {
     from {
         -webkit-transform: rotate(0deg);
