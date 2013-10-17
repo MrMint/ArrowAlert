@@ -3,16 +3,15 @@
     blue: 288edf
     
 **/
-@font-face
-{
-font-family: 'norwester';
-src: url(../font/norwester.eot);
- src: url(../font/norwester.eot?#iefix) format("embedded-opentype"), url(../font/norwester.woff) format("woff"), url(../font/norwester.ttf) format("truetype");
-
+@font-face {
+    font-family: 'norwester';
+    src: url(../font/norwester.eot);
+    src: url(../font/norwester.eot?#iefix) format("embedded-opentype"), url(../font/norwester.woff) format("woff"), url(../font/norwester.ttf) format("truetype");
 }
+
 body {
     font-family: "norwester"!important;
-     font-weight: 100;
+    font-weight: 100;
 }
 
 * {
@@ -27,18 +26,22 @@ input {
 .content-padded {
     padding: 10px;
 }
+
 #wrapper {
     height: 100%;
-    overflow:hidden;
+    overflow: hidden;
 }
+
 #site {
     height: 100%;
 }
+
 #content {
-    overflow-y:auto;
-    height:100%;
-    padding-bottom:60px;
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 60px;
 }
+
 @-webkit-keyframes rotate {
     from {
         -webkit-transform: rotate(0deg);
@@ -129,40 +132,57 @@ table {
     height: 0px;
     border-style: solid;
     border-width: 25px 25px 0 0;
-   
-
 }
+
 .high {
-     border-color: #e13030 transparent transparent transparent;
+    border-color: #e13030 transparent transparent transparent;
 }
 
 
 .topcoat-list__item {
     padding: 0rem;
 }
+
 .alertItemContainer {
     /*padding: 20px;*/
-    position:relative; 
-    width: 100%; 
+    position: relative;
+    width: 100%;
     /*height: 100%;*/
-    height:56px;
+    height: 56px;
 }
+
 .alertItemBody {
-    padding:20px;
-    overflow:hidden;
+    padding: 20px;
+    overflow: hidden;
 }
+
 /*Settings screen*/
 
 .retrieveButton {
     width: 60%;
     max-width: 300px;
+    min-width:150px;
 }
 
 .submitButton {
     width: 38%;
     max-width: 200px;
+     min-width:100px;
 }
 
+.row {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.row-no-margin{
+    width: 100%;
+}
+.textBigWhite {
+    color: #fff;
+    font-size: 40px;
+    margin: 5px 0 0;
+    line-height: 1.1em;
+}
 
 /*Overriding topcoat for ui stuff here*/
 
@@ -174,10 +194,11 @@ table {
 }
 
 .topcoat-list {
-    overflow:hidden;
+    overflow: hidden;
 }
+
 @media (min-width:1000px) {
-    .topcoat-button--cta {
+    /*.topcoat-button--cta {
         width: 150px;
         max-width: 500px;
     }
@@ -186,5 +207,5 @@ table {
         width: 700px;
         max-width: 500px;
         margin-bottom: 2px;
-    }
+    }*/
 }
