@@ -59,6 +59,10 @@ function MainCtrl($scope, $location) {
 
     //Set authentication
     $scope.setAuthenticated = function (auth) {
+        if (auth == false) {
+            $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
+            $scope.userName = "Not Authenticated";
+        }
         $scope.authenticated = auth;
     }
 
