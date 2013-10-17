@@ -22,13 +22,26 @@
     });
 });
 
-function MainCtrl($scope, $location) {
+function MainCtrl($scope, $location, $rootScope) {
     //User specific UI elements and page title
     $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
     $scope.userName = "Not Authenticated";
-    $scope.pageTitle = "ArrowAlert";
+    $scope.pageTitle = "Loading...";
     $scope.newAlerts = 0;
     $scope.authenticated = false;
+
+
+    //Helper function for safely broadcasting events from outside js
+    $scope.broadcastEventSafe = function (eventType, value) {
+        var phase = this.$root.$$phase;
+        if (phase == '$apply' || phase == '$digest') {
+            $scope.$broadcast(eventType, value);
+        } else {
+            this.$apply(function () {
+                $scope.$broadcast(eventType, value);
+            });
+        }
+    }
 
     //Helper function that checks if the user has authenticated, 
     //and redirects to login if not
@@ -37,47 +50,34 @@ function MainCtrl($scope, $location) {
             $location.path('/Login');
         }
     }
-    //Send app to background so alerts are still displayed in notification bar
-    $scope.exitApplication = function () {
-        cordova.require('cordova/plugin/home').goHome();
-    }
 
-    //Set page title
-    $scope.setPageTitle = function (title) {
+    $scope.$on("PAGE_TITLE_CHANGE", function (event, title) {
         $scope.pageTitle = title;
-    }
+    });
 
-    //Set users name
-    $scope.setUserName = function (name) {
-        $scope.userName = name;
-    }
+    $scope.$on("ALERT_RECEIVED", function (event, count) {
+        $scope.newAlerts += count;
+    });
 
-    //Set users picture
-    $scope.setUserPicture = function (pictureURL) {
-        $scope.userPicture = pictureURL;
-    }
-
-    //Set authentication
-    $scope.setAuthenticated = function (auth) {
-        if (auth == false) {
+    $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
+        $scope.authenticated = value;
+        if (value) {
+            if (name != null) {
+                $scope.userName = name;
+            }
+            if (characterId != null) {
+                $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
+            }
+        }
+        else {
             $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
             $scope.userName = "Not Authenticated";
         }
-        $scope.authenticated = auth;
-    }
+    });
 
-    //Set authentication
-    $scope.getAuthenticated = function () {
-        return $scope.authenticated;
-    }
-
-    //Set new alerts count
-    $scope.setNewAlerts = function (count) {
-        $scope.newAlerts = count;
-    }
-    //Adds to new alerts count
-    $scope.addNewAlerts = function (count) {
-        $scope.newAlerts += count;
+    //Send app to background so alerts are still displayed in notification bar
+    $scope.exitApplication = function () {
+        cordova.require('cordova/plugin/home').goHome();
     }
 }
 
@@ -85,7 +85,7 @@ function MainCtrl($scope, $location) {
 
 function AlertCtrl($scope, AlertRestangular) {
     $scope.authenticateUser();
-    $scope.setPageTitle('Alerts');
+    $scope.$emit("PAGE_TITLE_CHANGE", "Alerts");
     // This will be populated with Restangular
     $scope.Alerts = [];
 
@@ -107,26 +107,21 @@ function AlertCtrl($scope, AlertRestangular) {
 
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
-    $scope.setPageTitle('Authenticating...');
+    $scope.$emit("PAGE_TITLE_CHANGE", "Authenticating...");
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
     if (authKey != 'undefined' && authKey != null) {
-        $scope.setAuthenticated(false);
+        $scope.$emit("AUTHENTICATED", false);
         //user has key, authenticate with server
         $http({
             method: "GET", url: "https://arrowmanager.net/api/arrowalertapp/",
             headers: { "authorization": authKey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
-                //authorization was successful! update user info and store it.
-                $scope.setUserName(data.displayName);
-                if (data.characterId != null) {
-                    $scope.setUserPicture("https://image.eveonline.com/character/" + data.characterId + "_64.jpg");
-                }
-                $scope.setAuthenticated(true);
-                ////send to home page
-                $scope.sendGCMToServer();
+                //Emit authenticated event 
+                $scope.$emit("AUTHENTICATED", true, data.displayName, data.characterId);
+                //Redirect to home page
                 $location.path('/Home');
             }).
             error(function (data, status, headers, config) {
@@ -150,7 +145,6 @@ function LoginCtrl($scope, $http, $location) {
 
 
     $scope.sendGCMToServer = function () {
-        //showAlert('test', 'function called');
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
         if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
@@ -180,7 +174,7 @@ function LoginCtrl($scope, $http, $location) {
 };
 
 function EditKeyCtrl($scope, $http, $location) {
-    $scope.setPageTitle('Edit Key');
+    $scope.$emit("PAGE_TITLE_CHANGE", "Edit Key");
 
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
@@ -235,7 +229,7 @@ function EditKeyCtrl($scope, $http, $location) {
 
 function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.authenticateUser();
-    $scope.setPageTitle('ArrowAlert');
+    $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
 
     //// Fetch all objects from the backend (see models/Alert.js)
     $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();

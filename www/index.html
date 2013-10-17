@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="AlertApp">
+<html id="AlertApp" ng-app="AlertApp">
 <head>
     <meta charset="utf8">
     <title>Arrow Alert</title>
@@ -30,7 +30,7 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>-->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
-<body ng-controller="MainCtrl as main">
+<body id="main" ng-controller="MainCtrl as main">
 
     <div id="wrapper" style="height: 100%;">
         <div class="max-width">
@@ -52,7 +52,7 @@
                             <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a></div>
                         </li>
                         <li ng-show="authenticated">
-                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlertsCount}}</span></div>
+                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
@@ -71,21 +71,13 @@
                         <h1>{{pageTitle}}</h1>
                     </hgroup>
                     <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
-                    <span class="topcoat-notification topNotification" ng-show="newAlerts">{{newAlertsCount}}</span>
+                    <span class="topcoat-notification topNotification" ng-show="newAlerts != 0">{{newAlerts}}</span>
                 </div>
             </header>
             <div id="content" class="max-width">
-                <div class="example-animate-container">
                     <div ng-view class="view-example"></div>
-                </div>
-                  <ul id="app-status-ul" style="overflow: hidden;">
+                  <ul id="app-status-ul" style="overflow: hidden;" ng-show"enableDebug">
                     <li>Push Notification Debug</li>
-                      <li>Push Notification Debug1</li>
-                      <li>Push Notification Debug2</li>
-                      <li>Push Notification Debug3</li>
-                      <li>Push Notification Debug4</li>
-                      <li>Push Notification Debug5</li>
-                      <li>Push Notification Debug6</li>
                 </ul>
             </div>
             <footer>
@@ -96,8 +88,6 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-
-
-
 </body>
 </html>
+

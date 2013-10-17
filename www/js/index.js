@@ -101,7 +101,8 @@ function onNotificationGCM(e) {
     debugNote('EVENT -> RECEIVED:' + e.event);
 
     //TODO: This is bad, fix later with an angular service or something
-    
+
+
 
     switch (e.event) {
         case 'registered':
@@ -121,8 +122,7 @@ function onNotificationGCM(e) {
             if (e.foreground) {
                 debugNote('--INLINE NOTIFICATION--');
                 try {
-                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
-                    mainScope.addNewAlerts(1);
+                    broadcastAngularEvent('ALERT_RECEIVED', 1);
                 }
                 catch (err) {
                     txt = "There was an error on this page.\n\n";
@@ -189,3 +189,9 @@ cordova.define("cordova/plugin/home", function (require, exports, module) {
     var home = new Home();
     module.exports = home;
 });
+
+function broadcastAngularEvent(eventType, value) {
+    var element = document.getElementById('main');
+    var scope = angular.element(element).scope();
+    scope.broadcastEventSafe(eventType, value);
+}
