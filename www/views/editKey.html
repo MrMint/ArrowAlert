@@ -1,7 +1,8 @@
 ﻿<div style="text-align: center;">
     <div class="spinner" ng-show="loading"></div>
+    <button class="topcoat-button retrieveButton" ng-click="scanQRCode()">Scan QR Code</button>
     <input type="text" class="topcoat-text-input" placeholder="{{placeHolder}}" ng-model="authKey" value="">
     <button class="topcoat-button retrieveButton" ng-click="openBrowserForKey()">Retrieve Key</button>
-      <button class="topcoat-button retrieveButton" ng-click="scanQRCode()">Scan QR Code</button>
+
     <button class="topcoat-button--cta submitButton" ng-click="changeAuthKey()">Submit</button>
 </div>

@@ -3,7 +3,17 @@
     blue: 288edf
     
 **/
+@font-face
+{
+font-family: 'norwester';
+src: url(../font/norwester.eot);
+ src: url(../font/norwester.eot?#iefix) format("embedded-opentype"), url(../font/norwester.woff) format("woff"), url(../font/norwester.ttf) format("truetype");
 
+}
+body {
+    font-family: "norwester"!important;
+     font-weight: 100;
+}
 
 * {
     -webkit-user-select: none; /* Disable selection/copy of elements when tapping for a long time */

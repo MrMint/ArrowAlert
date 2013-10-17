@@ -27,7 +27,7 @@
     <script src="vendor/topcoat/js/main.js"></script>
     <script src="models/Alert.js"></script>
     <script src="controllers/controllers.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>-->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body ng-controller="MainCtrl as main">
@@ -46,10 +46,10 @@
                             </div>
                         </li>
                         <li ng-show="!authenticated">
-                            <div class="navItem"><i class="icon-cogs"></i><a href="#/Login">Login</a></div>
+                            <div class="navItem"><i class="icon-android"></i><a href="#/Login">Login</a></div>
                         </li>
                         <li ng-show="authenticated">
-                            <div class="navItem"><i class="icon-beer"></i><a href="#/Home">Home</a></div>
+                            <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a></div>
                         </li>
                         <li ng-show="authenticated">
                             <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlertsCount}}</span></div>
