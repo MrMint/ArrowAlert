@@ -18,7 +18,7 @@
     });
 
     $routeProvider.otherwise({
-        redirectTo: '/Login'
+        redirectTo: '/Home'
     });
 });
 
@@ -29,6 +29,7 @@ function MainCtrl($scope) {
     $scope.pageTitle = "ArrowAlert";
     $scope.newAlerts = false;
     $scope.newAlertsCount = 0;
+    $scope.authenticated = false;
 
     //
     $scope.exitApplication = function () {
@@ -40,13 +41,18 @@ function MainCtrl($scope) {
     }
 
     //Set users name
-    $scope.setUserName = function (title) {
-        $scope.userName = title;
+    $scope.setUserName = function (name) {
+        $scope.userName = name;
     }
 
     //Set users picture
-    $scope.setUserPicture = function (title) {
-        $scope.userPicture = title;
+    $scope.setUserPicture = function (pictureURL) {
+        $scope.userPicture = pictureURL;
+    }
+
+    //Set authentication
+    $scope.setAuthenticated = function (auth) {
+        $scope.pageTitle = auth;
     }
 
     //Set new alerts count
@@ -99,6 +105,7 @@ function LoginCtrl($scope, $http, $location) {
                 if (data.characterId != null) {
                     $scope.setUserPicture("https://image.eveonline.com/character/" + data.characterId + "_64.jpg");
                 }
+                $scope.setAuthenticated(true);
                 ////send to home page
                 $scope.sendGCMToServer();
                 $location.path('/Home');
@@ -107,7 +114,7 @@ function LoginCtrl($scope, $http, $location) {
                 if (status == '401') {
                     //user failed to authorize
                     showAlert("authorization error", "invalid key");
-                    $location.path('/Editkey');
+                    $location.path('/EditKey');
                 }
                 else {
                     //was some type of network error
@@ -118,7 +125,7 @@ function LoginCtrl($scope, $http, $location) {
     else {
         //user does not have a key
         //redirect user to enter a authorization key
-        $location.path('/editkey');
+        $location.path('/EditKey');
     }
 
 
@@ -172,11 +179,40 @@ function EditKeyCtrl($scope, $http, $location) {
     $scope.openBrowserForKey = function () {
         navigator.app.loadUrl('https://arrowmanager.net/Account/Manage', { openExternal: true });
     }
+
+
+    //Scan qr code
+    $scope.scanQRCode = function () {
+        cordova.plugins.barcodeScanner.scan(
+         function (result) {
+             if (result.format == 'QR_CODE' && result.cancelled == false && result.text.length == 64) {
+                 localStorage.setItem("authKey", result.text);
+                 $scope.$apply(function () {
+                     $location.path('/Login');
+                 });
+             }
+             else if (result.cancelled == true) {
+                 showAlert('QR Scan Error', 'Scan Canceled!');
+             }
+             else if (result.format != 'QR_CODE') {
+                 showAlert('QR Scan Error', 'Not a QR code!');
+             }
+             else if (result.text.length != 64) {
+                 showAlert('QR Scan Error', 'Not a valid auth key!');
+             }
+         },
+         function (error) {
+             alert("Scanning failed: " + error);
+         }
+      )
+    };
 };
 
 function HomeCtrl($scope, AlertRestangular) {
     $scope.setPageTitle('ArrowAlert');
-
+    //if ($scope.$parent.authenticated == false) {
+    //    $location.path('/Login');
+    //}
     //// Fetch all objects from the backend (see models/Alert.js)
     $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
     $scope.loading = false;
