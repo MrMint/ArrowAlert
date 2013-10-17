@@ -29,7 +29,7 @@ function MainCtrl($scope, $location, $rootScope) {
     $scope.pageTitle = "Loading...";
     $scope.newAlerts = 0;
     $scope.authenticated = false;
-
+    $scope.deviceReady = false;
     //Retrieve debug setting from localstorage
     var debugSetting = localStorage.getItem('debug');
     if (debugSetting != null) {
@@ -54,6 +54,10 @@ function MainCtrl($scope, $location, $rootScope) {
     $scope.$on("ALERT_RECEIVED", function (event, count) {
         $scope.newAlerts += count;
     });
+    //Handle alert received event
+    $scope.$on("DEVICE_READY", function (event) {
+        $scope.deviceReady = true;
+    });
 
     //Handle authenticated event
     $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
@@ -67,6 +71,8 @@ function MainCtrl($scope, $location, $rootScope) {
             if (characterId != null) {
                 $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
             }
+            //Register with GCM for push notifications
+            registerForPushNotifications();
         }
         else {
             //User is no longer authenticated, reset user specific UI

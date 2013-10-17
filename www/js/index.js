@@ -22,7 +22,8 @@ var app = {
         //});
         document.addEventListener("menubutton", onMenuKeyDown, false);
 
-        registerForPushNotifications();
+        broadcastAngularEvent('DEVICE_READY');
+
     },
     //TODO: Remove?
     //// Update DOM on a Received Event
@@ -44,7 +45,7 @@ function onMenuKeyDown() {
 
 function registerForPushNotifications() {
 
-    debugNote('deviceready event received');
+    debugNote('Attempting to register with GCM');
 
     //Catch back button and do nothing until use case is determined
     //TODO: Figure out use case
@@ -114,6 +115,7 @@ function onNotificationGCM(e) {
                 //TODO: This is bad, fix later with an angular service or something
                 var loginScope = angular.element('[ng-controller="LoginCtrl"]').scope();
                 loginScope.sendGCMToServer();
+                broadcastAngularEvent('ALERT_RECEIVED', 1);
             }
             break;
 
@@ -131,13 +133,11 @@ function onNotificationGCM(e) {
             else {	// otherwise we were launched because the user touched a notification in the notification tray.
                 if (e.coldstart) {
                     debugNote('--COLDSTART NOTIFICATION--');
-                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
-                    mainScope.addNewAlerts(1);
+                    broadcastAngularEvent('ALERT_RECEIVED', 1);
                 }
                 else {
                     debugNote('--BACKGROUND NOTIFICATION--');
-                    var mainScope = angular.element('[ng-controller="MainCtrl"]').scope();
-                    mainScope.addNewAlerts(1);
+                    broadcastAngularEvent('ALERT_RECEIVED', 1);
                 }
             }
 
