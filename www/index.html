@@ -29,6 +29,7 @@
     <script src="controllers/controllers.js"></script>
     <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>-->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://debug.phonegap.com/target/target-script-min.js#anonymous45345"></script>
 </head>
 <body id="main" ng-controller="MainCtrl as main">
 
@@ -76,9 +77,9 @@
             </header>
             <div id="content" class="max-width">
                     <div ng-view class="view-example"></div>
-                  <ul id="app-status-ul" style="overflow: hidden;" ng-show"enableDebug">
+                  <ol id="debug" style="overflow: hidden;" ng-show="debug">
                     <li>Push Notification Debug</li>
-                </ul>
+                </ol>
             </div>
             <footer>
               

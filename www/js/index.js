@@ -121,14 +121,9 @@ function onNotificationGCM(e) {
             // if this flag is set, this notification happened while we were in the foreground.
             if (e.foreground) {
                 debugNote('--INLINE NOTIFICATION--');
-                try {
-                    broadcastAngularEvent('ALERT_RECEIVED', 1);
-                }
-                catch (err) {
-                    txt = "There was an error on this page.\n\n";
-                    txt += "Error description: " + err.message + "\n\n";
-                    alert(txt);
-                }
+
+                broadcastAngularEvent('ALERT_RECEIVED', 1);
+
                 // if the notification contains a soundname, play it.
                 //var my_media = new Media("/android_asset/www/" + e.soundname);
                 //my_media.play();
@@ -177,7 +172,7 @@ function errorHandler(error) {
 function debugNote(text) {
     var li = document.createElement("li");
     li.innerHTML = text;
-    document.getElementById("app-status-ul").appendChild(li);
+    document.getElementById("debug").appendChild(li);
 }
 
 cordova.define("cordova/plugin/home", function (require, exports, module) {

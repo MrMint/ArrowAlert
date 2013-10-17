@@ -30,6 +30,50 @@ function MainCtrl($scope, $location, $rootScope) {
     $scope.newAlerts = 0;
     $scope.authenticated = false;
 
+    //Retrieve debug setting from localstorage
+    var debugSetting = localStorage.getItem('debug');
+    if (debugSetting != null) {
+        //Previous setting found! set it to scope variable
+        $scope.debug = debugSetting === 'true';
+    }
+    else {
+        //Nothing found, set to default
+        $scope.debug = false;
+    }
+
+    //Set a watch on the debug variable and store on change
+    $scope.$watch('debug', function () {
+        localStorage.setItem('debug', $scope.debug);
+    }, true);
+
+    //Handle page title change event
+    $scope.$on("PAGE_TITLE_CHANGE", function (event, title) {
+        $scope.pageTitle = title;
+    });
+    //Handle alert received event
+    $scope.$on("ALERT_RECEIVED", function (event, count) {
+        $scope.newAlerts += count;
+    });
+
+    //Handle authenticated event
+    $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
+        $scope.authenticated = value;
+
+        if (value) {
+            //User is authenticated, update UI
+            if (name != null) {
+                $scope.userName = name;
+            }
+            if (characterId != null) {
+                $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
+            }
+        }
+        else {
+            //User is no longer authenticated, reset user specific UI
+            $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
+            $scope.userName = "Not Authenticated";
+        }
+    });
 
     //Helper function for safely broadcasting events from outside js
     $scope.broadcastEventSafe = function (eventType, value) {
@@ -51,37 +95,11 @@ function MainCtrl($scope, $location, $rootScope) {
         }
     }
 
-    $scope.$on("PAGE_TITLE_CHANGE", function (event, title) {
-        $scope.pageTitle = title;
-    });
-
-    $scope.$on("ALERT_RECEIVED", function (event, count) {
-        $scope.newAlerts += count;
-    });
-
-    $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
-        $scope.authenticated = value;
-        if (value) {
-            if (name != null) {
-                $scope.userName = name;
-            }
-            if (characterId != null) {
-                $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
-            }
-        }
-        else {
-            $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
-            $scope.userName = "Not Authenticated";
-        }
-    });
-
     //Send app to background so alerts are still displayed in notification bar
     $scope.exitApplication = function () {
         cordova.require('cordova/plugin/home').goHome();
     }
 }
-
-// Index: http://localhost/views/Alert/index.html
 
 function AlertCtrl($scope, AlertRestangular) {
     $scope.authenticateUser();
@@ -175,7 +193,10 @@ function LoginCtrl($scope, $http, $location) {
 
 function EditKeyCtrl($scope, $http, $location) {
     $scope.$emit("PAGE_TITLE_CHANGE", "Edit Key");
-
+    $scope.debugTest = false;
+    $scope.debug = function (value) {
+        $scope.debugTest = value;
+    };
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
     var authKey = localStorage.getItem("authKey");
@@ -235,11 +256,6 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
     $scope.loading = false;
 }
-
-function ExitAppCtrl($scope) {
-
-}
-
 
 // Show a custom alert
 function showAlert(title, message) {

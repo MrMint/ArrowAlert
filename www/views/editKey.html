@@ -11,4 +11,11 @@
 
         <button class="topcoat-button--cta submitButton" ng-click="changeAuthKey()" ng-disabled="authKey.length != 64">Submit</button>
     </div>
+    <div class="row">
+         <span class="labelText">Show Debug Info: </span>
+        <label class="topcoat-switch">
+            <input type="checkbox" class="topcoat-switch__input" ng-model="$parent.debug">
+            <div class="topcoat-switch__toggle"></div>
+        </label>
+    </div>
 </div>

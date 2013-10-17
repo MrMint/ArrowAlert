@@ -161,22 +161,24 @@ table {
 .retrieveButton {
     width: 60%;
     max-width: 300px;
-    min-width:150px;
+    min-width: 150px;
 }
 
 .submitButton {
     width: 38%;
     max-width: 200px;
-     min-width:100px;
+    min-width: 100px;
 }
 
 .row {
     width: 100%;
     margin-bottom: 20px;
 }
-.row-no-margin{
+
+.row-no-margin {
     width: 100%;
 }
+
 .textBigWhite {
     color: #fff;
     font-size: 40px;
@@ -184,6 +186,10 @@ table {
     line-height: 1.1em;
 }
 
+.labelText {
+    line-height: 45px;
+    color: #fff;
+}
 /*Overriding topcoat for ui stuff here*/
 
 .topcoat-text-input {
@@ -195,6 +201,14 @@ table {
 
 .topcoat-list {
     overflow: hidden;
+}
+
+.topcoat-switch__toggle {
+    margin-left: -4rem;
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle {
+    margin-left: 2.9rem;
 }
 
 @media (min-width:1000px) {
