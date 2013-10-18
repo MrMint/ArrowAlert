@@ -20,29 +20,13 @@ var app = {
         //angular.element(document).ready(function () {
         //    angular.bootstrap(document);
         //});
-        document.addEventListener("menubutton", onMenuKeyDown, false);
 
-        broadcastAngularEvent('DEVICE_READY');
-        document.getElementById('alertsLink').addEventListener('touchstart', function () {
-            debugNote('touchstart #alertsLink');
-        }, false);
     },
     //TODO: Remove?
     //// Update DOM on a Received Event
     receivedEvent: function (id) {
     },
 };
-
-// Handle the Menu button being pressed
-function onMenuKeyDown() {
-    var site = document.getElementById('site');
-    var cl = site.classList;
-    if (cl.contains('open')) {
-        cl.remove('open');
-    } else {
-        cl.add('open');
-    }
-}
 
 
 function registerForPushNotifications() {
