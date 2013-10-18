@@ -72,7 +72,7 @@ function MainCtrl($scope, $location, $rootScope) {
                 $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
             }
             //Register with GCM for push notifications
-            registerForPushNotifications();
+            //registerForPushNotifications();
         }
         else {
             //User is no longer authenticated, reset user specific UI
