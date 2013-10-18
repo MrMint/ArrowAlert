@@ -175,7 +175,9 @@
     <Content Include="platforms\android\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="platforms\android\assets\www\config.xml" />
+    <Content Include="platforms\android\assets\www\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="platforms\android\assets\www\cordova.js" />
     <Content Include="platforms\android\assets\www\cordova_plugins.js" />
     <Content Include="platforms\android\assets\www\css\index.css" />
@@ -787,7 +789,9 @@
     <Content Include="plugins\org.apache.cordova.vibration\test\notification\index.html" />
     <Content Include="plugins\org.apache.cordova.vibration\www\blackberry10\vibrate.js" />
     <Content Include="plugins\org.apache.cordova.vibration\www\vibration.js" />
-    <Content Include="plugins\org.mrmint.home\plugin.xml" />
+    <Content Include="plugins\org.mrmint.home\plugin.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="plugins\org.mrmint.home\src\android\Home.java" />
     <Content Include="www\components\angular\angular.js" />
     <Content Include="www\components\angular\angular.min.js" />
@@ -920,7 +924,7 @@
     <Content Include="www\vendor\topcoat\js\main.js" />
     <Content Include="www\index.html" />
     <Content Include="www\views\alerts.html" />
-    <Content Include="www\views\editKey.html" />
+    <Content Include="www\views\settings.html" />
     <Content Include="www\views\home.html" />
     <Content Include="www\views\login.html" />
   </ItemGroup>

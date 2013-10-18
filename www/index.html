@@ -56,7 +56,7 @@
                             <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
                         </li>
                         <li>
-                            <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
+                            <div class="navItem"><i class="icon-cogs"></i><a href="#/Settings">Settings</a></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-off"></i><a href="" ng-click="exitApplication()">Exit Application</a></div>
@@ -76,13 +76,12 @@
                 </div>
             </header>
             <div id="content" class="max-width">
-                    <div ng-view class="view-example"></div>
-                  <ol id="debug" style="overflow: hidden;" ng-show="debug">
-                    <li>Push Notification Debug</li>
+                <div ng-view class="view-example"></div>
+                <ol id="debug" style="overflow: hidden; font-size: 14px; white-space: nowrap;" ng-show="debug">
+                    <li>-------------Debug Log-------------</li>
                 </ol>
             </div>
             <footer>
-              
             </footer>
         </div>
     </div>

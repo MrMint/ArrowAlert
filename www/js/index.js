@@ -45,8 +45,6 @@ function onMenuKeyDown() {
 
 function registerForPushNotifications() {
 
-    debugNote('Attempting to register with GCM');
-
     //Catch back button and do nothing until use case is determined
     //TODO: Figure out use case
     document.addEventListener("backbutton", function (e) {
@@ -66,10 +64,10 @@ function registerForPushNotifications() {
     try {
         pushNotification = window.plugins.pushNotification;
         if (device.platform == 'android' || device.platform == 'Android') {
-            debugNote('registering android');
+            debugNote('Registering android');
             pushNotification.register(successHandler, errorHandler, { "senderID": "643146338989", "ecb": "onNotificationGCM" });		// required!
         } else {
-            debugNote('registering iOS');
+            debugNote('Registering iOS');
             pushNotification.register(tokenHandler, errorHandler, { "badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN" });	// required!
         }
     }
@@ -101,21 +99,14 @@ function onNotificationAPN(e) {
 function onNotificationGCM(e) {
     debugNote('EVENT -> RECEIVED:' + e.event);
 
-    //TODO: This is bad, fix later with an angular service or something
-
-
-
     switch (e.event) {
         case 'registered':
             if (e.regid.length > 0) {
                 debugNote('REGISTERED -> REGID:' + e.regid);
 
                 localStorage.setItem("regId", e.regid);
+                broadcastAngularEvent('REGISTRATION_SUCCESS');
 
-                //TODO: This is bad, fix later with an angular service or something
-                var loginScope = angular.element('[ng-controller="LoginCtrl"]').scope();
-                loginScope.sendGCMToServer();
-                broadcastAngularEvent('ALERT_RECEIVED', 1);
             }
             break;
 

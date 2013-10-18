@@ -12,9 +12,9 @@
         templateUrl: 'views/alerts.html',
         controller: AlertCtrl
     });
-    $routeProvider.when('/EditKey', {
-        templateUrl: 'views/editKey.html',
-        controller: EditKeyCtrl
+    $routeProvider.when('/Settings', {
+        templateUrl: 'views/settings.html',
+        controller: SettingsCtrl
     });
 
     $routeProvider.otherwise({
@@ -22,7 +22,7 @@
     });
 });
 
-function MainCtrl($scope, $location, $rootScope) {
+function MainCtrl($scope, $location, $rootScope, $http) {
     //User specific UI elements and page title
     $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
     $scope.userName = "Not Authenticated";
@@ -57,6 +57,11 @@ function MainCtrl($scope, $location, $rootScope) {
     //Handle alert received event
     $scope.$on("DEVICE_READY", function (event) {
         $scope.deviceReady = true;
+        debugNote('DEVICE_READY event Received');
+    });
+    //Handle registration event
+    $scope.$on("REGISTRATION_SUCCESS", function (event) {
+        $scope.sendGCMToServer();
     });
 
     //Handle authenticated event
@@ -72,7 +77,7 @@ function MainCtrl($scope, $location, $rootScope) {
                 $scope.userPicture = "https://image.eveonline.com/character/" + characterId + "_64.jpg";
             }
             //Register with GCM for push notifications
-            //registerForPushNotifications();
+            $scope.registerForPushNotifications(0);
         }
         else {
             //User is no longer authenticated, reset user specific UI
@@ -92,7 +97,7 @@ function MainCtrl($scope, $location, $rootScope) {
             });
         }
     }
-
+    setTimeout(function () { $scope.broadcastEventSafe('TEST_EVENT') }, 100);
     //Helper function that checks if the user has authenticated, 
     //and redirects to login if not
     $scope.authenticateUser = function () {
@@ -104,6 +109,62 @@ function MainCtrl($scope, $location, $rootScope) {
     //Send app to background so alerts are still displayed in notification bar
     $scope.exitApplication = function () {
         cordova.require('cordova/plugin/home').goHome();
+    }
+
+    //Helper function that attempts to register with Push Notification service after authenticating
+    $scope.registerForPushNotifications = function (attempts) {
+        //Check if device is ready
+        if ($scope.deviceReady) {
+            //Register
+            registerForPushNotifications();
+        }
+        else if (attempts < 20) {
+            //Device is not ready, retry 20 times at 200ms intervals
+            debugNote('Push Reg. Error: Device not ready, Retrying...');
+            setTimeout(function () { $scope.registerForPushNotifications(attempts + 1) }, 200);
+        }
+
+    }
+
+    //Sends registration ID to ArrowManager so messages can be sent to this device
+    $scope.sendGCMToServer = function () {
+        debugNote('Sending registrationID to ArrowManager');
+        var authKey = localStorage.getItem("authKey");
+        var regId = localStorage.getItem("regId")
+
+            //Everything should be good, last check
+            if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
+                $http({
+                    method: "POST",
+                    url: "https://arrowmanager.net/api/ArrowAlertApp/",
+                    headers: { "Authorization": authKey, "Content-type": "application/json" },
+                    data: { "regId": regId }
+                }).
+                    success(function (data, status, headers, config) {
+                        //RegId was successfully updated on the server
+
+                        debugNote('Successfully sent regId to ArrowManager');
+                    }).
+                    error(function (data, status, headers, config) {
+                        if (status == '401') {
+                            //User failed to authorize
+                            showAlert("Authorization Error", "Invalid Key");
+                            $location.path('/Settings');
+                        }
+                        else {
+                            //Was some type of network error
+                            showAlert("Network Error", "Status: " + status);
+                        }
+                    });
+            }
+            else {
+                alert('authKey: ' + authKey);
+                alert('regId: ' + regId);
+                debugNote('Error: regId or authKey are not set!');
+            }
+                txt = "There was an error on this page.\n\n";
+                txt += "Error description: " + err.message + "\n\n";
+                alert(txt);
     }
 }
 
@@ -136,6 +197,7 @@ function LoginCtrl($scope, $http, $location) {
     var authKey = localStorage.getItem("authKey");
 
     if (authKey != 'undefined' && authKey != null) {
+        debugNote('Sending API authorization key to ArrowManager');
         $scope.$emit("AUTHENTICATED", false);
         //user has key, authenticate with server
         $http({
@@ -143,6 +205,7 @@ function LoginCtrl($scope, $http, $location) {
             headers: { "authorization": authKey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
+                debugNote('Successfully authenticated!');
                 //Emit authenticated event 
                 $scope.$emit("AUTHENTICATED", true, data.displayName, data.characterId);
                 //Redirect to home page
@@ -152,7 +215,7 @@ function LoginCtrl($scope, $http, $location) {
                 if (status == '401') {
                     //user failed to authorize
                     showAlert("authorization error", "invalid key");
-                    $location.path('/EditKey');
+                    $location.path('/Settings');
                 }
                 else {
                     //was some type of network error
@@ -163,42 +226,12 @@ function LoginCtrl($scope, $http, $location) {
     else {
         //user does not have a key
         //redirect user to enter a authorization key
-        $location.path('/EditKey');
-    }
-
-
-
-    $scope.sendGCMToServer = function () {
-        var authKey = localStorage.getItem("authKey");
-        var regId = localStorage.getItem("regId")
-        if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
-            $http({
-                method: "POST",
-                url: "https://arrowmanager.net/api/ArrowAlertApp/",
-                headers: { "Authorization": authKey, "Content-type": "application/json" },
-                data: { "regId": regId }
-            }).
-               success(function (data, status, headers, config) {
-                   //RegId was successfully updated on the server
-                   localStorage.removeItem("regId");
-               }).
-               error(function (data, status, headers, config) {
-                   if (status == '401') {
-                       //User failed to authorize
-                       showAlert("Authorization Error", "Invalid Key");
-                       $location.path('/EditKey');
-                   }
-                   else {
-                       //Was some type of network error
-                       showAlert("Network Error", "Status: " + status);
-                   }
-               });
-        }
+        $location.path('/Settings');
     }
 };
 
-function EditKeyCtrl($scope, $http, $location) {
-    $scope.$emit("PAGE_TITLE_CHANGE", "Edit Key");
+function SettingsCtrl($scope, $http, $location) {
+    $scope.$emit("PAGE_TITLE_CHANGE", "Settings");
     $scope.debugTest = false;
     $scope.debug = function (value) {
         $scope.debugTest = value;
@@ -257,6 +290,7 @@ function EditKeyCtrl($scope, $http, $location) {
 function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
+
 
     //// Fetch all objects from the backend (see models/Alert.js)
     $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
