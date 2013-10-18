@@ -4,7 +4,7 @@
     </div>
     <div class="row"><span class="textBigWhite">-OR-</span></div>
     <div class="row-no-margin">
-        <input type="text" class="topcoat-text-input" ng-model="authKey" value="">
+        <input type="text" class="topcoat-text-input" ng-model="authKey" value="" id="text">
     </div>
     <div class="row">
         <button class="topcoat-button retrieveButton" ng-click="openBrowserForKey()">Retrieve Key</button>
@@ -13,9 +13,13 @@
     </div>
     <div class="row">
          <span class="labelText">Show Debug Info: </span>
-        <label class="topcoat-switch">
+        <label id="debugSwitch" class="topcoat-switch">
             <input type="checkbox" class="topcoat-switch__input" ng-model="$parent.debug">
             <div class="topcoat-switch__toggle"></div>
         </label>
     </div>
 </div>
+
+<script>
+    bindHammerSettings();
+</script>

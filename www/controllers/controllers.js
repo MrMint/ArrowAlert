@@ -47,7 +47,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
         debugEnable = $scope.debug;
         localStorage.setItem('debug', $scope.debug);
     }, true);
-   
+
     //Handle page title change event
     $scope.$on("PAGE_TITLE_CHANGE", function (event, title) {
         $scope.pageTitle = title;
@@ -72,7 +72,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
     });
 
     //Handle authenticated event
-    $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
+    $scope.$on("AUTHENTICATED", function (event, value, name, characterId, expectedRegId) {
         $scope.authenticated = value;
         debugNote('EVENT: Authenticated event Received: ' + value);
         if (value) {
@@ -85,6 +85,8 @@ function MainCtrl($scope, $location, $rootScope, $http) {
             }
             //Register with GCM for push notifications
             $scope.registerForPushNotifications(0);
+            //Save expectedRegId to storage
+            localStorage.setItem('expectedRegId', expectedRegId);
         }
         else {
             //User is no longer authenticated, reset user specific UI
@@ -137,40 +139,40 @@ function MainCtrl($scope, $location, $rootScope, $http) {
 
     //Sends registration ID to ArrowManager so messages can be sent to this device
     $scope.sendGCMToServer = function () {
-        debugNote('API: Sending registrationID to ArrowManager');
+        debugNote('API: Checking if regId has changed');
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
+        var expectedRegId = localStorage.getItem('expectedRegId');
+        //Check if regId is new
+        if (regId != expectedRegId) {
+            debugNote('API: Sending registrationID to ArrowManager');
+            $http({
+                method: "POST",
+                url: "https://arrowmanager.net/api/ArrowAlertApp/",
+                headers: { "Authorization": authKey, "Content-type": "application/json" },
+                data: { "regId": regId }
+            }).
+                success(function (data, status, headers, config) {
+                    //RegId was successfully updated on the server
 
-            //Everything should be good, last check
-            if (authKey != null && authKey != 'undefined' && regId != null && regId != 'undefined') {
-                $http({
-                    method: "POST",
-                    url: "https://arrowmanager.net/api/ArrowAlertApp/",
-                    headers: { "Authorization": authKey, "Content-type": "application/json" },
-                    data: { "regId": regId }
+                    debugNote('API: Successfully sent regId to ArrowManager');
                 }).
-                    success(function (data, status, headers, config) {
-                        //RegId was successfully updated on the server
+                error(function (data, status, headers, config) {
+                    if (status == '401') {
+                        //User failed to authorize
+                        showAlert("Authorization Error", "Invalid Key");
+                        $location.path('/Settings');
+                    }
+                    else {
+                        //Was some type of network error
+                        showAlert("Network Error", "Status: " + status);
+                    }
+                });
+        }
+        else {
+            debugNote('API: RegId has not changed, not sending to ArrowManager');
+        }
 
-                        debugNote('API: Successfully sent regId to ArrowManager');
-                    }).
-                    error(function (data, status, headers, config) {
-                        if (status == '401') {
-                            //User failed to authorize
-                            showAlert("Authorization Error", "Invalid Key");
-                            $location.path('/Settings');
-                        }
-                        else {
-                            //Was some type of network error
-                            showAlert("Network Error", "Status: " + status);
-                        }
-                    });
-            }
-            else {
-                alert('authKey: ' + authKey);
-                alert('regId: ' + regId);
-                debugNote('Error: regId or authKey are not set!');
-            }
     }
 }
 
@@ -214,7 +216,7 @@ function LoginCtrl($scope, $http, $location) {
             success(function (data, status, headers, config) {
                 debugNote('API: Successfully authenticated!');
                 //Emit authenticated event 
-                $scope.$emit("AUTHENTICATED", true, data.displayName, data.characterId);
+                $scope.$emit("AUTHENTICATED", true, data.displayName, data.characterId, data.expectedRegId);
                 //Redirect to home page
                 $location.path('/Home');
             }).
@@ -239,16 +241,14 @@ function LoginCtrl($scope, $http, $location) {
 
 function SettingsCtrl($scope, $http, $location) {
     $scope.$emit("PAGE_TITLE_CHANGE", "Settings");
-    $scope.debugTest = false;
-    $scope.debug = function (value) {
-        $scope.debugTest = value;
-    };
+    bindHammerSettings();
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
     var authKey = localStorage.getItem("authKey");
     if (authKey != 'undefined' && authKey != null) {
         $scope.placeHolder = authKey;
     }
+
     //Saves the key to localstorage, and navigates to login for authentication
     $scope.changeAuthKey = function () {
         localStorage.setItem("authKey", $scope.authKey);
@@ -294,6 +294,12 @@ function SettingsCtrl($scope, $http, $location) {
          }
       )
     };
+    //Handle alert received event
+    $scope.$on("DEBUG_SETTING_CHANGE", function (event, value) {
+        $scope.$parent.debug = value;
+        debugNote('EVENT: Debug_setting_change event received: ' + value);
+    });
+
 };
 
 function HomeCtrl($scope, AlertRestangular, $location) {

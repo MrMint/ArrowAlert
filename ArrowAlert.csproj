@@ -163,6 +163,13 @@
     <None Include="www\js\.gitkeep" />
     <None Include="www\res\screen\tizen\README.md" />
     <None Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    <Content Include="www\components\angular\12rc2\angular-animate.min.js" />
+    <Content Include="www\components\angular\12rc2\angular-touch.min.js" />
+    <Content Include="www\components\angular\12rc3\angular-animate.min.js" />
+    <Content Include="www\components\angular\12rc3\angular-route.min.js" />
+    <Content Include="www\components\angular\12rc3\angular-touch.min.js" />
+    <Content Include="www\components\angular\12rc3\angular.min.js" />
+    <Content Include="www\js\input.js" />
     <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.eot" />
     <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.ttf" />
     <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.woff" />
@@ -800,8 +807,6 @@
     <Content Include="plugins\org.mrmint.home\src\android\Home.java" />
     <Content Include="www\components\angular\12rc2\angular-route.min.js" />
     <Content Include="www\components\angular\12rc2\angular.min.js" />
-    <Content Include="www\components\angular\12rc3\angular-route.min.js" />
-    <Content Include="www\components\angular\12rc3\angular.min.js" />
     <Content Include="www\components\lodash\dist\lodash.compat.js" />
     <Content Include="www\components\lodash\dist\lodash.compat.min.js" />
     <Content Include="www\components\lodash\dist\lodash.js" />
@@ -859,9 +864,7 @@
     <Content Include="www\js\application.js" />
     <Content Include="www\js\console.log.android.js" />
     <Content Include="www\js\console.log.js" />
-    <Content Include="www\js\drawer.js" />
     <Content Include="www\js\index.js" />
-    <Content Include="www\js\onerror.android.js" />
     <Content Include="www\js\onerror.js" />
     <Content Include="www\js\PushNotification.js" />
     <Content Include="www\models\Alert.js" />
@@ -974,6 +977,7 @@
       <DependentUpon>NotificationBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="plugins\org.apache.cordova.vibration\src\wp\Vibration.cs" />
+    <Content Include="www\vendor\Animate\animate.css" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="plugins\org.apache.cordova.dialogs\src\wp\NotificationBox.xaml">

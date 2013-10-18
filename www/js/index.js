@@ -172,18 +172,3 @@ function broadcastAngularEvent(eventType, value) {
     scope.broadcastEventSafe(eventType, value);
 }
 
-function openNav() {
-    var site = document.getElementById('site');
-    var cl = site.classList;
-    if (!cl.contains('open')) {
-        cl.add('open');
-    }
-}
-
-function closeNav() {
-    var site = document.getElementById('site');
-    var cl = site.classList;
-    if (cl.contains('open')) {
-        cl.remove('open');
-    }
-}
