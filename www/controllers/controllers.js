@@ -30,6 +30,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
     $scope.newAlerts = 0;
     $scope.authenticated = false;
     $scope.deviceReady = false;
+
     //Retrieve debug setting from localstorage
     var debugSetting = localStorage.getItem('debug');
     if (debugSetting != null) {
@@ -46,20 +47,25 @@ function MainCtrl($scope, $location, $rootScope, $http) {
         debugEnable = $scope.debug;
         localStorage.setItem('debug', $scope.debug);
     }, true);
-
+   
     //Handle page title change event
     $scope.$on("PAGE_TITLE_CHANGE", function (event, title) {
         $scope.pageTitle = title;
+        debugNote('EVENT: Page_title_change event received: ' + title);
     });
+
     //Handle alert received event
     $scope.$on("ALERT_RECEIVED", function (event, count) {
         $scope.newAlerts += count;
+        debugNote('EVENT: Alert_received event received: ' + count);
     });
+
     //Handle alert received event
     $scope.$on("DEVICE_READY", function (event) {
         $scope.deviceReady = true;
-        debugNote('DEVICE_READY event Received');
+        debugNote('EVENT: Device_ready event received');
     });
+
     //Handle registration event
     $scope.$on("REGISTRATION_SUCCESS", function (event) {
         $scope.sendGCMToServer();
@@ -68,7 +74,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
     //Handle authenticated event
     $scope.$on("AUTHENTICATED", function (event, value, name, characterId) {
         $scope.authenticated = value;
-
+        debugNote('EVENT: Authenticated event Received: ' + value);
         if (value) {
             //User is authenticated, update UI
             if (name != null) {
@@ -121,15 +127,17 @@ function MainCtrl($scope, $location, $rootScope, $http) {
         }
         else if (attempts < 20) {
             //Device is not ready, retry 20 times at 200ms intervals
-            debugNote('Push Reg. Error: Device not ready, Retrying...');
+            debugNote('WARNING: Device not ready, Retrying...');
             setTimeout(function () { $scope.registerForPushNotifications(attempts + 1) }, 200);
         }
-
+        else if (attempts = 20) {
+            debugNote('ERROR: Device not ready, unable to register with push notif.');
+        }
     }
 
     //Sends registration ID to ArrowManager so messages can be sent to this device
     $scope.sendGCMToServer = function () {
-        debugNote('Sending registrationID to ArrowManager');
+        debugNote('API: Sending registrationID to ArrowManager');
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
 
@@ -144,7 +152,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
                     success(function (data, status, headers, config) {
                         //RegId was successfully updated on the server
 
-                        debugNote('Successfully sent regId to ArrowManager');
+                        debugNote('API: Successfully sent regId to ArrowManager');
                     }).
                     error(function (data, status, headers, config) {
                         if (status == '401') {
@@ -163,9 +171,6 @@ function MainCtrl($scope, $location, $rootScope, $http) {
                 alert('regId: ' + regId);
                 debugNote('Error: regId or authKey are not set!');
             }
-                txt = "There was an error on this page.\n\n";
-                txt += "Error description: " + err.message + "\n\n";
-                alert(txt);
     }
 }
 
@@ -178,10 +183,11 @@ function AlertCtrl($scope, AlertRestangular) {
     // Helper function for loading Alert data with spinner
     $scope.loadAlerts = function () {
         $scope.loading = true;
-
+        debugNote('API: Requesting alerts from ArrowManager');
         Alerts.getList().then(function (data) {
             $scope.loading = false;
             $scope.Alerts = data;
+            debugNote('API: Alerts Received, count: ' + data.length);
         });
     };
 
@@ -198,7 +204,7 @@ function LoginCtrl($scope, $http, $location) {
     var authKey = localStorage.getItem("authKey");
 
     if (authKey != 'undefined' && authKey != null) {
-        debugNote('Sending API authorization key to ArrowManager');
+        debugNote('API: Sending API authorization key to ArrowManager');
         $scope.$emit("AUTHENTICATED", false);
         //user has key, authenticate with server
         $http({
@@ -206,7 +212,7 @@ function LoginCtrl($scope, $http, $location) {
             headers: { "authorization": authKey, "content-type": "application/json" }
         }).
             success(function (data, status, headers, config) {
-                debugNote('Successfully authenticated!');
+                debugNote('API: Successfully authenticated!');
                 //Emit authenticated event 
                 $scope.$emit("AUTHENTICATED", true, data.displayName, data.characterId);
                 //Redirect to home page
@@ -257,6 +263,7 @@ function SettingsCtrl($scope, $http, $location) {
 
     //Scan qr code
     $scope.scanQRCode = function () {
+        debugNote('QRSCANNER: Launching QR Scanner');
         cordova.plugins.barcodeScanner.scan(
          function (result) {
 
@@ -273,6 +280,7 @@ function SettingsCtrl($scope, $http, $location) {
                  showAlert('QR Scan Error', 'Not a valid auth key!');
              }
              else {
+                 debugNote('QRSCANNER: Successfully scanned QR auth key');
                  //Store captured Auth Key
                  localStorage.setItem("authKey", result.text);
                  //Redirect to login page

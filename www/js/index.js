@@ -20,7 +20,7 @@ var app = {
         //angular.element(document).ready(function () {
         //    angular.bootstrap(document);
         //});
-
+        broadcastAngularEvent('DEVICE_READY');
     },
     //TODO: Remove?
     //// Update DOM on a Received Event
@@ -34,7 +34,7 @@ function registerForPushNotifications() {
     //Catch back button and do nothing until use case is determined
     //TODO: Figure out use case
     document.addEventListener("backbutton", function (e) {
-        debugNote('backbutton event received');
+       // debugNote('backbutton event received');
         e.preventDefault();
         //if (document.getElementById("app-status-ul").length > 0) {
         //    // call this to get a new token each time. don't call it to reuse existing token.
@@ -50,10 +50,10 @@ function registerForPushNotifications() {
     try {
         pushNotification = window.plugins.pushNotification;
         if (device.platform == 'android' || device.platform == 'Android') {
-            debugNote('Registering android');
+            debugNote('PUSHNOTIF: Registering android');
             pushNotification.register(successHandler, errorHandler, { "senderID": "643146338989", "ecb": "onNotificationGCM" });		// required!
         } else {
-            debugNote('Registering iOS');
+            debugNote('PUSHNOTIF: Registering iOS');
             pushNotification.register(tokenHandler, errorHandler, { "badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN" });	// required!
         }
     }
@@ -67,7 +67,7 @@ function registerForPushNotifications() {
 // handle APNS notifications for iOS
 function onNotificationAPN(e) {
     if (e.alert) {
-        debugNote('push-notification: ' + e.alert);
+        debugNote('PUSHNOTIF: push-notification: ' + e.alert);
         navigator.notification.alert(e.alert);
     }
 
@@ -83,12 +83,12 @@ function onNotificationAPN(e) {
 
 // handle GCM notifications for Android
 function onNotificationGCM(e) {
-    debugNote('EVENT -> RECEIVED:' + e.event);
+    debugNote('PUSHNOTIF: EVENT -> RECEIVED:' + e.event);
 
     switch (e.event) {
         case 'registered':
             if (e.regid.length > 0) {
-                debugNote('REGISTERED -> REGID:' + e.regid);
+                debugNote('PUSHNOTIF: REGISTERED -> REGID:' + e.regid);
                 
                 localStorage.setItem("regId", e.regid);
                 broadcastAngularEvent('REGISTRATION_SUCCESS');
@@ -99,7 +99,7 @@ function onNotificationGCM(e) {
         case 'message':
             // if this flag is set, this notification happened while we were in the foreground.
             if (e.foreground) {
-                debugNote('--INLINE NOTIFICATION--');
+                debugNote('PUSHNOTIF: Notification received while in focus');
 
                 broadcastAngularEvent('ALERT_RECEIVED', 1);
                 navigator.notification.vibrate(500);
@@ -109,41 +109,41 @@ function onNotificationGCM(e) {
             }
             else {	// otherwise we were launched because the user touched a notification in the notification tray.
                 if (e.coldstart) {
-                    debugNote('--COLDSTART NOTIFICATION--');
+                    debugNote('PUSHNOTIF: Notification received while closed');
                     broadcastAngularEvent('ALERT_RECEIVED', 1);
                 }
                 else {
-                    debugNote('--BACKGROUND NOTIFICATION--');
+                    debugNote('PUSHNOTIF: Notification received while in background');
                     broadcastAngularEvent('ALERT_RECEIVED', 1);
                 }
             }
 
-            debugNote('MESSAGE -> MSG: ' + e.payload.message);
-            debugNote('MESSAGE -> MSGCNT: ' + e.payload.msgcnt);
+            debugNote('PUSHNOTIF: MESSAGE -> MSG: ' + e.payload.message);
+            //debugNote('PUSHNOTIF: MESSAGE -> MSGCNT: ' + e.payload.msgcnt);
             break;
 
         case 'error':
-            debugNote('ERROR -> MSG:' + e.msg);
+            debugNote('PUSHNOTIF: ERROR -> MSG:' + e.msg);
             break;
 
         default:
-            debugNote('EVENT -> Unknown, an event was received and we do not know what it is');
+            debugNote('PUSHNOTIF: EVENT -> Unknown, an event was received and we do not know what it is');
             break;
     }
 }
 
 function tokenHandler(result) {
-    debugNote('token: ' + result);
+    debugNote('PUSHNOTIF: token: ' + result);
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
 }
 
 function successHandler(result) {
-    debugNote('success:' + result);
+    debugNote('PUSHNOTIF: success:' + result);
 }
 
 function errorHandler(error) {
-    debugNote('error:' + error);
+    debugNote('PUSHNOTIF:error:' + error);
 }
 //Set debugEnable at start for improved runtime performance when disabled
 var debugEnable = localStorage.getItem('debug') === 'true';
@@ -170,4 +170,20 @@ function broadcastAngularEvent(eventType, value) {
     var element = document.getElementById('main');
     var scope = angular.element(element).scope();
     scope.broadcastEventSafe(eventType, value);
+}
+
+function openNav() {
+    var site = document.getElementById('site');
+    var cl = site.classList;
+    if (!cl.contains('open')) {
+        cl.add('open');
+    }
+}
+
+function closeNav() {
+    var site = document.getElementById('site');
+    var cl = site.classList;
+    if (cl.contains('open')) {
+        cl.remove('open');
+    }
 }

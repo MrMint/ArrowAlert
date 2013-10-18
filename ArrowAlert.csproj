@@ -33,11 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".cordova\config.json" />
-    <Content Include="Content\font\fontawesome-webfont.eot" />
-    <Content Include="Content\font\fontawesome-webfont.ttf" />
-    <Content Include="Content\font\fontawesome-webfont.woff" />
-    <Content Include="Content\font\FontAwesome.otf" />
-    <None Include="packages.config" />
     <None Include="platforms\android\assets\www\res\screen\tizen\README.md" />
     <None Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
     <None Include="platforms\android\cordova\build" />
@@ -181,11 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="Content\font-awesome-ie7.css" />
-    <Content Include="Content\font-awesome-ie7.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="www\vendor\fontawesome\font-awesome.min.css" />
     <Content Include="platforms\android\AndroidManifest.xml">
       <SubType>Designer</SubType>
