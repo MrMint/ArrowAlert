@@ -5,34 +5,29 @@
     <title>Arrow Alert</title>
     <meta charset="utf-8" />
 
+    <!-- CSS Styles -->
+    <!-- Topcoat -->
     <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-dark.css" />
     <link rel="stylesheet" href="vendor/topcoat/css/main.css" />
+
+    <!-- Icons -->
     <link rel="stylesheet" href="vendor/fontawesome/font-awesome.min.css" />
-    
+
+    <!-- Animations -->
+    <link rel="stylesheet" href="vendor/Animate/animate.css" />
+
+    <!-- Application -->
     <link rel="stylesheet" href="css/application.css" />
     <link rel="stylesheet" href="css/navigation.css" />
 
     
-    <script type="text/javascript" src="phonegap.js"></script>
-    <script type="text/javascript" src="js/PushNotification.js"></script>
-
-    <script type="text/javascript" src="components/angular/12rc2/angular.min.js"></script>
-    <script type="text/javascript" src="components/angular/12rc2/angular-route.min.js"></script>
-
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="components/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="components/restangular/dist/restangular.min.js"></script>
-    <script type="text/javascript" src="vendor/hammerjs/hammer.min.js"></script>
-    <script type="text/javascript" src="vendor/angular-hammer/angular-hammer.js"></script>
-    <script type="text/javascript" src="vendor/topcoat/js/main.js"></script>
-    <script type="text/javascript" src="models/Alert.js"></script>
-    <script type="text/javascript" src="controllers/controllers.js"></script>
 
 </head>
 <body id="main" ng-controller="MainCtrl as main">
 
-    <div id="wrapper" style="height: 100%;">
+    <div id="wrapper">
         <div class="max-width">
+            <!-- Navigation -->
             <div id="sideNav">
                 <div id="pageNav">
                     <ul>
@@ -63,6 +58,8 @@
                 </div>
             </div>
         </div>
+        <!-- End Navigation -->
+
         <div id="site">
             <header id="main-header">
                 <div class="max-width">
@@ -74,32 +71,42 @@
                 </div>
             </header>
             <div id="content" class="max-width">
+                <!-- Content -->
                 <div ng-view class="view-example"></div>
-                <ol id="debug" style="overflow: hidden; font-size: 14px; white-space: nowrap;" ng-show="debug">
-                    <li>-------------Debug Log-------------</li>
+                <!-- Debug Log -->
+                <ol id="debug"ng-show="debug">
+                    <li>--------------------------Debug Log--------------------------</li>
                 </ol>
             </div>
             <footer>
             </footer>
         </div>
     </div>
+
+    <!-- Script Files -->
+    <!-- Phonegap -->
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="js/PushNotification.js"></script>
+
+    <!-- Angular -->
+    <script type="text/javascript" src="components/angular/12rc2/angular.min.js"></script>
+    <script type="text/javascript" src="components/angular/12rc2/angular-route.min.js"></script>
+    <script type="text/javascript" src="components/restangular/dist/restangular.min.js"></script>
+    <script type="text/javascript" src="components/underscore/underscore-min.js"></script>
+
+    <!-- Application -->
+    <script type="text/javascript" src="models/Alert.js"></script>
+    <script type="text/javascript" src="controllers/controllers.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- Input -->
+    <script type="text/javascript" src="vendor/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-hammer/angular-hammer.js"></script>
+    <script type="text/javascript" src="vendor/topcoat/js/main.js"></script>
+    <script type="text/javascript" src="js/input.js"></script>
+
     <script type="text/javascript">
         app.initialize();
-    </script>
-    <script>
-        var element = document.getElementById('content');
-        var hammertime = Hammer(element).on("swiperight", function (event) {
-            debugNote('Hammer: Swiperight event received');
-            event.preventDefault();
-            event.gesture.preventDefault();
-            openNav();
-        });
-        var hammertime = Hammer(element).on("swipeleft", function (event) {
-            debugNote('Hammer: Swipeleft event received');
-            event.preventDefault();
-            event.gesture.preventDefault();
-            closeNav();
-        });
     </script>
 </body>
 </html>

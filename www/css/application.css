@@ -190,6 +190,15 @@ table {
     line-height: 45px;
     color: #fff;
 }
+
+/*--------DEBUG-------*/
+#debug {
+    overflow: hidden;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+
 /*Overriding topcoat for ui stuff here*/
 
 .topcoat-text-input {
