@@ -51,7 +51,7 @@
                             <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a></div>
                         </li>
                         <li ng-show="authenticated">
-                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
+                            <div class="navItem"><i class="icon-warning-sign"></i><a id="alertsLink"  hm-tap="showAlert('test','hammer')">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/Settings">Settings</a></div>
@@ -85,6 +85,21 @@
     </div>
     <script type="text/javascript">
         app.initialize();
+    </script>
+    <script>
+        var element = document.getElementById('alertsLink');
+        var hammertime = Hammer(element).on("tap", function (event) {
+            debugNote('Hammer Tap event');
+            event.preventDefault();
+            event.gesture.preventDefault();
+        });
+        var element = document.getElementById('content');
+        var hammertime = Hammer(element).on("tap", function (event) {
+            debugNote('Hammer content Tap event');
+            event.preventDefault();
+            event.gesture.preventDefault();
+        });
+        
     </script>
 </body>
 </html>

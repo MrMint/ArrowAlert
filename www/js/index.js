@@ -23,7 +23,9 @@ var app = {
         document.addEventListener("menubutton", onMenuKeyDown, false);
 
         broadcastAngularEvent('DEVICE_READY');
-
+        document.getElementById('alertsLink').addEventListener('touchstart', function () {
+            debugNote('touchstart #alertsLink');
+        }, false);
     },
     //TODO: Remove?
     //// Update DOM on a Received Event

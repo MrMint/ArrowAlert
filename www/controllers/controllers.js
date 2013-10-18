@@ -1,4 +1,4 @@
-﻿var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel'], function ($routeProvider, $locationProvider) {
+﻿var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel', 'hmTouchevents'], function ($routeProvider, $locationProvider) {
     //configure custom routing
     $routeProvider.when('/Home', {
         templateUrl: 'views/home.html',
