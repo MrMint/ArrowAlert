@@ -1,4 +1,4 @@
-﻿var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel', 'ngAnimate'], function ($routeProvider, $locationProvider) {
+﻿var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel'], function ($routeProvider, $locationProvider) {
     //configure custom routing
     $routeProvider.when('/Home', {
         templateUrl: 'views/home.html',
@@ -43,6 +43,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
 
     //Set a watch on the debug variable and store on change
     $scope.$watch('debug', function () {
+        debugEnable = $scope.debug;
         localStorage.setItem('debug', $scope.debug);
     }, true);
 
@@ -293,8 +294,8 @@ function HomeCtrl($scope, AlertRestangular, $location) {
 
 
     //// Fetch all objects from the backend (see models/Alert.js)
-    $scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
-    $scope.loading = false;
+    //$scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
+    //$scope.loading = false;
 }
 
 // Show a custom alert

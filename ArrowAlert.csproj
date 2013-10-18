@@ -33,6 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".cordova\config.json" />
+    <Content Include="Content\font\fontawesome-webfont.eot" />
+    <Content Include="Content\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\font\fontawesome-webfont.woff" />
+    <Content Include="Content\font\FontAwesome.otf" />
+    <None Include="packages.config" />
     <None Include="platforms\android\assets\www\res\screen\tizen\README.md" />
     <None Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
     <None Include="platforms\android\cordova\build" />
@@ -163,6 +168,10 @@
     <None Include="www\js\.gitkeep" />
     <None Include="www\res\screen\tizen\README.md" />
     <None Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.eot" />
+    <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.ttf" />
+    <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.woff" />
+    <Content Include="www\vendor\fontawesome\font\FontAwesome.otf" />
     <None Include="www\vendor\topcoat\font\SourceSansPro-It.otf" />
     <None Include="www\vendor\topcoat\font\SourceSansPro-Light.otf" />
     <None Include="www\vendor\topcoat\font\SourceSansPro-LightIt.otf" />
@@ -172,6 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Content\font-awesome-ie7.css" />
+    <Content Include="Content\font-awesome-ie7.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="www\vendor\fontawesome\font-awesome.min.css" />
     <Content Include="platforms\android\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -793,8 +808,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="plugins\org.mrmint.home\src\android\Home.java" />
-    <Content Include="www\components\angular\angular.js" />
-    <Content Include="www\components\angular\angular.min.js" />
+    <Content Include="www\components\angular\12rc2\angular-route.min.js" />
+    <Content Include="www\components\angular\12rc2\angular.min.js" />
+    <Content Include="www\components\angular\12rc3\angular-route.min.js" />
+    <Content Include="www\components\angular\12rc3\angular.min.js" />
     <Content Include="www\components\lodash\dist\lodash.compat.js" />
     <Content Include="www\components\lodash\dist\lodash.compat.min.js" />
     <Content Include="www\components\lodash\dist\lodash.js" />
@@ -907,6 +924,7 @@
     <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.css" />
     <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.js" />
     <Content Include="www\vendor\angular-hammer\angular-hammer.js" />
+    <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.svg" />
     <Content Include="www\vendor\hammerjs\hammer.js" />
     <Content Include="www\vendor\hammerjs\hammer.min.js" />
     <Content Include="www\vendor\hammerjs\jquery.hammer.js" />

@@ -159,11 +159,15 @@ function successHandler(result) {
 function errorHandler(error) {
     debugNote('error:' + error);
 }
-
+//Set debugEnable at start for improved runtime performance when disabled
+var debugEnable = localStorage.getItem('debug') === 'true';
 function debugNote(text) {
-    var li = document.createElement("li");
-    li.innerHTML = text;
-    document.getElementById("debug").appendChild(li);
+    if (debugEnable) {
+        debugEnable = true;
+        var li = document.createElement("li");
+        li.innerHTML = text;
+        document.getElementById("debug").appendChild(li);
+    }
 }
 
 cordova.define("cordova/plugin/home", function (require, exports, module) {
