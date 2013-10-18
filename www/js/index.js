@@ -103,7 +103,7 @@ function onNotificationGCM(e) {
         case 'registered':
             if (e.regid.length > 0) {
                 debugNote('REGISTERED -> REGID:' + e.regid);
-
+                
                 localStorage.setItem("regId", e.regid);
                 broadcastAngularEvent('REGISTRATION_SUCCESS');
 
@@ -116,7 +116,7 @@ function onNotificationGCM(e) {
                 debugNote('--INLINE NOTIFICATION--');
 
                 broadcastAngularEvent('ALERT_RECEIVED', 1);
-
+                navigator.notification.vibrate(500);
                 // if the notification contains a soundname, play it.
                 //var my_media = new Media("/android_asset/www/" + e.soundname);
                 //my_media.play();
