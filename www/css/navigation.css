@@ -35,7 +35,7 @@
         }
 
     #userDisplay .userDisplayName {
-        padding: 12px 0 0 40px;
+        padding: 14px 0 0 40px;
         color: #288edf;
         margin-left: 3px;
     }
@@ -45,12 +45,9 @@
 }
 
 #sideNav li a {
-    padding: 12px 0 0 30px;
+    padding: 16px 0 0 30px;
 }
 
-body {
-    font-family: 'Lato', sans-serif;
-}
 
 #sideNav {
     background: #252525;
@@ -65,7 +62,7 @@ body {
         color: #58595A;
         /*color:#288EDF;*/
         position: absolute;
-        top: 12px;
+        top: 14px;
         left: 7px;
     }
 
@@ -83,6 +80,6 @@ body {
 
 .navNotification {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 130px;
 }

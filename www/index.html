@@ -1,39 +1,33 @@
 ﻿<!DOCTYPE html>
-<html ng-app="AlertApp">
+<html id="AlertApp" ng-app="AlertApp">
 <head>
     <meta charset="utf8">
     <title>Arrow Alert</title>
     <meta charset="utf-8" />
 
+    <!-- CSS Styles -->
+    <!-- Topcoat -->
     <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-dark.css" />
     <link rel="stylesheet" href="vendor/topcoat/css/main.css" />
 
+    <!-- Icons -->
+    <link rel="stylesheet" href="vendor/fontawesome/font-awesome.min.css" />
+
+    <!-- Animations -->
+    <link rel="stylesheet" href="vendor/Animate/animate.css" />
+
+    <!-- Application -->
     <link rel="stylesheet" href="css/application.css" />
     <link rel="stylesheet" href="css/navigation.css" />
 
-    <!--<script src="../../components/angular/angular.min.js"></script>-->
-    <script src="phonegap.js"></script>
-    <script type="text/javascript" src="js/PushNotification.js"></script>
+    
 
-    <script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
-    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-animate.min.js"></script>
-    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>
-
-    <script src="js/index.js"></script>
-    <script src="components/underscore/underscore-min.js"></script>
-    <script src="components/restangular/dist/restangular.min.js"></script>
-    <script src="vendor/hammerjs/hammer.min.js"></script>
-    <script src="vendor/angular-hammer/angular-hammer.js"></script>
-    <script src="vendor/topcoat/js/main.js"></script>
-    <script src="models/Alert.js"></script>
-    <script src="controllers/controllers.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
-<body ng-controller="MainCtrl as main">
+<body id="main" ng-controller="MainCtrl as main">
 
-    <div id="wrapper" style="height: 100%;">
+    <div id="wrapper">
         <div class="max-width">
+            <!-- Navigation -->
             <div id="sideNav">
                 <div id="pageNav">
                     <ul>
@@ -45,17 +39,17 @@
                                 <div class="userDisplayName">{{userName}} </div>
                             </div>
                         </li>
-                                                <li>
-                            <div class="navItem" ng-show="!authenticated"><i class="icon-cogs"></i><a href="#/Login">Login</a></div>
+                        <li ng-show="!authenticated">
+                            <div class="navItem"><i class="icon-android"></i><a href="#/Login">Login</a></div>
+                        </li>
+                        <li ng-show="authenticated">
+                            <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a></div>
+                        </li>
+                        <li ng-show="authenticated">
+                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
                         </li>
                         <li>
-                            <div class="navItem" ng-show="authenticated"><i class="icon-beer"></i><a href="#/Home">Home</a></div>
-                        </li>
-                        <li>
-                            <div class="navItem" ng-show="authenticated"><i class="icon-warning-sign" ></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlertsCount}}</span></div>
-                        </li>
-                        <li>
-                            <div class="navItem"><i class="icon-cogs"></i><a href="#/EditKey">Edit Key</a></div>
+                            <div class="navItem"><i class="icon-cogs"></i><a href="#/Settings">Settings</a></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-off"></i><a href="" ng-click="exitApplication()">Exit Application</a></div>
@@ -64,6 +58,8 @@
                 </div>
             </div>
         </div>
+        <!-- End Navigation -->
+
         <div id="site">
             <header id="main-header">
                 <div class="max-width">
@@ -71,26 +67,48 @@
                         <h1>{{pageTitle}}</h1>
                     </hgroup>
                     <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
-                    <span class="topcoat-notification topNotification" ng-show="newAlerts">{{newAlertsCount}}</span>
+                    <!--<span class="topcoat-notification topNotification" ng-show="newAlerts != 0">{{newAlerts}}</span>-->
                 </div>
             </header>
             <div id="content" class="max-width">
-                <div class="example-animate-container">
-                    <div ng-view class="view-example"></div>
-                </div>
+                <!-- Content -->
+                <div ng-view class="view-example"></div>
+                <!-- Debug Log -->
+                <ol id="debug"ng-show="debug">
+                    <li>--------------------------Debug Log--------------------------</li>
+                </ol>
             </div>
             <footer>
-                <ul id="app-status-ul" style="overflow:hidden;">
-                    <li>Push Notification Debug</li>
-                </ul>
             </footer>
         </div>
     </div>
+
+    <!-- Script Files -->
+    <!-- Phonegap -->
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="js/PushNotification.js"></script>
+
+    <!-- Angular -->
+    <script type="text/javascript" src="components/angular/12rc2/angular.min.js"></script>
+    <script type="text/javascript" src="components/angular/12rc2/angular-route.min.js"></script>
+    <script type="text/javascript" src="components/restangular/dist/restangular.min.js"></script>
+    <script type="text/javascript" src="components/underscore/underscore-min.js"></script>
+
+    <!-- Application -->
+    <script type="text/javascript" src="models/Alert.js"></script>
+    <script type="text/javascript" src="controllers/controllers.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- Input -->
+    <script type="text/javascript" src="vendor/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-hammer/angular-hammer.js"></script>
+    <script type="text/javascript" src="vendor/topcoat/js/main.js"></script>
+    <script type="text/javascript" src="js/input.js"></script>
+
     <script type="text/javascript">
         app.initialize();
+        bindHammerIndex();
     </script>
-
-
-
 </body>
 </html>
+
