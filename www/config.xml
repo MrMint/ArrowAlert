@@ -48,12 +48,12 @@
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
   
-  <plugin name="Home" value="org.mrmint.home"/>
+  <!--<plugin name="Home" value="org.mrmint.home"/>
   <plugin value="org.apache.cordova.vibration"/>
   <plugin value="org.apache.cordova.dialogs"/>
   <plugin value="org.apache.cordova.vibration"/>
   <plugin value="com.phonegap.plugins.pushplugin"/>
-  <plugin value="com.phonegap.plugins.barcodescanner"/>
+  <plugin value="com.phonegap.plugins.barcodescanner"/>-->
   <!--<feature name="Notification">
     <param name="android-package" value="org.apache.cordova.Notification" />
   </feature>-->

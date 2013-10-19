@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".cordova\config.json" />
+    <None Include="platforms\android\ant.properties" />
     <None Include="platforms\android\assets\www\res\screen\tizen\README.md" />
     <None Include="platforms\android\assets\www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
     <None Include="platforms\android\cordova\build" />
