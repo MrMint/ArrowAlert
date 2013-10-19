@@ -24,10 +24,10 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <icon src="icon.png" />
-    <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
-    <icon gap:density="mdpi" gap:platform="android" src="res/icon/android/icon-48-mdpi.png" />
-    <icon gap:density="hdpi" gap:platform="android" src="res/icon/android/icon-72-hdpi.png" />
-    <icon gap:density="xhdpi" gap:platform="android" src="res/icon/android/icon-96-xhdpi.png" />
+    <icon gap:density="ldpi" gap:platform="android" src="icon.png" />
+    <icon gap:density="mdpi" gap:platform="android" src="icon.png" />
+    <icon gap:density="hdpi" gap:platform="android" src="icon.png" />
+    <icon gap:density="xhdpi" gap:platform="android" src="icon.png" />
     <icon gap:platform="blackberry" src="res/icon/blackberry/icon-80.png" />
     <icon gap:platform="blackberry" gap:state="hover" src="res/icon/blackberry/icon-80.png" />
     <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
@@ -48,12 +48,12 @@
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
   
-  <plugin name="Home" value="org.mrmint.home"/>
+  <!--<plugin name="Home" value="org.mrmint.home"/>
   <plugin value="org.apache.cordova.vibration"/>
   <plugin value="org.apache.cordova.dialogs"/>
   <plugin value="org.apache.cordova.vibration"/>
   <plugin value="com.phonegap.plugins.pushplugin"/>
-  <plugin value="com.phonegap.plugins.barcodescanner"/>
+  <plugin value="com.phonegap.plugins.barcodescanner"/>-->
   <!--<feature name="Notification">
     <param name="android-package" value="org.apache.cordova.Notification" />
   </feature>-->
