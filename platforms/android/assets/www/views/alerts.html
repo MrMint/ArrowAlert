@@ -1,0 +1,15 @@
+<div class="spinner" ng-show="loading"></div>
+<div class="topcoat-list__container">
+
+    <ul class="topcoat-list">
+        <!-- order is reversed created timestamp -->
+        <li class="topcoat-list__item" hm-tap="open(Alert.ID)" ng-repeat="Alert in Alerts ">
+            <!--| orderBy: '-createddate'-->
+            <div class="alertItemContainer">
+                <div class="topLeftTriangle high"></div>
+                <div class="alertItemBody">{{ Alert.Body }}</div>
+
+            </div>
+        </li>
+    </ul>
+</div>
