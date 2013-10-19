@@ -223,7 +223,7 @@ function LoginCtrl($scope, $http, $location) {
             error(function (data, status, headers, config) {
                 if (status == '401') {
                     //user failed to authorize
-                    showAlert("authorization error", "invalid key");
+                    //showAlert("authorization error", "invalid key");
                     $location.path('/Settings');
                 }
                 else {

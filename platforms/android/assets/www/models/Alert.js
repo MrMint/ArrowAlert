@@ -17,9 +17,19 @@
                 id: "ID"
             });
 
-            RestangularConfigurer.setDefaultHeaders({
-                'authorization': localStorage.getItem('authKey')
+            //RestangularConfigurer.setDefaultHeaders({
+            //    'authorization': localStorage.getItem('authKey')
+            //});
+
+            //Intercept outbound requests and attach the auth key to it (ensures up to date authkey)
+            RestangularConfigurer.setFullRequestInterceptor(function (element, operation, route, url, headers, params) {
+                return {
+                    element: element,
+                    params: params,
+                    headers: _.extend(headers, { Authorization: localStorage.getItem('authKey') })
+                };
             });
+
         });
     });
 })();
