@@ -1,4 +1,14 @@
 ﻿<div style="text-align: center;">
     <div class="spinner" ng-show="loading"></div>
-
+    <ul class="topcoat-list">
+        <h3 class="topcoat-list__header">Recent Alerts</h3>
+        <li class="topcoat-list__item" ng-repeat="Alert in recentAlerts ">
+            <!--| orderBy: '-createddate'-->
+            <div class="alertItemContainer">
+                <div class="topLeftTriangle high"></div>
+                <div class="alertItemBody">{{Alert.Body}}</div>
+                <div class="alertInfo">-{{Alert.CreatorName}}, 1 hour ago</div>
+            </div>
+        </li>
+    </ul>
 </div>

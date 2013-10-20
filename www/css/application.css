@@ -149,13 +149,21 @@ table {
     width: 100%;
     /*height: 100%;*/
     height: 56px;
+    color:#fff;
 }
 
 .alertItemBody {
-    padding: 20px;
     overflow: hidden;
+    height:40px;
+    padding-top:10px;
 }
-
+.alertInfo {
+position:absolute;
+bottom:5px;
+right:5px;
+color:#808080;
+font-size:13px;
+}
 /*Settings screen*/
 
 .retrieveButton {
