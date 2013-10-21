@@ -223,7 +223,7 @@ function LoginCtrl($scope, $http, $location) {
             error(function (data, status, headers, config) {
                 if (status == '401') {
                     //user failed to authorize
-                    showAlert("authorization error", "invalid key");
+                    //showAlert("authorization error", "invalid key");
                     $location.path('/Settings');
                 }
                 else {
@@ -306,10 +306,10 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
 
-
-    //// Fetch all objects from the backend (see models/Alert.js)
-    //$scope.recentAlert = AlertRestangular.one('Alerts', '?count=1').get();
-    //$scope.loading = false;
+    //'?count=1'
+    //// Fetch recent objects from the backend (see models/Alert.js)
+    $scope.recentAlerts = AlertRestangular.all('Alerts').getList({ count: '1' });
+    $scope.loading = false;
 }
 
 // Show a custom alert

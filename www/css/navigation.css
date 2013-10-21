@@ -39,7 +39,8 @@
         color: #288edf;
         margin-left: 3px;
     }
-
+#pageNav {
+}
 #pageNav li {
     border-bottom: 1px solid #58595A;
 }
@@ -70,6 +71,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    z-index:2;
 }
 
 .topNotification {
