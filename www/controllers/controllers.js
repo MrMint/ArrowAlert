@@ -46,6 +46,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
     $scope.$watch('debug', function () {
         debugEnable = $scope.debug;
         localStorage.setItem('debug', $scope.debug);
+        debugNote('WATCH: Debug has changed');
     }, true);
 
     //Handle page title change event
@@ -68,6 +69,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
 
     //Handle registration event
     $scope.$on("REGISTRATION_SUCCESS", function (event) {
+        debugNote('EVENT: Registration_success event received');
         $scope.sendGCMToServer();
     });
 
@@ -173,6 +175,28 @@ function MainCtrl($scope, $location, $rootScope, $http) {
             debugNote('API: RegId has not changed, not sending to ArrowManager');
         }
 
+    }
+    //Helper function for displaying the alerts priority level
+    $scope.displayAlertLevel = function (alertLevel) {
+        switch (alertLevel) {
+            case 0:
+                return 'low';
+            case 1:
+                return 'medium';
+            case 2:
+                return 'high';
+            case 3:
+                return 'extreme';
+        }
+    }
+
+    $scope.viewedAlert = function (alertId) {
+        var viewedAlertId = localStorage.getItem('oldViewedAlert');
+        if (viewedAlertId != null) {
+            if (alertId <= viewedAlertId) {
+                return "viewed";
+            }
+        }
     }
 }
 
@@ -294,7 +318,7 @@ function AlertCtrl($scope, AlertRestangular) {
     $scope.$emit("PAGE_TITLE_CHANGE", "Alerts");
     // This will be populated with Restangular
     $scope.Alerts = [];
-
+    var alertsViewed = localStorage.getItem("viewedAlert");
     // Helper function for loading Alert data with spinner
     $scope.loadAlerts = function () {
         $scope.loading = true;
@@ -302,6 +326,12 @@ function AlertCtrl($scope, AlertRestangular) {
         Alerts.getList({ count: '20' }).then(function (data) {
             $scope.loading = false;
             $scope.Alerts = data;
+            //Set the new alert viewed
+            if (data.length > 0) {
+                //Save the old variable so that the new alerts still show as new
+                localStorage.setItem("oldViewedAlert", alertsViewed);
+                localStorage.setItem("viewedAlert", data[0].ID);
+            }
             debugNote('API: Alerts Received, count: ' + data.length);
         });
     };
@@ -309,6 +339,8 @@ function AlertCtrl($scope, AlertRestangular) {
     // Fetch all objects from the backend (see models/Alert.js)
     var Alerts = AlertRestangular.all('Alerts');
     $scope.loadAlerts();
+
+
 
 };
 // Show a custom alert
