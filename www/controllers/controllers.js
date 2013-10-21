@@ -176,29 +176,6 @@ function MainCtrl($scope, $location, $rootScope, $http) {
     }
 }
 
-function AlertCtrl($scope, AlertRestangular) {
-    $scope.authenticateUser();
-    $scope.$emit("PAGE_TITLE_CHANGE", "Alerts");
-    // This will be populated with Restangular
-    $scope.Alerts = [];
-
-    // Helper function for loading Alert data with spinner
-    $scope.loadAlerts = function () {
-        $scope.loading = true;
-        debugNote('API: Requesting alerts from ArrowManager');
-        Alerts.getList().then(function (data) {
-            $scope.loading = false;
-            $scope.Alerts = data;
-            debugNote('API: Alerts Received, count: ' + data.length);
-        });
-    };
-
-    // Fetch all objects from the backend (see models/Alert.js)
-    var Alerts = AlertRestangular.all('Alerts').getList({ count: '20' });
-    $scope.loadAlerts();
-
-};
-
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
     $scope.$emit("PAGE_TITLE_CHANGE", "Authenticating...");
@@ -312,6 +289,28 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.loading = false;
 }
 
+function AlertCtrl($scope, AlertRestangular) {
+    $scope.authenticateUser();
+    $scope.$emit("PAGE_TITLE_CHANGE", "Alerts");
+    // This will be populated with Restangular
+    $scope.Alerts = [];
+
+    // Helper function for loading Alert data with spinner
+    $scope.loadAlerts = function () {
+        $scope.loading = true;
+        debugNote('API: Requesting alerts from ArrowManager');
+        Alerts.getList({ count: '20' }).then(function (data) {
+            $scope.loading = false;
+            $scope.Alerts = data;
+            debugNote('API: Alerts Received, count: ' + data.length);
+        });
+    };
+
+    // Fetch all objects from the backend (see models/Alert.js)
+    var Alerts = AlertRestangular.all('Alerts');
+    $scope.loadAlerts();
+
+};
 // Show a custom alert
 function showAlert(title, message) {
     navigator.notification.alert(
