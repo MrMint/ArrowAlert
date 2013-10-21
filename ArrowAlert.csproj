@@ -164,6 +164,7 @@
     <None Include="www\js\.gitkeep" />
     <None Include="www\res\screen\tizen\README.md" />
     <None Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    <Content Include="Readme.txt" />
     <Content Include="www\components\angular\12rc2\angular-animate.min.js" />
     <Content Include="www\components\angular\12rc2\angular-touch.min.js" />
     <Content Include="www\components\angular\12rc3\angular-animate.min.js" />
