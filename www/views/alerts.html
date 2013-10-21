@@ -6,7 +6,7 @@
         <!-- order is reversed created timestamp -->
         <li class="topcoat-list__item" ng-repeat="Alert in Alerts | orderBy: '-Date'">
             <div class="alertItemContainer">
-                <div class="topLeftTriangle high"></div>
+                <div class="alertLevelRectangle {{displayAlertLevel(Alert.AlertLevel)}} {{viewedAlert(Alert.ID)}}"></div>
                 <div class="alertItemBody">{{Alert.Body}}</div>
                 <div class="alertInfo">-{{Alert.CreatorName}}, {{Alert.Age}}</div>
             </div>
