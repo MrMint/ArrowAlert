@@ -8,3 +8,7 @@ CODE:
 	www/views/						- Partial html views
 	www/models/						- The models (utilize REST via restangular)
 	www/js/input.js					- The input bindings
+
+
+Want to contribute?
+	Fork the repo and create pull requests!

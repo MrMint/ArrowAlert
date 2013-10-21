@@ -194,7 +194,7 @@ function AlertCtrl($scope, AlertRestangular) {
     };
 
     // Fetch all objects from the backend (see models/Alert.js)
-    var Alerts = AlertRestangular.all('Alerts');
+    var Alerts = AlertRestangular.all('Alerts').getList({ count: '20' });
     $scope.loadAlerts();
 
 };
@@ -306,9 +306,9 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
 
-    //'?count=1'
-    //// Fetch recent objects from the backend (see models/Alert.js)
-    $scope.recentAlerts = AlertRestangular.all('Alerts').getList({ count: '1' });
+    //Fetch recent objects from the backend (see models/Alert.js)
+    //Parameter age requests all alerts within the last 24 hours
+    $scope.recentAlerts = AlertRestangular.all('Alerts').getList({ age: '24' });
     $scope.loading = false;
 }
 
