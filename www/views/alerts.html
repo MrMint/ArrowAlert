@@ -4,12 +4,11 @@
     <ul class="topcoat-list" style="text-align: center;">
         <h3 class="topcoat-list__header">Alerts</h3>
         <!-- order is reversed created timestamp -->
-        <li class="topcoat-list__item" ng-repeat="Alert in Alerts ">
-            <!--| orderBy: '-createddate'-->
+        <li class="topcoat-list__item" ng-repeat="Alert in Alerts | orderBy: '-Date'">
             <div class="alertItemContainer">
                 <div class="topLeftTriangle high"></div>
-                <div class="alertItemBody">{{ Alert.Body }}</div>
-                <div class="alertInfo">-{{Alert.CreatorName}}, 1 hour ago</div>
+                <div class="alertItemBody">{{Alert.Body}}</div>
+                <div class="alertInfo">-{{Alert.CreatorName}}, {{Alert.Age}}</div>
             </div>
         </li>
     </ul>
