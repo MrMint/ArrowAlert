@@ -8,7 +8,7 @@
     bottom: -190px;
     left: -240px;
     width: 550px;
-    opacity: .1;
+    opacity: .03;
 }
 
     .arrowLogo img {
@@ -90,11 +90,34 @@ input {
     border-style: solid;
     border-width: 25px 25px 0 0;
 }
-
+.alertLevelRectangle {
+    position: absolute;
+    top: -1px;
+    left: 0px;
+    width: 20px;
+    height: 56px;
+}
+.low {
+    /*border-color: #37e130 transparent transparent transparent;*/
+    background-color:#37e130;
+}
+.medium {
+    /*border-color: #dfe130 transparent transparent transparent;*/
+    background-color:#E8EB21;
+}
 .high {
-    border-color: #e13030 transparent transparent transparent;
+    /*border-color: #e17c30 transparent transparent transparent;*/
+    background-color:#FF8F00;
+    
+}
+.extreme {
+    /*border-color: #e13030 transparent transparent transparent;*/
+    background-color:#e13030;
 }
 
+.viewed {
+    opacity:.4;
+}
 
 .topcoat-list__item {
     padding: 0rem;
@@ -113,14 +136,16 @@ input {
     overflow: hidden;
     height: 40px;
     padding-top: 10px;
+    padding-left:20px;
 }
 
 .alertInfo {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 2px;
+    right: 2px;
     color: #808080;
     font-size: 13px;
+    line-height:13px;
 }
 /*Settings screen*/
 

@@ -4,8 +4,8 @@
     <description>
        Alert application for The Arrow Project.
     </description>
-    <author email="mr.mint89@gmail.com" href="http://phonegap.com">
-        Jared Prather
+    <author email="mr.mint89@gmail.com" href="www.arrowproject.net">
+        The Arrow Project
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
