@@ -22,6 +22,16 @@
     });
 });
 
+//A directive that binds dom elements to hammer events
+AlertApp.directive('bindHammerAlert', function () {
+    return {
+        link: function (scope, element, attrs, ctrl) {
+            //Bind alert to hammer
+            bindHammerAlert(element);
+        }
+    };
+});
+
 function MainCtrl($scope, $location, $rootScope, $http) {
     //User specific UI elements and page title
     $scope.userPicture = "https://image.eveonline.com/Character/1_64.jpg";
@@ -304,6 +314,7 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
     $scope.loading = true;
+    
     //Fetch recent objects from the backend (see models/Alert.js)
     //Parameter age requests all alerts within the last 24 hours
     $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
@@ -321,6 +332,8 @@ function HomeCtrl($scope, AlertRestangular, $location) {
 function AlertCtrl($scope, AlertRestangular) {
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "Alerts");
+   
+
     // This will be populated with Restangular
     $scope.Alerts = [];
     var alertsViewed = localStorage.getItem("viewedAlert");
@@ -345,7 +358,17 @@ function AlertCtrl($scope, AlertRestangular) {
     var Alerts = AlertRestangular.all('AlertInUser');
     $scope.loadAlerts();
 
-
+    //Handle dismiss alert event while on alert screen
+    $scope.$on("DISMISS_ALERT", function (event, index) {
+        //
+        var alert = $scope.Alerts[index];
+        alert.Dismissed = true;
+        //copy so setting data to null doesnt change ui
+        var dismissedAlert = AlertRestangular.copy(alert);
+        alertify.success("Alert Dismissed");
+        dismissedAlert.Alert = null;
+        dismissedAlert.put();
+    });
 
 };
 // Show a custom alert
