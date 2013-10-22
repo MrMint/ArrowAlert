@@ -2,11 +2,11 @@
     <div class="spinner" ng-show="loading"></div>
     <ul class="topcoat-list">
         <h3 class="topcoat-list__header">Recent Alerts</h3>
-        <li class="topcoat-list__item" ng-repeat="Alert in recentAlerts | orderBy: '-Date'">
-            <div class="alertItemContainer">
-                <div class="alertLevelRectangle {{displayAlertLevel(Alert.AlertLevel)}}"></div>
-                <div class="alertItemBody">{{Alert.Body}}</div>
-                <div class="alertInfo">-{{Alert.CreatorName}}, {{Alert.Age}}</div>
+        <li class="topcoat-list__item" ng-repeat="AlertContainer in recentAlerts | orderBy: '-Date'">
+            <div class="alertItemContainer" ng-show="AlertContainer.Dismissed">
+                <div class="alertLevelRectangle {{displayAlertLevel(AlertContainer.Alert.AlertLevel)}}"></div>
+                <div class="alertItemBody">{{AlertContainer.Alert.Body}}</div>
+                <div class="alertInfo">-{{AlertContainer.Alert.CreatorName}}, {{AlertContainer.Alert.Age}}</div>
             </div>
         </li>
     </ul>

@@ -190,12 +190,9 @@ function MainCtrl($scope, $location, $rootScope, $http) {
         }
     }
 
-    $scope.viewedAlert = function (alertId) {
-        var viewedAlertId = localStorage.getItem('oldViewedAlert');
-        if (viewedAlertId != null) {
-            if (alertId <= viewedAlertId) {
-                return "viewed";
-            }
+    $scope.viewedAlert = function (dismissed) {
+        if (dismissed) {
+            return "viewed";
         }
     }
 }
@@ -309,13 +306,13 @@ function HomeCtrl($scope, AlertRestangular, $location) {
     $scope.loading = true;
     //Fetch recent objects from the backend (see models/Alert.js)
     //Parameter age requests all alerts within the last 24 hours
-    $scope.recentAlerts = AlertRestangular.all('Alerts').getList({ age: '24' });
+    $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
     $scope.loading = false;
 
 
     //Handle alert received event while on homescreen
     $scope.$on("ALERT_RECEIVED", function (event, count) {
-        $scope.recentAlerts = AlertRestangular.all('Alerts').getList({ age: '24' });
+        $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
         debugNote('EVENT: Alert_received event received on homepage');
     });
 
@@ -345,7 +342,7 @@ function AlertCtrl($scope, AlertRestangular) {
     };
 
     // Fetch all objects from the backend (see models/Alert.js)
-    var Alerts = AlertRestangular.all('Alerts');
+    var Alerts = AlertRestangular.all('AlertInUser');
     $scope.loadAlerts();
 
 
