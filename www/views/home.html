@@ -4,7 +4,7 @@
         <h3 class="topcoat-list__header">Recent Alerts</h3>
         <li class="topcoat-list__item" ng-repeat="Alert in recentAlerts | orderBy: '-Date'">
             <div class="alertItemContainer">
-                <div class="topLeftTriangle high"></div>
+                <div class="alertLevelRectangle {{displayAlertLevel(Alert.AlertLevel)}}"></div>
                 <div class="alertItemBody">{{Alert.Body}}</div>
                 <div class="alertInfo">-{{Alert.CreatorName}}, {{Alert.Age}}</div>
             </div>
