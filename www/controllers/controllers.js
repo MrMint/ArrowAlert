@@ -173,12 +173,12 @@ function MainCtrl($scope, $location, $rootScope, $http) {
                 error(function (data, status, headers, config) {
                     if (status == '401') {
                         //User failed to authorize
-                        showAlert("Authorization Error", "Invalid Key");
+                        mintNotify.error("Authorization Error: Invalid Key");
                         $location.path('/Settings');
                     }
                     else {
                         //Was some type of network error
-                        showAlert("Network Error", "Status: " + status);
+                        mintNotify.error('Network Error, Status: ' + status);
                     }
                 });
         }
@@ -237,7 +237,7 @@ function LoginCtrl($scope, $http, $location) {
                 }
                 else {
                     //was some type of network error
-                    showalert("network error", "status: " + status);
+                    mintNotify.error('Network error: ' + status);
                 }
             });
     }
@@ -278,15 +278,15 @@ function SettingsCtrl($scope, $http, $location) {
 
              if (result.cancelled == true) {
                  //Scan was canceled
-                 showAlert('QR Scan Error', 'Scan Canceled!');
+                 mintNotify.error('QR scan error, Scan Canceled!');
              }
              else if (result.format != 'QR_CODE') {
                  //A QR code was not scanned
-                 showAlert('QR Scan Error', 'Not a QR code!');
+                 mintNotify.error('QR scan error, Not a QR code!');
              }
              else if (result.text.length != 64) {
                  //Captured string is not valid
-                 showAlert('QR Scan Error', 'Not a valid auth key!');
+                 mintNotify.error('QR scan error, Not a valid auth key!');
              }
              else {
                  debugNote('QRSCANNER: Successfully scanned QR auth key');
@@ -299,7 +299,7 @@ function SettingsCtrl($scope, $http, $location) {
              }
          },
          function (error) {
-             showAlert('QR Scan Error', 'Scan failed: ' + error);
+             mintNotify.error("QR Scan failed: " + error);
          }
       )
     };
@@ -361,14 +361,18 @@ function AlertCtrl($scope, AlertRestangular) {
 
     //Handle dismiss alert event while on alert screen
     $scope.$on("DISMISS_ALERT", function (event, index) {
-        //
+        //Get alerts
         var alert = $scope.Alerts[index];
-        alert.Dismissed = true;
-        mintNotify.success("Alert dismissed");
-        //copy so setting data to null doesnt change ui
-        var dismissedAlert = AlertRestangular.copy(alert);s
-        dismissedAlert.Alert = null;
-        dismissedAlert.put();
+        if (!alert.dismissed) {
+            //Set as dismissed
+            alert.Dismissed = true;
+            mintNotify.success("Alert dismissed");
+            //Make a copy to send to server so ui doesnt get null'd out
+            var dismissedAlert = AlertRestangular.copy(alert); s
+            dismissedAlert.Alert = null;
+            //Send to ArrowManager
+            dismissedAlert.put();
+        }
     });
 
 };

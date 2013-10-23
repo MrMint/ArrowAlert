@@ -1,6 +1,6 @@
-platforms/*
-
-
+*/bin/*
+*/gen/*
+*/assets/*
 
 ##Ignore anything created by visual studio
 ## Ignore Visual Studio temporary files, build results, and
