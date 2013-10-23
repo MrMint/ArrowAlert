@@ -364,8 +364,7 @@ function AlertCtrl($scope, AlertRestangular) {
         var alert = $scope.Alerts[index];
         alert.Dismissed = true;
         //copy so setting data to null doesnt change ui
-        var dismissedAlert = AlertRestangular.copy(alert);
-        alertify.success("Alert Dismissed");
+        var dismissedAlert = AlertRestangular.copy(alert);s
         dismissedAlert.Alert = null;
         dismissedAlert.put();
     });
