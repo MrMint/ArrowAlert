@@ -76,7 +76,7 @@ function hideBar(notificationType) {
 //Function that runs the que of functions
 function mintNotifyrun() {
 	//Call the initial function if not running
-	if (!mintNotifyShowing()) {
+    if (!mintNotifyShowing() && mintNotifyQue.length > 0) {
 		(mintNotifyQue.shift())();
 	}
 }

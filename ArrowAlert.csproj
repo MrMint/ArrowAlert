@@ -924,6 +924,7 @@
     <Content Include="www\vendor\hammerjs\hammer.min.js" />
     <Content Include="www\vendor\hammerjs\jquery.hammer.js" />
     <Content Include="www\vendor\hammerjs\jquery.hammer.min.js" />
+    <Content Include="www\vendor\MintNotify\css\MintNotify.css" />
     <Content Include="www\vendor\topcoat\css\main.css" />
     <Content Include="www\vendor\topcoat\css\topcoat-mobile-dark.css" />
     <Content Include="www\vendor\topcoat\css\topcoat-mobile-light.css" />
@@ -979,6 +980,7 @@
       <DependentUpon>NotificationBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="plugins\org.apache.cordova.vibration\src\wp\Vibration.cs" />
+    <Content Include="www\vendor\MintNotify\js\MintNotify.js" />
     <Content Include="www\vendor\Animate\animate.css" />
   </ItemGroup>
   <ItemGroup>
