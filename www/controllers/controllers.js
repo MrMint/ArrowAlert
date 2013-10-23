@@ -99,6 +99,7 @@ function MainCtrl($scope, $location, $rootScope, $http) {
             $scope.registerForPushNotifications(0);
             //Save expectedRegId to storage
             localStorage.setItem('expectedRegId', expectedRegId);
+            mintNotify.success("Successfully Authenticated");
         }
         else {
             //User is no longer authenticated, reset user specific UI
@@ -363,6 +364,7 @@ function AlertCtrl($scope, AlertRestangular) {
         //
         var alert = $scope.Alerts[index];
         alert.Dismissed = true;
+        mintNotify.success("Alert dismissed");
         //copy so setting data to null doesnt change ui
         var dismissedAlert = AlertRestangular.copy(alert);s
         dismissedAlert.Alert = null;

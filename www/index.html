@@ -19,7 +19,9 @@
     <!-- Application -->
     <link rel="stylesheet" href="css/application.css" />
     <link rel="stylesheet" href="css/navigation.css" />
-
+    <!-- Notifications -->
+    <link rel="stylesheet" href="vendor/MintNotify/css/MintNotify.css" />
+    
 </head>
 <body id="main" ng-controller="MainCtrl as main">
 
@@ -73,11 +75,16 @@
             <div id="content" class="max-width">
                 <!-- Content -->
                 <div ng-view class="view-example"></div>
+                <button onclick="mintNotify.success('Great Success!')">success</button>
+                <button onclick="mintNotify.info('Info!')">success</button>
+                <button onclick="mintNotify.warning('warning!')">success</button>
+                <button onclick="mintNotify.error('Great error!')">success</button>
                 <!-- Debug Log -->
                 <ol id="debug"ng-show="debug">
                     <li>--------------------------Debug Log--------------------------</li>
                 </ol>
             </div>
+            <div id="mintNotifyBar" class=""> tes</div>
             <footer>
             </footer>
         </div>
@@ -104,6 +111,9 @@
     <script type="text/javascript" src="vendor/angular-hammer/angular-hammer.js"></script>
     <script type="text/javascript" src="vendor/topcoat/js/main.js"></script>
     <script type="text/javascript" src="js/input.js"></script>
+
+    <!-- Notifications -->
+    <script type="text/javascript" src="vendor/MintNotify/js/MintNotify.js"></script>
 
     <script type="text/javascript">
         app.initialize();
