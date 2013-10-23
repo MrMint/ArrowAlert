@@ -1,6 +1,6 @@
-*/bin/*
-*/gen/*
-*/assets/*
+platforms/android/bin
+platforms/android/gen
+platforms/android/assets
 
 ##Ignore anything created by visual studio
 ## Ignore Visual Studio temporary files, build results, and
