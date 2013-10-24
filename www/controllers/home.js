@@ -7,6 +7,7 @@
     //Fetch recent objects from the backend (see models/Alert.js)
     //Parameter age requests all alerts within the last 24 hours
     $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
+    $scope.newAlerts = [];
     $scope.loading = false;
 
 

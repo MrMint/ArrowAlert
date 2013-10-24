@@ -1,6 +1,21 @@
 ﻿<div style="text-align: center;">
     <div class="spinner" ng-show="loading"></div>
-    <ul class="topcoat-list">
+     <!-- New Alerts -->
+    <div ng-show="newAlerts.length == 0">No New Alerts</div>
+    <ul class="topcoat-list" ng-show="newAlerts.length > 0">
+        <h3 class="topcoat-list__header">New Alerts</h3>
+        <li class="topcoat-list__item" ng-repeat="AlertContainer in newAlerts | orderBy: '-Date'">
+            <div class="alertItemContainer" ng-show="AlertContainer.Dismissed">
+                <div class="alertLevelRectangle {{displayAlertLevel(AlertContainer.Alert.AlertLevel)}}"></div>
+                <div class="alertItemBody">{{AlertContainer.Alert.Body}}</div>
+                <div class="alertInfo">-{{AlertContainer.Alert.CreatorName}}, {{AlertContainer.Alert.Age}}</div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Recent Alerts -->
+    <div ng-show="recentAlerts.length == 0">No Recent Alerts</div>
+    <ul class="topcoat-list" ng-show="recentAlerts.length > 0">
         <h3 class="topcoat-list__header">Recent Alerts</h3>
         <li class="topcoat-list__item" ng-repeat="AlertContainer in recentAlerts | orderBy: '-Date'">
             <div class="alertItemContainer" ng-show="AlertContainer.Dismissed">
