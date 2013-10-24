@@ -176,6 +176,7 @@
     <Content Include="www\controllers\login.js" />
     <Content Include="www\controllers\main.js" />
     <Content Include="www\controllers\settings.js" />
+    <Content Include="www\js\arrowAlert.js" />
     <Content Include="www\js\input.js" />
     <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.eot" />
     <Content Include="www\vendor\fontawesome\font\fontawesome-webfont.ttf" />
@@ -867,7 +868,6 @@
     <Content Include="www\icon.png" />
     <Content Include="www\img\logo.png" />
     <Content Include="www\js\application.js" />
-    <Content Include="www\js\console.log.android.js" />
     <Content Include="www\js\console.log.js" />
     <Content Include="www\js\index.js" />
     <Content Include="www\js\onerror.js" />

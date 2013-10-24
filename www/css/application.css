@@ -80,6 +80,15 @@ input {
     -webkit-animation-timing-function: linear;
 }
 
+/*Home Screen css*/
+
+.noAlerts {
+    margin-top:20px;
+    color:#fff;
+
+}
+
+
 /*Alert screen css*/
 .topLeftTriangle {
     position: absolute;

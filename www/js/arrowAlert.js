@@ -28,7 +28,7 @@ AlertApp.directive('bindHammerAlert', function () {
     return {
         link: function (scope, element, attrs, ctrl) {
             //Bind alert to hammer
-            bindHammerAlert(element);
+            bindHammerAlert(element[0]);
         }
     };
 });
