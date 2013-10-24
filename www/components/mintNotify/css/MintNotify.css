@@ -8,16 +8,16 @@
     z-index: 20;
     text-align: center;
     padding-top: 10px;
-    transition: all 0.2s ease-out, background-color .00001s linear;
-    -webkit-transition: all 0.2s ease-out, background-color .00001s linear;
+    transition: all 0.2s ease-out, background-color 0s linear;
+    -webkit-transition: all 0.2s ease-out, background-color 0s linear;
 }
 
 /*Translate bar using css*/
 .showMintBar {
     transform: translate3d(0, -35px, 0);
-    transition: all .09s ease-in-out, background-color .00001s linear;
+    transition: all .09s ease-in-out, background-color 0s linear;
     -webkit-transform: translate3d(0, -35px, 0);
-    -webkit-transition: all .09s ease-in-out, background-color .00001s linear;
+    -webkit-transition: all .09s ease-in-out, background-color 0s linear;
 }
 
 /*Success style*/

@@ -62,8 +62,14 @@
 
             //Dismiss alert
             alert.Dismissed = true;
-            setTimeout(function () { $scope.$apply(function () {$scope.newAlerts.splice(index, 1) })}, 650);
-            mintNotify.success("Alert dismissed");
+            setTimeout(function () 
+            { 
+                $scope.$apply(function () {
+                    $scope.newAlerts.splice(index, 1);
+                    mintNotify.success("Alert dismissed");
+                })
+            }, 650);
+            
 
             //Make a copy to send to server so ui doesnt get null'd out
             var dismissedAlert = AlertRestangular.copy(alert);

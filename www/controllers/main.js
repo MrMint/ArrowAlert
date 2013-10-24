@@ -122,6 +122,14 @@
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
         var expectedRegId = localStorage.getItem('expectedRegId');
+        var platform;
+        //Get platform
+        if(device.platform == 'android' || device.platform == 'Android'){
+            platform = "Android";
+        }
+        else{
+            platform = "Ios";
+        }
         //Check if regId is new
         if (regId != expectedRegId) {
             debugNote('API: Sending registrationID to ArrowManager');
@@ -129,7 +137,7 @@
                 method: "POST",
                 url: "https://arrowmanager.net/api/ArrowAlertApp/",
                 headers: { "Authorization": authKey, "Content-type": "application/json" },
-                data: { "regId": regId }
+                data: { "regId": regId, "platform": platform }
             }).
                 success(function (data, status, headers, config) {
                     //RegId was successfully updated on the server
