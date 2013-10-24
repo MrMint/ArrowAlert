@@ -21,7 +21,7 @@ function bindHammerIndex() {
 //Called by the bind-hammer-alert directive
 function bindHammerAlert(element) {
     //Binds swiperight to alert element
-    Hammer(element[0]).on("swiperight", function (event) {
+    Hammer(element).on("swiperight", function (event) {
         //Get elements index
         var index = event.currentTarget.getElementsByClassName('index')[0].innerHTML;
         //Broadcast dismiss alert

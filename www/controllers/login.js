@@ -2,6 +2,7 @@
 function LoginCtrl($scope, $http, $location) {
     $scope.loading = true;
     $scope.$emit("PAGE_TITLE_CHANGE", "Authenticating...");
+    pullToRefreshEnabled = false;
     //Retrieve current Authorization Key from local storage
     var authKey = localStorage.getItem("authKey");
 
@@ -24,6 +25,7 @@ function LoginCtrl($scope, $http, $location) {
                 if (status == '401') {
                     //user failed to authorize
                     //showAlert("authorization error", "invalid key");
+                    mintNotify.error('Invalid auth key!');
                     $location.path('/Settings');
                 }
                 else {

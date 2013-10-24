@@ -1,5 +1,5 @@
 ﻿//Initializes the ArrowAlert application
-var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel', 'hmTouchevents'], function ($routeProvider, $locationProvider) {
+var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel'], function ($routeProvider, $locationProvider) {
 
     //configure custom routing
     $routeProvider.when('/Home', {
@@ -28,7 +28,7 @@ AlertApp.directive('bindHammerAlert', function () {
     return {
         link: function (scope, element, attrs, ctrl) {
             //Bind alert to hammer
-            bindHammerAlert(element);
+            bindHammerAlert(element[0]);
         }
     };
 });

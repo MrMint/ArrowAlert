@@ -35,8 +35,14 @@
     $scope.$on("ALERT_RECEIVED", function (event, count) {
         $scope.newAlerts += count;
         debugNote('EVENT: Alert_received event received: ' + count);
+        mintNotify.success('Alert Received!');
     });
 
+    //Handle sent new alerts event
+    $scope.$on("SET_NEW_ALERTS", function (event, count) {
+        $scope.newAlerts = count;
+        debugNote('EVENT: Set_new_alerts event received: ' + count);
+    });
     //Handle alert received event
     $scope.$on("DEVICE_READY", function (event) {
         $scope.deviceReady = true;
@@ -122,6 +128,14 @@
         var authKey = localStorage.getItem("authKey");
         var regId = localStorage.getItem("regId")
         var expectedRegId = localStorage.getItem('expectedRegId');
+        var platform;
+        //Get platform
+        if(device.platform == 'android' || device.platform == 'Android'){
+            platform = "Android";
+        }
+        else{
+            platform = "Ios";
+        }
         //Check if regId is new
         if (regId != expectedRegId) {
             debugNote('API: Sending registrationID to ArrowManager');
@@ -129,7 +143,7 @@
                 method: "POST",
                 url: "https://arrowmanager.net/api/ArrowAlertApp/",
                 headers: { "Authorization": authKey, "Content-type": "application/json" },
-                data: { "regId": regId }
+                data: { "regId": regId, "platform": platform }
             }).
                 success(function (data, status, headers, config) {
                     //RegId was successfully updated on the server
@@ -171,5 +185,11 @@
         if (dismissed) {
             return "viewed";
         }
+    }
+
+    //Handles pull to refresh
+    $scope.pullRefresh = function () {
+        $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
+        return;
     }
 }

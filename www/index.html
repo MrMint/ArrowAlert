@@ -19,14 +19,20 @@
     <!-- Application -->
     <link rel="stylesheet" href="css/application.css" />
     <link rel="stylesheet" href="css/navigation.css" />
+
     <!-- Notifications -->
-    <link rel="stylesheet" href="vendor/MintNotify/css/MintNotify.css" />
-    
+    <link rel="stylesheet" href="components/mintNotify/css/MintNotify.css" />
+
+    <!-- Pull to Refresh -->
+    <link rel="stylesheet" href="components/mintPullRefresh/css/mintPullRefresh.css" />
+
 </head>
 <body id="main" ng-controller="MainCtrl as main">
 
     <div id="wrapper">
         <div class="max-width">
+            <!-- Pull to Refresh -->
+            <div id="pullToRefresh"><i class="fa fa-long-arrow-down"></i></div>
             <!-- Navigation -->
             <div id="sideNav">
                 <div id="pageNav">
@@ -36,17 +42,17 @@
                                 <div class="userDisplayPicture">
                                     <img src="{{userPicture}}" />
                                 </div>
-                                <div class="userDisplayName">{{userName}} </div>
+                                <div class="userDisplayName">{{userName}}</div>
                             </div>
                         </li>
                         <li ng-show="!authenticated">
                             <div class="navItem"><i class="icon-android"></i><a href="#/Login">Login</a></div>
                         </li>
                         <li ng-show="authenticated">
-                            <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a></div>
+                            <div class="navItem"><i class="icon-home"></i><a href="#/Home">Home</a><span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
                         </li>
                         <li ng-show="authenticated">
-                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a>  <span class="topcoat-notification navNotification" ng-show="newAlerts != 0">{{newAlerts}}</span></div>
+                            <div class="navItem"><i class="icon-warning-sign"></i><a href="#/Alerts">Alert History</a></div>
                         </li>
                         <li>
                             <div class="navItem"><i class="icon-cogs"></i><a href="#/Settings">Settings</a></div>
@@ -56,26 +62,34 @@
                         </li>
                     </ul>
                 </div>
-                 <div class="arrowLogo" style="z-index:1;"><img src="img/navLogo.png"/></div>
+                <div class="arrowLogo" style="z-index: 1;">
+                    <img src="img/navLogo.png" />
+                </div>
             </div>
         </div>
         <!-- End Navigation -->
 
         <div id="site">
+
+            <!-- Pull to Refresh -->
+            <div id="mintPullRefreshQue"></div>
+            <div id="mintPullInfo">
+                <span>Pull down to refresh</span>
+            </div>
+            <!-- Page Header -->
             <header id="main-header">
                 <div class="max-width">
                     <hgroup>
                         <h1>{{pageTitle}}</h1>
                     </hgroup>
                     <a id="slide-menu-button" class="topcoat-icon-button--large--quiet"><span class="topcoat-icon--large topcoat-icon--menu-stack"></span></a>
-                    <!--<span class="topcoat-notification topNotification" ng-show="newAlerts != 0">{{newAlerts}}</span>-->
                 </div>
             </header>
             <div id="content" class="max-width">
                 <!-- Content -->
-                <div ng-view class="view-example"></div>
+                <div ng-view></div>
                 <!-- Debug Log -->
-                <ol id="debug"ng-show="debug">
+                <ol id="debug" ng-show="debug">
                     <li>--------------------------Debug Log--------------------------</li>
                 </ol>
             </div>
@@ -116,7 +130,10 @@
     <script type="text/javascript" src="js/input.js"></script>
 
     <!-- Notifications -->
-    <script type="text/javascript" src="vendor/MintNotify/js/MintNotify.js"></script>
+    <script type="text/javascript" src="components/mintNotify/js/MintNotify.js"></script>
+
+    <!-- Pull to Refresh -->
+    <script type="text/javascript" src="components/mintPullRefresh/js/mintPullRefresh.js"></script>
 
     <!-- Debug -->
     <script type="text/javascript" src="js/onerror.js"></script>
@@ -124,6 +141,7 @@
     <script type="text/javascript">
         app.initialize();
         bindHammerIndex();
+        mintNotify.displayTime = 1500;
     </script>
 </body>
 </html>

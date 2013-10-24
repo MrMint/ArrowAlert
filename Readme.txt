@@ -2,7 +2,7 @@ ArrowAlert is a HTML5 based mobile application that uses phonegap/cordova for na
 The app uses an MVC design powered by angularjs, and a REST api to obtain data.
 
 CODE:
-	www/controllers/controllers.js 	- The controller logic
+	www/controllers/ 				- The controllers
 	www/js/index.html				- The notification hooks/initialization
 	www/index.html					- The layout html
 	www/views/						- Partial html views
