@@ -1,8 +1,39 @@
 #mintPullRefreshQue {
-    height:64px;
-    position:absolute;
-    top:0px;
-    background-color:#4cff00;
-    left:50%;
-    right:50%;
+    height: 49px;
+    position: absolute;
+    top: 0px;
+    background-color: #4cff00;
+    left: 50%;
+    right: 50%;
 }
+
+#mintPullInfo {
+    opacity:0;
+    background-color:#288edf;
+    position: absolute;
+    width: 100%;
+    top: -44px;
+    left: 0px;
+    height: 44px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 40px;
+    /*letter-spacing: -.065em;*/
+    line-height: 1.1em;
+    color: #fff;
+    z-index: 12;
+     transition: transform .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+}
+
+#mintPullInfo.showPullInfo {
+    opacity:1;
+    transform: translate3d(0, 44px, 0);
+    transition: transform .2s ease-in;
+    -webkit-transform: translate3d(0, 44px, 0);
+    -webkit-transition: -webkit-transform .1s ease-in, opacity .15s ease-in;
+}
+/*#mintPullRefreshQue.i {
+        position: absolute;
+    }*/

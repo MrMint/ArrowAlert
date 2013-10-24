@@ -62,15 +62,23 @@
                         </li>
                     </ul>
                 </div>
-                 <div class="arrowLogo" style="z-index:1;"><img src="img/navLogo.png"/></div>
+                <div class="arrowLogo" style="z-index: 1;">
+                    <img src="img/navLogo.png" />
+                </div>
             </div>
         </div>
         <!-- End Navigation -->
 
         <div id="site">
-            <!-- Pull to Refresh -->
-            <div id="mintPullRefreshQue"> Pull to Refresh<i class="fa fa-long-arrow-down"></i></div>
 
+            <!-- Pull to Refresh -->
+            <div id="mintPullRefreshQue"></div>
+            <div id="mintPullInfo">
+                <i class="icon-long-arrow-down"></i>
+                <span>Pull to Refresh</span>
+                <i class="icon-long-arrow-down"></i>
+            </div>
+            <!-- Page Header -->
             <header id="main-header">
                 <div class="max-width">
                     <hgroup>
@@ -84,7 +92,7 @@
                 <!-- Content -->
                 <div ng-view pull-to-refresh="pullRefresh()"></div>
                 <!-- Debug Log -->
-                <ol id="debug"ng-show="debug">
+                <ol id="debug" ng-show="debug">
                     <li>--------------------------Debug Log--------------------------</li>
                 </ol>
             </div>

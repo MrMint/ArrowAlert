@@ -1,5 +1,6 @@
 ﻿function SettingsCtrl($scope, $http, $location) {
     $scope.$emit("PAGE_TITLE_CHANGE", "Settings");
+    pullToRefreshEnabled = false;
     bindHammerSettings();
     //Check if they have a key in storage, UI changes based on it
     $scope.placeHolder = "Copy your key here";
