@@ -25,6 +25,7 @@ function LoginCtrl($scope, $http, $location) {
                 if (status == '401') {
                     //user failed to authorize
                     //showAlert("authorization error", "invalid key");
+                    mintNotify.error('Invalid auth key!');
                     $location.path('/Settings');
                 }
                 else {

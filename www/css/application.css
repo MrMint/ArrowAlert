@@ -191,6 +191,9 @@ input {
     color: #fff;
 }
 
+.textNormalGrey {
+color:#D8D8D8;
+}
 /*--------DEBUG-------*/
 #debug {
     overflow: hidden;

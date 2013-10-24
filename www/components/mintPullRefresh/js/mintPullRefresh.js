@@ -2,7 +2,7 @@
 var pullingToRefreshSuccess = false;
 var showingTooltip = false;
 var mintPullInfoTooltip = document.getElementById('mintPullInfo');
-
+var activationDeltaY = window.innerHeight / 3;
 var pullToRefreshEnabled = false;
 
 //Gives user visual feedback on percent needed to pull
@@ -26,9 +26,9 @@ Hammer(document.getElementById('content')).on("drag", function (event) {
                         showTooltip();
                     }
 
-                    displayPullingQue(event.gesture.deltaY / 200);
-                    //If user pulls 200px down, send refresh command
-                    if (event.gesture.deltaY >= 200) {
+                    displayPullingQue(event.gesture.deltaY / activationDeltaY);
+                    //If user pulls activationDeltaY down, send refresh command
+                    if (event.gesture.deltaY >= activationDeltaY) {
                         pullingToRefreshSuccess = true;
                         mintNotify.success("Refreshing!");
                         displayPullingQue(0);

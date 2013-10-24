@@ -35,6 +35,7 @@
     $scope.$on("ALERT_RECEIVED", function (event, count) {
         $scope.newAlerts += count;
         debugNote('EVENT: Alert_received event received: ' + count);
+        mintNotify.success('Alert Received!');
     });
 
     //Handle sent new alerts event
