@@ -15,11 +15,11 @@
     </ul>
 
     <!-- Recent Alerts -->
-    <div class="noAlerts" ng-show="recentAlerts.length == 0">No Recent Alerts</div>
-    <ul class="topcoat-list" ng-show="recentAlerts.length > 0">
+    <div class="noAlerts" ng-show="recentAlerts.length == 0 && newAlerts.length == 0">No Recent Alerts</div>
+    <ul class="topcoat-list" style="margin-top:20px;" ng-show="recentAlerts.length > 0">
         <h3 class="topcoat-list__header">Recent Alerts</h3>
         <li class="topcoat-list__item" ng-repeat="recentAlertContainer in recentAlerts | orderBy: '-Date'">
-            <div class="alertItemContainer" ng-show="!recentAlertContainer.Dismissed">
+            <div class="alertItemContainer">
                 <div class="alertLevelRectangle {{displayAlertLevel(recentAlertContainer.Alert.AlertLevel)}} {{viewedAlert(recentAlertContainer.Dismissed)}}"></div>
                 <div class="alertItemBody">{{recentAlertContainer.Alert.Body}}</div>
                 <div class="alertInfo">-{{recentAlertContainer.Alert.CreatorName}}, {{recentAlertContainer.Alert.Age}}</div>

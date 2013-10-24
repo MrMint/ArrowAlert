@@ -42,7 +42,7 @@
 
         // Fetch all objects from the backend (see models/Alert.js)
         //Parameter age requests all alerts within the last 24 hours
-        AlertRestangular.all('AlertInUser').getList({ age: '24' }).then(function (data) {
+        AlertRestangular.all('AlertInUser').getList({ age: '24',dismissed: 'true' }).then(function (data) {
             $scope.loadingRecent = false;
             $scope.recentAlerts = data;
             debugNote('API: Alerts Received, count: ' + data.length);
@@ -76,7 +76,11 @@
             dismissedAlert.Alert = null;
 
             //Send to ArrowManager
-            dismissedAlert.put();
+            dismissedAlert.put().then(function () {
+                $scope.loadRecentAlerts();
+            });
+
+            
         }
     });
 }
