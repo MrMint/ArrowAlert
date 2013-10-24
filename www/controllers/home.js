@@ -1,4 +1,5 @@
 ﻿function HomeCtrl($scope, AlertRestangular, $location) {
+    pullToRefreshEnabled = true;
     $scope.authenticateUser();
     $scope.$emit("PAGE_TITLE_CHANGE", "ArrowAlert");
     $scope.loading = true;
@@ -14,5 +15,12 @@
         $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
         debugNote('EVENT: Alert_received event received on homepage');
     });
-
+    
+    //Handle alert received event while on homescreen
+    $scope.$on("PULL_REFRESH", function (event) {
+        $scope.loading = true;
+        $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
+        $scope.loading = false;
+        debugNote('EVENT: Pull_refresh event received on homepage');
+    });
 }

@@ -172,4 +172,10 @@
             return "viewed";
         }
     }
+
+    //Handles pull to refresh
+    $scope.pullRefresh = function () {
+        $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
+        return;
+    }
 }
