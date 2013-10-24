@@ -31,4 +31,11 @@ function AlertCtrl($scope, AlertRestangular) {
 	    // Fetch all objects from the backend (see models/Alert.js)
 	    $scope.loadAlerts();
 	});
+
+    //Handle alert received event
+	$scope.$on("ALERT_RECEIVED", function (event, count) {
+	    debugNote('EVENT: Alert_received event received on alert history page, refreshing');
+	    //Refresh Alerts
+	    $scope.loadAlerts();
+	});
 };
