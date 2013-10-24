@@ -1,5 +1,5 @@
 ﻿//Initializes the ArrowAlert application
-var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel', 'mgcrea.pullToRefresh'], function ($routeProvider, $locationProvider) {
+var AlertApp = angular.module('AlertApp', ['ngRoute', 'AlertModel'], function ($routeProvider, $locationProvider) {
 
     //configure custom routing
     $routeProvider.when('/Home', {

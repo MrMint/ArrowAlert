@@ -24,13 +24,15 @@
     <link rel="stylesheet" href="components/mintNotify/css/MintNotify.css" />
 
     <!-- Pull to Refresh -->
-    <link rel="stylesheet" href="components/pullToRefresh/css/pull-to-refresh.min.css" />
+    <link rel="stylesheet" href="components/mintPullRefresh/css/mintPullRefresh.css" />
 
 </head>
 <body id="main" ng-controller="MainCtrl as main">
 
     <div id="wrapper">
         <div class="max-width">
+            <!-- Pull to Refresh -->
+            <div id="pullToRefresh"><i class="fa fa-long-arrow-down"></i></div>
             <!-- Navigation -->
             <div id="sideNav">
                 <div id="pageNav">
@@ -66,6 +68,9 @@
         <!-- End Navigation -->
 
         <div id="site">
+            <!-- Pull to Refresh -->
+            <div id="mintPullRefreshQue"> Pull to Refresh<i class="fa fa-long-arrow-down"></i></div>
+
             <header id="main-header">
                 <div class="max-width">
                     <hgroup>
@@ -77,7 +82,7 @@
             </header>
             <div id="content" class="max-width">
                 <!-- Content -->
-                <div ng-view class="view-example"></div>
+                <div ng-view pull-to-refresh="pullRefresh()"></div>
                 <!-- Debug Log -->
                 <ol id="debug"ng-show="debug">
                     <li>--------------------------Debug Log--------------------------</li>
@@ -123,7 +128,7 @@
     <script type="text/javascript" src="components/mintNotify/js/MintNotify.js"></script>
 
     <!-- Pull to Refresh -->
-    <script type="text/javascript" src="components/pullToRefresh/js/pull-to-refresh.min.js"></script>
+    <script type="text/javascript" src="components/mintPullRefresh/js/mintPullRefresh.js"></script>
 
     <!-- Debug -->
     <script type="text/javascript" src="js/onerror.js"></script>

@@ -15,4 +15,9 @@
         debugNote('EVENT: Alert_received event received on homepage');
     });
 
+    //Handles pull to refresh
+    $scope.pullRefresh = function () {
+        $scope.recentAlerts = AlertRestangular.all('AlertInUser').getList({ age: '24' });
+        return;
+    }
 }
