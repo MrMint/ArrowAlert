@@ -18,9 +18,9 @@
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
     /*letter-spacing: -.065em;*/
-    line-height: 1.1em;
+    line-height: 44px;
     color: #fff;
     z-index: 12;
      transition: transform .2s ease-out;
