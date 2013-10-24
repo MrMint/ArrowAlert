@@ -68,7 +68,7 @@ function registerForPushNotifications() {
 function onNotificationAPN(e) {
     if (e.alert) {
         debugNote('PUSHNOTIF: push-notification: ' + e.alert);
-        navigator.notification.alert(e.alert);
+        broadcastAngularEvent('ALERT_RECEIVED', 1);
     }
 
     if (e.sound) {

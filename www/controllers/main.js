@@ -37,6 +37,11 @@
         debugNote('EVENT: Alert_received event received: ' + count);
     });
 
+    //Handle sent new alerts event
+    $scope.$on("SET_NEW_ALERTS", function (event, count) {
+        $scope.newAlerts = count;
+        debugNote('EVENT: Set_new_alerts event received: ' + count);
+    });
     //Handle alert received event
     $scope.$on("DEVICE_READY", function (event) {
         $scope.deviceReady = true;

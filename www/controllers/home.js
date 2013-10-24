@@ -21,7 +21,7 @@
         debugNote('EVENT: Pull_refresh event received on homepage');
     });
 
-    // Helper function for loading Alert data with spinner
+    // Helper function for loading new Alerts with spinner
     $scope.loadNewAlerts = function () {
         $scope.loadingNew = true;
         debugNote('API: Requesting new alerts from ArrowManager');
@@ -31,7 +31,8 @@
         AlertRestangular.all('AlertInUser').getList({ dismissed: 'false' }).then(function (data) {
             $scope.loadingNew = false;
             $scope.newAlerts = data;
-            debugNote('API: Alerts Received, count: ' + data.length);
+            $scope.$emit("SET_NEW_ALERTS", data.length);
+            debugNote('API: New Alerts Received, count: ' + data.length);
         });
     };
 
@@ -45,7 +46,7 @@
         AlertRestangular.all('AlertInUser').getList({ age: '24',dismissed: 'true' }).then(function (data) {
             $scope.loadingRecent = false;
             $scope.recentAlerts = data;
-            debugNote('API: Alerts Received, count: ' + data.length);
+            debugNote('API: Recent alerts Received, count: ' + data.length);
         });
     };
 
@@ -77,10 +78,18 @@
 
             //Send to ArrowManager
             dismissedAlert.put().then(function () {
+                $scope.$emit("ALERT_RECEIVED", -1);
                 $scope.loadRecentAlerts();
             });
 
             
         }
+    });
+
+    //Handle alert received event
+    $scope.$on("ALERT_RECEIVED", function (event, count) {
+        debugNote('EVENT: Alert_received event received on home page, refreshing');
+        //Refresh Alerts
+        $scope.loadNewAlerts();
     });
 }
