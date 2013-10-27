@@ -1,0 +1,15 @@
+<div class="spinner" ng-show="loading"></div>
+<div class="topcoat-list__container">
+
+    <ul class="topcoat-list" style="text-align: center;">
+        <h3 class="topcoat-list__header">Alerts</h3>
+        <!-- order is reversed created timestamp -->
+        <li class="topcoat-list__item" ng-repeat="AlertContainer in Alerts">
+            <div class="alertItemContainer">
+                <div class="alertLevelRectangle {{displayAlertLevel(AlertContainer.Alert.AlertLevel)}} {{viewedAlert(AlertContainer.Dismissed)}}"></div>
+                <div class="alertItemBody">{{AlertContainer.Alert.Body}}</div>
+                <div class="alertInfo">-{{AlertContainer.Alert.CreatorName}}, {{AlertContainer.Alert.Age}}</div>
+            </div>
+        </li>
+    </ul>
+</div>
