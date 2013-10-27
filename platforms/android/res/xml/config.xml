@@ -26,9 +26,6 @@
     <feature name="Home">
         <param name="android-package" value="org.mrmint.home.Home" />
     </feature>
-    <feature name="BarcodeScanner">
-        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
-    </feature>
     <access origin="*" />
     <access origin="*" />
     <preference name="useBrowserHistory" value="true" />
@@ -47,4 +44,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+    <feature name="BarcodeScanner">
+        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
 </widget>

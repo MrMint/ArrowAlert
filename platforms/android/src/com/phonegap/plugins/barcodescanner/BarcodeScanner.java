@@ -107,7 +107,7 @@ public class BarcodeScanner extends CordovaPlugin {
      * Starts an intent to scan and decode a barcode.
      */
     public void scan() {
-        Intent intentScan = new Intent("com.dhaval.phonegap.plugins.barcodescanner.SCAN");
+        Intent intentScan = new Intent(SCAN_INTENT);
         intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 
         this.cordova.startActivityForResult((CordovaPlugin) this, intentScan, REQUEST_CODE);
