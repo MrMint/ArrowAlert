@@ -91,7 +91,7 @@
             });
         }
     }
-    setTimeout(function () { $scope.broadcastEventSafe('TEST_EVENT') }, 100);
+
     //Helper function that checks if the user has authenticated, 
     //and redirects to login if not
     $scope.authenticateUser = function () {
