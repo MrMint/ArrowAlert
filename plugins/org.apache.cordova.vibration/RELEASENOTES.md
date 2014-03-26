@@ -37,3 +37,20 @@
 ### 0.3.3 (Oct 9, 2013)
 * add missing android namespace
 * [CB-4915] Incremented plugin version on dev branch.
+
+### 0.3.4 (Oct 28, 2013)
+* add repo + issue tag to plugin.xml for vibration plugin
+* corrected plugin.xml to write properly to config.xml for ffos
+* [CB-5010] Incremented plugin version on dev branch.
+
+### 0.3.5 (Dec 4, 2013)
+* add ubuntu platform
+* Added amazon-fireos platform. Change to include amazon-fireos as a platform if the user agent string contains 'cordova-amazon-fireos'
+* CB-4747 Fixed Blackberry background vibrate
+
+### 0.3.6 (Jan 02, 2014)
+* CB-5658 Add doc/index.md for Vibration plugin
+
+### 0.3.7 (Feb 05, 2014)
+* Add support for Tizen.
+* CB-3206 - Supported platforms updated

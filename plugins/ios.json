@@ -1,1 +1,58 @@
-{"prepare_queue":{"installed":[],"uninstalled":[]},"config_munge":{"config.xml":{"/*":{"<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>":1,"<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>":1,"<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>":1,"<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>":1,"<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>":1}},"framework":{"libiconv.dylib":{"false":1},"AVFoundation.framework":{"false":1},"AssetsLibrary.framework":{"false":1},"CoreVideo.framework":{"false":1},"AudioToolbox.framework":{"true":2},"QuartzCore.framework":{"false":1}}},"installed_plugins":{"com.phonegap.plugins.PushPlugin":{"PACKAGE_NAME":"com.jaredprather.arrowalert"},"org.apache.cordova.device":{"PACKAGE_NAME":"com.jaredprather.arrowalert"},"org.apache.cordova.dialogs":{"PACKAGE_NAME":"com.jaredprather.arrowalert"},"org.apache.cordova.vibration":{"PACKAGE_NAME":"com.jaredprather.arrowalert"},"org.mrmint.home":{"PACKAGE_NAME":"com.jaredprather.arrowalert"},"com.phonegap.plugins.barcodescanner":{"PACKAGE_NAME":"com.jaredprather.arrowalert"}},"dependent_plugins":{}}
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "config.xml": {
+            "/*": {
+                "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>": 1,
+                "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>": 1,
+                "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>": 1,
+                "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>": 1
+            },
+            "plugins": {
+                "<plugin name=\"BarcodeScanner\" value=\"CDVBarcodeScanner\" />": 1
+            }
+        },
+        "framework": {
+            "libiconv.dylib": {
+                "false": 1
+            },
+            "AVFoundation.framework": {
+                "false": 1
+            },
+            "AssetsLibrary.framework": {
+                "false": 1
+            },
+            "CoreVideo.framework": {
+                "false": 1
+            },
+            "AudioToolbox.framework": {
+                "true": 2
+            },
+            "QuartzCore.framework": {}
+        }
+    },
+    "installed_plugins": {
+        "org.mrmint.home": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        },
+        "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        },
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        },
+        "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "com.jaredprather.arrowalert"
+        }
+    },
+    "dependent_plugins": {}
+}

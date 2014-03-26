@@ -167,6 +167,7 @@
     <Content Include="www\components\angular\12rc3\angular-route.min.js" />
     <Content Include="www\components\angular\12rc3\angular-touch.min.js" />
     <Content Include="www\components\angular\12rc3\angular.min.js" />
+    <Content Include="www\components\mintDrawer\js\mintDrawer.js" />
     <Content Include="www\components\mintNotify\css\MintNotify.css" />
     <Content Include="www\components\mintNotify\js\MintNotify.js" />
     <Content Include="www\components\mintPullRefresh\css\mintPullRefresh.css" />
